@@ -41,8 +41,8 @@ func TestElasticIndexerSaveTransactions(t *testing.T) {
 	}
 	tx := &transaction.Transaction{
 		Nonce:    1,
-		SndAddr:  decodeAddress("drt1w7jyzuj6cv4ngw8luhlkakatjpmjh3ql95lmxphd3vssc4vpymks6k5th7"),
-		RcvAddr:  decodeAddress("drt1ahmy0yjhjg87n755yv99nzla22zzwfud55sa69gk3anyxyyucq9q2hgxww"),
+		SndAddr:  decodeAddress("drt1w7jyzuj6cv4ngw8luhlkakatjpmjh3ql95lmxphd3vssc4vpymks82rg5q"),
+		RcvAddr:  decodeAddress("drt1ahmy0yjhjg87n755yv99nzla22zzwfud55sa69gk3anyxyyucq9qhtl9ds"),
 		GasLimit: 70000,
 		GasPrice: 1000000000,
 		Data:     []byte("transfer"),

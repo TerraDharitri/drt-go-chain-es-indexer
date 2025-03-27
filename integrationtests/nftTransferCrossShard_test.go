@@ -13,7 +13,7 @@ import (
 	"github.com/TerraDharitri/drt-go-chain-core/data/outport"
 	"github.com/TerraDharitri/drt-go-chain-core/data/smartContractResult"
 	"github.com/TerraDharitri/drt-go-chain-core/data/transaction"
-	indexdrtata "github.com/TerraDharitri/drt-go-chain-es-indexer/process/dataindexer"
+	indexerdata "github.com/TerraDharitri/drt-go-chain-es-indexer/process/dataindexer"
 	"github.com/stretchr/testify/require"
 )
 
@@ -51,15 +51,15 @@ func TestNFTTransferCrossShardWithSCCall(t *testing.T) {
 		},
 	}
 
-	address1 := "drt1ef9xx3k3m89azf4c4xc98wpcdnx5h0cnxy6em47r6dc4alud0uwqx24f50"
-	address2 := "drt1qqqqqqqqqqqqqpgq78y09lw93f3udvsplshdv2vk957l5vl70n4splrad2"
+	address1 := "drt1ef9xx3k3m89azf4c4xc98wpcdnx5h0cnxy6em47r6dc4alud0uwqmkz2h3"
+	address2 := "drt1qqqqqqqqqqqqqpgq78y09lw93f3udvsplshdv2vk957l5vl70n4sur57w5"
 	scr1 := &smartContractResult.SmartContractResult{
 		Nonce:          0,
 		GasPrice:       1000000000,
 		GasLimit:       148957500,
 		SndAddr:        decodeAddress(address1),
 		RcvAddr:        decodeAddress(address2),
-		Data:           []byte("DCDTNFTTransfer@4c4b4641524d2d336634663962@016534@6f1e6f01bc7627f5ae@0801120a006f1e6f01bc7627f5ae227608b4ca051a2000000000000000000500f1c8f2fdc58a63c6b201fc2ed629962d3dfa33fe7ceb32003a4c0000000e4d45584641524d2d6239336536300000000000016ab5000000096f1e6f01bc7627f5ae0000000c4c4b4d45582d643163346162000000000000733b000000096e9018a1f0cc9a9aef@636f6d706f756e645265776172647350726f7879@000000000000000005004f79ec44bb13372b5ac9d996d749120f476427627ceb"),
+		Data:           []byte("DCDTNFTTransfer@4c4b4641524d2d336634663962@016534@6f1e6f01bc7627f5ae@0801120a006f1e6f01bc7627f5ae227608b4ca051a2000000000000000000500f1c8f2fdc58a63c6b201fc2ed629962d3dfa33fe7ceb32003a4c0000000e4d4f414641524d2d6239336536300000000000016ab5000000096f1e6f01bc7627f5ae0000000c4c4b4d4f412d643163346162000000000000733b000000096e9018a1f0cc9a9aef@636f6d706f756e645265776172647350726f7879@000000000000000005004f79ec44bb13372b5ac9d996d749120f476427627ceb"),
 		PrevTxHash:     txHash,
 		OriginalTxHash: txHash,
 	}
@@ -98,7 +98,7 @@ func TestNFTTransferCrossShardWithSCCall(t *testing.T) {
 
 	ids := []string{hex.EncodeToString(txHash)}
 	genericResponse := &GenericResponse{}
-	err = esClient.DoMultiGet(context.Background(), ids, indexdrtata.TransactionsIndex, true, genericResponse)
+	err = esClient.DoMultiGet(context.Background(), ids, indexerdata.TransactionsIndex, true, genericResponse)
 	require.Nil(t, err)
 
 	require.JSONEq(t,
@@ -128,7 +128,7 @@ func TestNFTTransferCrossShardWithSCCall(t *testing.T) {
 				PrevTxHash:     []byte("f639cb7a0231191e04ec19dcb1359bd93a03fe8dc4a28a80d00835c5d1c988f8"),
 				OriginalTxHash: txHash,
 				Value:          refundValueBig,
-				Data:           []byte("@6f6b@017d15@0000000e4d45584641524d2d6239336536300000000000017d15000000097045173cc97554b65d@0178af"),
+				Data:           []byte("@6f6b@017d15@0000000e4d4f414641524d2d6239336536300000000000017d15000000097045173cc97554b65d@0178af"),
 			}, FeeInfo: &outport.FeeInfo{GasUsed: 139832352, Fee: big.NewInt(1802738520000000)}},
 		},
 	}
@@ -136,7 +136,7 @@ func TestNFTTransferCrossShardWithSCCall(t *testing.T) {
 	err = esProc.SaveTransactions(createOutportBlockWithHeader(bodyDstShard, header, poolDstShard, nil, testNumOfShards))
 	require.Nil(t, err)
 
-	err = esClient.DoMultiGet(context.Background(), ids, indexdrtata.TransactionsIndex, true, genericResponse)
+	err = esClient.DoMultiGet(context.Background(), ids, indexerdata.TransactionsIndex, true, genericResponse)
 	require.Nil(t, err)
 
 	require.JSONEq(t,
@@ -145,7 +145,7 @@ func TestNFTTransferCrossShardWithSCCall(t *testing.T) {
 	)
 
 	genericResponse = &GenericResponse{}
-	err = esClient.DoMultiGet(context.Background(), ids, indexdrtata.OperationsIndex, true, genericResponse)
+	err = esClient.DoMultiGet(context.Background(), ids, indexerdata.OperationsIndex, true, genericResponse)
 	require.Nil(t, err)
 	require.JSONEq(t,
 		readExpectedResult("./testdata/nftTransferCrossShard/op-nft-transfer-sc-call-after-refund.json"),
@@ -186,8 +186,8 @@ func TestNFTTransferCrossShard(t *testing.T) {
 		},
 	}
 
-	address1 := "drt1ure7ea247clj6yqjg80unz6xzjhlj2zwm4gtg6sudcmtsd2cw3xs74hasv"
-	address2 := "drt1qqqqqqqqqqqqqpgq57szwud2quysucrlq2e97ntdysdl7v4ejz3qn3njq4"
+	address1 := "drt1ure7ea247clj6yqjg80unz6xzjhlj2zwm4gtg6sudcmtsd2cw3xsrfq7nj"
+	address2 := "drt1qqqqqqqqqqqqqpgq57szwud2quysucrlq2e97ntdysdl7v4ejz3qwdy3rt"
 	scr2 := &smartContractResult.SmartContractResult{
 		Nonce:          0,
 		GasPrice:       1000000000,
@@ -242,7 +242,7 @@ func TestNFTTransferCrossShard(t *testing.T) {
 
 	ids := []string{hex.EncodeToString(txHash)}
 	genericResponse := &GenericResponse{}
-	err = esClient.DoMultiGet(context.Background(), ids, indexdrtata.TransactionsIndex, true, genericResponse)
+	err = esClient.DoMultiGet(context.Background(), ids, indexerdata.TransactionsIndex, true, genericResponse)
 	require.Nil(t, err)
 
 	require.JSONEq(t,
@@ -292,7 +292,7 @@ func TestNFTTransferCrossShard(t *testing.T) {
 	err = esProc.SaveTransactions(createOutportBlockWithHeader(bodyDstShard, header, poolDstShard, nil, testNumOfShards))
 	require.Nil(t, err)
 
-	err = esClient.DoMultiGet(context.Background(), ids, indexdrtata.TransactionsIndex, true, genericResponse)
+	err = esClient.DoMultiGet(context.Background(), ids, indexerdata.TransactionsIndex, true, genericResponse)
 	require.Nil(t, err)
 
 	require.JSONEq(t,
@@ -318,8 +318,8 @@ func TestNFTTransferCrossShardImportDBScenarioFirstIndexDestinationAfterSource(t
 		TimeStamp: 5040,
 	}
 
-	address1 := "drt1ure7ea247clj6yqjg80unz6xzjhlj2zwm4gtg6sudcmtsd2cw3xs74hasv"
-	address2 := "drt1qqqqqqqqqqqqqpgq57szwud2quysucrlq2e97ntdysdl7v4ejz3qn3njq4"
+	address1 := "drt1ure7ea247clj6yqjg80unz6xzjhlj2zwm4gtg6sudcmtsd2cw3xsrfq7nj"
+	address2 := "drt1qqqqqqqqqqqqqpgq57szwud2quysucrlq2e97ntdysdl7v4ejz3qwdy3rt"
 	scr2 := &smartContractResult.SmartContractResult{
 		Nonce:          0,
 		GasPrice:       1000000000,
@@ -374,7 +374,7 @@ func TestNFTTransferCrossShardImportDBScenarioFirstIndexDestinationAfterSource(t
 	err = esProc.SaveTransactions(createOutportBlockWithHeader(bodyDstShard, header, poolDstShard, nil, testNumOfShards))
 	require.Nil(t, err)
 
-	err = esClient.DoMultiGet(context.Background(), ids, indexdrtata.TransactionsIndex, true, genericResponse)
+	err = esClient.DoMultiGet(context.Background(), ids, indexerdata.TransactionsIndex, true, genericResponse)
 	require.Nil(t, err)
 
 	require.JSONEq(t,
@@ -443,7 +443,7 @@ func TestNFTTransferCrossShardImportDBScenarioFirstIndexDestinationAfterSource(t
 	err = esProc.SaveTransactions(createOutportBlockWithHeader(body, header, pool, nil, testNumOfShards))
 	require.Nil(t, err)
 
-	err = esClient.DoMultiGet(context.Background(), ids, indexdrtata.TransactionsIndex, true, genericResponse)
+	err = esClient.DoMultiGet(context.Background(), ids, indexerdata.TransactionsIndex, true, genericResponse)
 	require.Nil(t, err)
 
 	require.JSONEq(t,
@@ -469,8 +469,8 @@ func TestNFTTransferCrossShardImportDBScenarioFirstIndexDestinationAfterSourceSu
 		TimeStamp: 5040,
 	}
 
-	address1 := "drt1ure7ea247clj6yqjg80unz6xzjhlj2zwm4gtg6sudcmtsd2cw3xs74hasv"
-	address2 := "drt1qqqqqqqqqqqqqpgq57szwud2quysucrlq2e97ntdysdl7v4ejz3qn3njq4"
+	address1 := "drt1ure7ea247clj6yqjg80unz6xzjhlj2zwm4gtg6sudcmtsd2cw3xsrfq7nj"
+	address2 := "drt1qqqqqqqqqqqqqpgq57szwud2quysucrlq2e97ntdysdl7v4ejz3qwdy3rt"
 	scr2 := &smartContractResult.SmartContractResult{
 		Nonce:          0,
 		GasPrice:       1000000000,
@@ -525,7 +525,7 @@ func TestNFTTransferCrossShardImportDBScenarioFirstIndexDestinationAfterSourceSu
 	err = esProc.SaveTransactions(createOutportBlockWithHeader(bodyDstShard, header, poolDstShard, nil, testNumOfShards))
 	require.Nil(t, err)
 
-	err = esClient.DoMultiGet(context.Background(), ids, indexdrtata.TransactionsIndex, true, genericResponse)
+	err = esClient.DoMultiGet(context.Background(), ids, indexerdata.TransactionsIndex, true, genericResponse)
 	require.Nil(t, err)
 
 	require.JSONEq(t,
@@ -594,7 +594,7 @@ func TestNFTTransferCrossShardImportDBScenarioFirstIndexDestinationAfterSourceSu
 	err = esProc.SaveTransactions(createOutportBlockWithHeader(body, header, pool, nil, testNumOfShards))
 	require.Nil(t, err)
 
-	err = esClient.DoMultiGet(context.Background(), ids, indexdrtata.TransactionsIndex, true, genericResponse)
+	err = esClient.DoMultiGet(context.Background(), ids, indexerdata.TransactionsIndex, true, genericResponse)
 	require.Nil(t, err)
 
 	require.JSONEq(t,

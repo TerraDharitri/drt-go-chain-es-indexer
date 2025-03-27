@@ -16,7 +16,7 @@ import (
 	"github.com/TerraDharitri/drt-go-chain-core/data/dcdt"
 	"github.com/TerraDharitri/drt-go-chain-core/data/outport"
 	"github.com/TerraDharitri/drt-go-chain-core/data/transaction"
-	indexdrtata "github.com/TerraDharitri/drt-go-chain-es-indexer/process/dataindexer"
+	indexerdata "github.com/TerraDharitri/drt-go-chain-es-indexer/process/dataindexer"
 	"github.com/stretchr/testify/require"
 )
 
@@ -33,7 +33,7 @@ func TestAccountsDCDTDeleteOnRollback(t *testing.T) {
 			Creator: []byte("creator"),
 		},
 	}
-	addr := "drt1sqy2ywvswp09ef7qwjhv8zwr9kzz3xas6y2ye5nuryaz0wcnfzzsnq0am3"
+	addr := "drt1sqy2ywvswp09ef7qwjhv8zwr9kzz3xas6y2ye5nuryaz0wcnfzzswuc7c0"
 	coreAlteredAccounts := map[string]*alteredAccount.AlteredAccount{
 		addr: {
 			Address: addr,
@@ -86,7 +86,7 @@ func TestAccountsDCDTDeleteOnRollback(t *testing.T) {
 
 	ids := []string{fmt.Sprintf("%s-TOKEN-eeee-02", addr)}
 	genericResponse := &GenericResponse{}
-	err = esClient.DoMultiGet(context.Background(), ids, indexdrtata.AccountsDCDTIndex, true, genericResponse)
+	err = esClient.DoMultiGet(context.Background(), ids, indexerdata.AccountsDCDTIndex, true, genericResponse)
 	require.Nil(t, err)
 	require.JSONEq(t, readExpectedResult("./testdata/accountsDCDTRollback/account-after-create.json"), string(genericResponse.Docs[0].Source))
 
@@ -94,7 +94,7 @@ func TestAccountsDCDTDeleteOnRollback(t *testing.T) {
 	err = esProc.RemoveAccountsDCDT(5040, 2)
 	require.Nil(t, err)
 
-	err = esClient.DoMultiGet(context.Background(), ids, indexdrtata.AccountsDCDTIndex, true, genericResponse)
+	err = esClient.DoMultiGet(context.Background(), ids, indexerdata.AccountsDCDTIndex, true, genericResponse)
 	require.Nil(t, err)
 	require.False(t, genericResponse.Docs[0].Found)
 }

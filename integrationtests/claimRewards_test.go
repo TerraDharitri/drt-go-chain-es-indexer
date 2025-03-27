@@ -13,7 +13,7 @@ import (
 	"github.com/TerraDharitri/drt-go-chain-core/data/outport"
 	"github.com/TerraDharitri/drt-go-chain-core/data/smartContractResult"
 	"github.com/TerraDharitri/drt-go-chain-core/data/transaction"
-	indexdrtata "github.com/TerraDharitri/drt-go-chain-es-indexer/process/dataindexer"
+	indexerdata "github.com/TerraDharitri/drt-go-chain-es-indexer/process/dataindexer"
 	"github.com/stretchr/testify/require"
 )
 
@@ -51,8 +51,8 @@ func TestTransactionWithClaimRewardsGasRefund(t *testing.T) {
 		},
 	}
 
-	addressSender := "drt14wnzmpwhcm9up7lsrujcf7jne2lgnydcpkfwk0etlnndn5dcacksplnun7"
-	addressReceiver := "drt1qqqqqqqqqqqqqqqpqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqplllst77y4l"
+	addressSender := "drt14wnzmpwhcm9up7lsrujcf7jne2lgnydcpkfwk0etlnndn5dcacksurylsq"
+	addressReceiver := "drt1qqqqqqqqqqqqqqqpqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqplllskzf8kp"
 
 	refundValue, _ := big.NewInt(0).SetString("49320000000000", 10)
 	scr1 := &smartContractResult.SmartContractResult{
@@ -128,7 +128,7 @@ func TestTransactionWithClaimRewardsGasRefund(t *testing.T) {
 
 	ids := []string{hex.EncodeToString(txHash)}
 	genericResponse := &GenericResponse{}
-	err = esClient.DoMultiGet(context.Background(), ids, indexdrtata.TransactionsIndex, true, genericResponse)
+	err = esClient.DoMultiGet(context.Background(), ids, indexerdata.TransactionsIndex, true, genericResponse)
 	require.Nil(t, err)
 
 	require.JSONEq(t,

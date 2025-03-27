@@ -12,7 +12,7 @@ import (
 	"github.com/TerraDharitri/drt-go-chain-core/data/outport"
 	"github.com/TerraDharitri/drt-go-chain-core/data/smartContractResult"
 	"github.com/TerraDharitri/drt-go-chain-core/data/transaction"
-	indexdrtata "github.com/TerraDharitri/drt-go-chain-es-indexer/process/dataindexer"
+	indexerdata "github.com/TerraDharitri/drt-go-chain-es-indexer/process/dataindexer"
 	"github.com/stretchr/testify/require"
 )
 
@@ -48,14 +48,14 @@ func TestNFTTransferCrossShardWithScCall(t *testing.T) {
 		},
 	}
 
-	address1 := "drt1ure7ea247clj6yqjg80unz6xzjhlj2zwm4gtg6sudcmtsd2cw3xs74hasv"
-	address2 := "drt1qqqqqqqqqqqqqpgq57szwud2quysucrlq2e97ntdysdl7v4ejz3qn3njq4"
+	address1 := "drt1ure7ea247clj6yqjg80unz6xzjhlj2zwm4gtg6sudcmtsd2cw3xsrfq7nj"
+	address2 := "drt1qqqqqqqqqqqqqpgq57szwud2quysucrlq2e97ntdysdl7v4ejz3qwdy3rt"
 	scr2 := &smartContractResult.SmartContractResult{
 		Nonce:          0,
 		GasPrice:       1000000000,
 		SndAddr:        decodeAddress(address1),
 		RcvAddr:        decodeAddress(address2),
-		Data:           []byte("DCDTNFTTransfer@4d45584641524d2d636362323532@078b@0347543e5b59c9be8670@000000000000000005005754e4f6ba0b94efd71a0e4dd4814ee24e5f75297ceb@636c61696d52657761726473"),
+		Data:           []byte("DCDTNFTTransfer@4d4f414641524d2d636362323532@078b@0347543e5b59c9be8670@000000000000000005005754e4f6ba0b94efd71a0e4dd4814ee24e5f75297ceb@636c61696d52657761726473"),
 		PrevTxHash:     txHash,
 		OriginalTxHash: txHash,
 	}
@@ -66,7 +66,7 @@ func TestNFTTransferCrossShardWithScCall(t *testing.T) {
 		RcvAddr:  decodeAddress(address1),
 		GasLimit: 5000000,
 		GasPrice: 1000000000,
-		Data:     []byte("DCDTNFTTransfer@4d45584641524d2d636362323532@078b@0347543e5b59c9be8670@00000000000000000500a7a02771aa07090e607f02b25f4d6d241bff32b990a2@636c61696d52657761726473"),
+		Data:     []byte("DCDTNFTTransfer@4d4f414641524d2d636362323532@078b@0347543e5b59c9be8670@00000000000000000500a7a02771aa07090e607f02b25f4d6d241bff32b990a2@636c61696d52657761726473"),
 		Value:    big.NewInt(0),
 	}
 
@@ -93,7 +93,7 @@ func TestNFTTransferCrossShardWithScCall(t *testing.T) {
 
 	ids := []string{hex.EncodeToString(txHash)}
 	genericResponse := &GenericResponse{}
-	err = esClient.DoMultiGet(context.Background(), ids, indexdrtata.TransactionsIndex, true, genericResponse)
+	err = esClient.DoMultiGet(context.Background(), ids, indexerdata.TransactionsIndex, true, genericResponse)
 	require.Nil(t, err)
 	require.JSONEq(t,
 		readExpectedResult("./testdata/nftTransferCrossShardWithScCall/cross-shard-transfer-with-sc-call.json"),

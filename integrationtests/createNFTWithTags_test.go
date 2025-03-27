@@ -16,7 +16,7 @@ import (
 	"github.com/TerraDharitri/drt-go-chain-core/data/dcdt"
 	"github.com/TerraDharitri/drt-go-chain-core/data/outport"
 	"github.com/TerraDharitri/drt-go-chain-core/data/transaction"
-	indexdrtata "github.com/TerraDharitri/drt-go-chain-es-indexer/process/dataindexer"
+	indexerdata "github.com/TerraDharitri/drt-go-chain-es-indexer/process/dataindexer"
 	"github.com/stretchr/testify/require"
 )
 
@@ -47,7 +47,7 @@ func TestCreateNFTWithTags(t *testing.T) {
 	dcdtDataBytes, _ := json.Marshal(dcdtToken)
 
 	// CREATE A FIRST NFT WITH THE TAGS
-	address1 := "drt1v7e552pz9py4hv6raan0c4jflez3e6csdmzcgrncg0qrnk4tywvsqx0h5j"
+	address1 := "drt1v7e552pz9py4hv6raan0c4jflez3e6csdmzcgrncg0qrnk4tywvsa6c5hv"
 	pool := &outport.TransactionPool{
 		Logs: []*outport.LogData{
 			{
@@ -95,13 +95,13 @@ func TestCreateNFTWithTags(t *testing.T) {
 
 	ids := []string{fmt.Sprintf("%s-DESK-abcd-01", address1)}
 	genericResponse := &GenericResponse{}
-	err = esClient.DoMultiGet(context.Background(), ids, indexdrtata.AccountsDCDTIndex, true, genericResponse)
+	err = esClient.DoMultiGet(context.Background(), ids, indexerdata.AccountsDCDTIndex, true, genericResponse)
 	require.Nil(t, err)
 	require.JSONEq(t, readExpectedResult("./testdata/createNFTWithTags/accounts-dcdt-address-balance.json"), string(genericResponse.Docs[0].Source))
 
 	ids = []string{"bXVzaWM=", "aGVsbG8=", "Z2FsbGVyeQ==", "ZG8=", "YXJ0", "c29tZXRoaW5n"}
 	genericResponse = &GenericResponse{}
-	err = esClient.DoMultiGet(context.Background(), ids, indexdrtata.TagsIndex, true, genericResponse)
+	err = esClient.DoMultiGet(context.Background(), ids, indexerdata.TagsIndex, true, genericResponse)
 	require.Nil(t, err)
 
 	tagsChecked := 0
@@ -142,7 +142,7 @@ func TestCreateNFTWithTags(t *testing.T) {
 	require.Nil(t, err)
 
 	genericResponse = &GenericResponse{}
-	err = esClient.DoMultiGet(context.Background(), ids, indexdrtata.TagsIndex, true, genericResponse)
+	err = esClient.DoMultiGet(context.Background(), ids, indexerdata.TagsIndex, true, genericResponse)
 	require.Nil(t, err)
 
 	tagsChecked = 0
@@ -192,7 +192,7 @@ func TestCreateNFTWithTags(t *testing.T) {
 
 	ids = append(ids, "XFxcXFxcXFxcXFxcXFxcXFxcXA==", "JycnJw==", "PDw8Pj4+JiYmJiYmJiYmJiYmJiYm")
 	genericResponse = &GenericResponse{}
-	err = esClient.DoMultiGet(context.Background(), ids, indexdrtata.TagsIndex, true, genericResponse)
+	err = esClient.DoMultiGet(context.Background(), ids, indexerdata.TagsIndex, true, genericResponse)
 	require.Nil(t, err)
 
 	tagsChecked = 0

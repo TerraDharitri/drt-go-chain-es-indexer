@@ -5,12 +5,12 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/TerraDharitri/drt-go-chain-es-indexer/core"
-	"github.com/TerraDharitri/drt-go-chain-es-indexer/metrics"
-	"github.com/TerraDharitri/drt-go-chain-es-indexer/process/dataindexer"
 	"github.com/TerraDharitri/drt-go-chain-core/core/check"
 	"github.com/TerraDharitri/drt-go-chain-core/data/outport"
 	"github.com/TerraDharitri/drt-go-chain-core/marshal"
+	"github.com/TerraDharitri/drt-go-chain-es-indexer/core"
+	"github.com/TerraDharitri/drt-go-chain-es-indexer/metrics"
+	"github.com/TerraDharitri/drt-go-chain-es-indexer/process/dataindexer"
 	logger "github.com/TerraDharitri/drt-go-chain-logger"
 )
 

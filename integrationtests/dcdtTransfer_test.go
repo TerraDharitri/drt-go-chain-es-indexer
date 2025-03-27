@@ -12,7 +12,7 @@ import (
 	"github.com/TerraDharitri/drt-go-chain-core/data/outport"
 	"github.com/TerraDharitri/drt-go-chain-core/data/smartContractResult"
 	"github.com/TerraDharitri/drt-go-chain-core/data/transaction"
-	indexdrtata "github.com/TerraDharitri/drt-go-chain-es-indexer/process/dataindexer"
+	indexerdata "github.com/TerraDharitri/drt-go-chain-es-indexer/process/dataindexer"
 	"github.com/stretchr/testify/require"
 )
 
@@ -49,8 +49,8 @@ func TestDCDTTransferTooMuchGasProvided(t *testing.T) {
 		},
 	}
 
-	address1 := "drt1ef6470tjdtlgpa9f6g3ae4nsedmjg0gv6w73v32xtvhkfff993hq750xl9"
-	address2 := "drt13u7zyekzvdvzek8768r5gau9p6677ufppsjuklu9e6t7yx7rhg4s68e2ze"
+	address1 := "drt1ef6470tjdtlgpa9f6g3ae4nsedmjg0gv6w73v32xtvhkfff993hqrgc9um"
+	address2 := "drt13u7zyekzvdvzek8768r5gau9p6677ufppsjuklu9e6t7yx7rhg4s8mwfp8"
 	txDCDT := &transaction.Transaction{
 		Nonce:    6,
 		SndAddr:  decodeAddress(address1),
@@ -108,7 +108,7 @@ func TestDCDTTransferTooMuchGasProvided(t *testing.T) {
 
 	ids := []string{hex.EncodeToString(txHash)}
 	genericResponse := &GenericResponse{}
-	err = esClient.DoMultiGet(context.Background(), ids, indexdrtata.TransactionsIndex, true, genericResponse)
+	err = esClient.DoMultiGet(context.Background(), ids, indexerdata.TransactionsIndex, true, genericResponse)
 	require.Nil(t, err)
 
 	require.JSONEq(t, readExpectedResult("./testdata/dcdtTransfer/dcdt-transfer.json"), string(genericResponse.Docs[0].Source))
@@ -146,8 +146,8 @@ func TestDCDTTransferCrossShardWithRefundOnSourceShard(t *testing.T) {
 		},
 	}
 
-	address1 := "drt1ef6470tjdtlgpa9f6g3ae4nsedmjg0gv6w73v32xtvhkfff993hq750xl9"
-	address2 := "drt13u7zyekzvdvzek8768r5gau9p6677ufppsjuklu9e6t7yx7rhg4s68e2ze"
+	address1 := "drt1ef6470tjdtlgpa9f6g3ae4nsedmjg0gv6w73v32xtvhkfff993hqrgc9um"
+	address2 := "drt13u7zyekzvdvzek8768r5gau9p6677ufppsjuklu9e6t7yx7rhg4s8mwfp8"
 
 	txDCDT := outport.TxInfo{
 		Transaction: &transaction.Transaction{
@@ -190,7 +190,7 @@ func TestDCDTTransferCrossShardWithRefundOnSourceShard(t *testing.T) {
 
 	ids := []string{hex.EncodeToString(txHash)}
 	genericResponse := &GenericResponse{}
-	err = esClient.DoMultiGet(context.Background(), ids, indexdrtata.OperationsIndex, true, genericResponse)
+	err = esClient.DoMultiGet(context.Background(), ids, indexerdata.OperationsIndex, true, genericResponse)
 	require.Nil(t, err)
 
 	require.JSONEq(t, readExpectedResult("./testdata/dcdtTransfer/dcdt-transfer-cross-shard-on-source.json"), string(genericResponse.Docs[0].Source))
@@ -209,7 +209,7 @@ func TestDCDTTransferCrossShardWithRefundOnSourceShard(t *testing.T) {
 	err = esProc.SaveTransactions(createOutportBlockWithHeader(body, header, pool, nil, testNumOfShards))
 	require.Nil(t, err)
 
-	err = esClient.DoMultiGet(context.Background(), ids, indexdrtata.OperationsIndex, true, genericResponse)
+	err = esClient.DoMultiGet(context.Background(), ids, indexerdata.OperationsIndex, true, genericResponse)
 	require.Nil(t, err)
 
 	require.JSONEq(t, readExpectedResult("./testdata/dcdtTransfer/dcdt-transfer-cross-shard-on-destination.json"), string(genericResponse.Docs[0].Source))
@@ -241,8 +241,8 @@ func TestDCDTTransferCrossShardIndexFirstOnDestinationAndAfterSource(t *testing.
 		},
 	}
 
-	address1 := "drt1ef6470tjdtlgpa9f6g3ae4nsedmjg0gv6w73v32xtvhkfff993hq750xl9"
-	address2 := "drt13u7zyekzvdvzek8768r5gau9p6677ufppsjuklu9e6t7yx7rhg4s68e2ze"
+	address1 := "drt1ef6470tjdtlgpa9f6g3ae4nsedmjg0gv6w73v32xtvhkfff993hqrgc9um"
+	address2 := "drt13u7zyekzvdvzek8768r5gau9p6677ufppsjuklu9e6t7yx7rhg4s8mwfp8"
 
 	txDCDT := outport.TxInfo{
 		Transaction: &transaction.Transaction{
@@ -285,7 +285,7 @@ func TestDCDTTransferCrossShardIndexFirstOnDestinationAndAfterSource(t *testing.
 
 	ids := []string{hex.EncodeToString(txHash)}
 	genericResponse := &GenericResponse{}
-	err = esClient.DoMultiGet(context.Background(), ids, indexdrtata.OperationsIndex, true, genericResponse)
+	err = esClient.DoMultiGet(context.Background(), ids, indexerdata.OperationsIndex, true, genericResponse)
 	require.Nil(t, err)
 	require.JSONEq(t, readExpectedResult("./testdata/dcdtTransfer/dcdt-transfer-first-on-destination.json"), string(genericResponse.Docs[0].Source))
 
@@ -309,7 +309,7 @@ func TestDCDTTransferCrossShardIndexFirstOnDestinationAndAfterSource(t *testing.
 	err = esProc.SaveTransactions(createOutportBlockWithHeader(body, header, pool, nil, testNumOfShards))
 	require.Nil(t, err)
 
-	err = esClient.DoMultiGet(context.Background(), ids, indexdrtata.OperationsIndex, true, genericResponse)
+	err = esClient.DoMultiGet(context.Background(), ids, indexerdata.OperationsIndex, true, genericResponse)
 	require.Nil(t, err)
 	require.JSONEq(t, readExpectedResult("./testdata/dcdtTransfer/dcdt-transfer-second-on-source.json"), string(genericResponse.Docs[0].Source))
 }

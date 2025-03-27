@@ -20,27 +20,28 @@
   "gasUsed": 150000000,
   "miniBlockHash": "71a5272ba7198b74f8a59cb9db4a270d2cfb1a7aefacbe17a27d1aa6f0d60b57",
   "receivers": [
-    "drt1qqqqqqqqqqqqqpgqt6ltx52ukss9d2qag2k67at28a36xc9lkp2sr06394",
-    "drt1qqqqqqqqqqqqqpgqt6ltx52ukss9d2qag2k67at28a36xc9lkp2sr06394"
+    "drt1qqqqqqqqqqqqqpgqt6ltx52ukss9d2qag2k67at28a36xc9lkp2s7ndjxt",
+    "drt1qqqqqqqqqqqqqpgqt6ltx52ukss9d2qag2k67at28a36xc9lkp2s7ndjxt"
   ],
   "function": "addLiquidityProxy",
   "senderShard": 0,
   "tokens": [
     "WREWA-bd4d79",
-    "XMEX-fda355-07"
+    "XMOA-fda355-07"
   ],
   "value": "0",
   "valueNum": 0,
   "gasPrice": 1000000000,
   "timestamp": 5040,
-  "receiver": "drt1ju8pkvg57cwdmjsjx58jlmnuf4l9yspstrhr9tgsrt98n9edpm2qtlgy99",
+  "receiver": "drt1ju8pkvg57cwdmjsjx58jlmnuf4l9yspstrhr9tgsrt98n9edpm2qkrl8xm",
   "nonce": 79,
   "round": 50,
   "hasScResults": true,
-  "sender": "drt1ju8pkvg57cwdmjsjx58jlmnuf4l9yspstrhr9tgsrt98n9edpm2qtlgy99",
+  "sender": "drt1ju8pkvg57cwdmjsjx58jlmnuf4l9yspstrhr9tgsrt98n9edpm2qkrl8xm",
   "receiverShard": 0,
   "operation": "MultiDCDTNFTTransfer",
   "status": "fail",
   "searchOrder": 0,
-  "errorEvent": true
+  "errorEvent": true,
+  "epoch": 0
 }

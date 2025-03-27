@@ -36,8 +36,8 @@ github.com/BurntSushi/toml v1.4.0/go.mod h1:ukJfTF/6rtPPRCnwkur4qwRxa8vTRFBF0uk2
 github.com/BurntSushi/xgb v0.0.0-20160522181843-27f122750802/go.mod h1:IVnqGOEym/WlBOVXweHU+Q+/VP0lqqI8lqeDx9IjBqo=
 github.com/TerraDharitri/drt-go-chain-communication v0.0.4 h1:mGLbGgqi/oFarRRbjajcDaXZYUXZbyU8g79NiiWaqLM=
 github.com/TerraDharitri/drt-go-chain-communication v0.0.4/go.mod h1:3cvC/Cv+6sOazl523LHv/ch0matWm50Ao5/JlpfXVkc=
-github.com/TerraDharitri/drt-go-chain-core v0.0.5 h1:mL9NA+vqPZZ8jM9fkP8p0HGq0aFnfI+KbzyatFzgp1U=
-github.com/TerraDharitri/drt-go-chain-core v0.0.5/go.mod h1:EOd4CmJQTz5RWSMxYgkeX/2HIB/Hd1R9Wrd1aR6gwO0=
+github.com/TerraDharitri/drt-go-chain-core v0.0.6 h1:jcvsc8Gg68HmzotkhTRPUrPhNbnMTMmYO579EnN7Hds=
+github.com/TerraDharitri/drt-go-chain-core v0.0.6/go.mod h1:pfcNSq98o/hpOX5vpt1OwQPnneRX/S3lzlFXQoXO1kQ=
 github.com/TerraDharitri/drt-go-chain-crypto v0.0.5 h1:C+PY99Cws11NI+4CiPT3b10D+FrGgCud3V/gfFpcZD4=
 github.com/TerraDharitri/drt-go-chain-logger v0.0.3 h1:Q8Ff5sC/VRAVw9ZwzciYDSQEDcVdnFVJpFZ+nqVIISQ=
 github.com/TerraDharitri/drt-go-chain-logger v0.0.3/go.mod h1:0LDt8MpTLZtLK9a0WQfRVL9Tu0MwMX9Bfar9PyBGQZ4=
@@ -199,6 +199,8 @@ github.com/google/pprof v0.0.0-20200229191704-1ebb73c60ed3/go.mod h1:ZgVRPoUq/hf
 github.com/google/pprof v0.0.0-20200430221834-fc25d7d30c6d/go.mod h1:ZgVRPoUq/hfqzAqh7sHMqb3I9Rq5C59dIz2SbBwJ4eM=
 github.com/google/pprof v0.0.0-20200708004538-1a94d8640e99/go.mod h1:ZgVRPoUq/hfqzAqh7sHMqb3I9Rq5C59dIz2SbBwJ4eM=
 github.com/google/renameio v0.1.0/go.mod h1:KWCgfxg9yswjAJkECMjeO8J8rahYeXnNhOm40UhjYkI=
+github.com/google/uuid v1.6.0 h1:NIvaJDMOsjHA8n1jAhLSgzrAzy1Hgr+hNrb57e+94F0=
+github.com/google/uuid v1.6.0/go.mod h1:TIyPZe4MgqvfeYDBFedMoGGpEw/LqOeaOT+nhxU+yHo=
 github.com/googleapis/gax-go/v2 v2.0.4/go.mod h1:0Wqv26UfaUD9n4G6kQubkQ+KchISgw+vpHVxEJEs9eg=
 github.com/googleapis/gax-go/v2 v2.0.5/go.mod h1:DWXyrwAJ9X0FpwwEdw+IPEYBICEFu5mhpdKc/us6bOk=
 github.com/gorilla/mux v1.8.0 h1:i40aqfkR1h2SlN9hojwV5ZA91wcXFOvkdNIeFDP5koI=

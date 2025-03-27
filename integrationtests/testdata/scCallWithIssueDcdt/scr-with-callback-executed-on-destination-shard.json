@@ -5,8 +5,8 @@
   "gasPrice": 0,
   "value": "0",
   "valueNum": 0,
-  "sender": "drt1qqqqqqqqqqqqqqqpqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqzllls8a5w6u",
-  "receiver": "drt1qqqqqqqqqqqqqpgqahumqen35dr9k4rmcnd70mqt5t4mt7ey4nwqwjme9g",
+  "sender": "drt1qqqqqqqqqqqqqqqpqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqzllls6prdez",
+  "receiver": "drt1qqqqqqqqqqqqqpgqahumqen35dr9k4rmcnd70mqt5t4mt7ey4nwqnwv6xk",
   "senderShard": 4294967295,
   "receiverShard": 0,
   "data": "QDAwQDU0NDU1MzU0NGU0NjU0MmQ2NDM5NjQzNTM0NjM=",
@@ -14,7 +14,10 @@
   "originalTxHash": "747857697468536343616c6c",
   "callType": "2",
   "timestamp": 5040,
+  "hasOperations": true,
   "type": "unsigned",
-  "status": "pending",
-  "operation": "transfer"
+  "status": "success",
+  "operation": "transfer",
+  "hasLogs": true,
+  "epoch": 0
 }

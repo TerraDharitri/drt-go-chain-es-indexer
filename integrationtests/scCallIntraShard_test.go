@@ -43,8 +43,8 @@ func TestTransactionWithSCCallFail(t *testing.T) {
 		},
 	}
 
-	address1 := "drt1ure7ea247clj6yqjg80unz6xzjhlj2zwm4gtg6sudcmtsd2cw3xs74hasv"
-	address2 := "drt1qqqqqqqqqqqqqqqpqqqqqqqqqqqqqqqqqqqqqqqqqqqqqfhllllscrt56r"
+	address1 := "drt1ure7ea247clj6yqjg80unz6xzjhlj2zwm4gtg6sudcmtsd2cw3xsrfq7nj"
+	address2 := "drt1qqqqqqqqqqqqqqqpqqqqqqqqqqqqqqqqqqqqqqqqqqqqqfhlllls9luhea"
 	refundValueBig, _ := big.NewInt(0).SetString("5000000000000000000", 10)
 	tx := &transaction.Transaction{
 		Nonce:    46,
@@ -138,8 +138,8 @@ func TestTransactionWithScCallSuccess(t *testing.T) {
 		},
 	}
 
-	address1 := "drt1ure7ea247clj6yqjg80unz6xzjhlj2zwm4gtg6sudcmtsd2cw3xs74hasv"
-	address2 := "drt1qqqqqqqqqqqqqqqpqqqqqqqqqqqqqqqqqqqqqqqqqqqqqfhllllscrt56r"
+	address1 := "drt1ure7ea247clj6yqjg80unz6xzjhlj2zwm4gtg6sudcmtsd2cw3xsrfq7nj"
+	address2 := "drt1qqqqqqqqqqqqqqqpqqqqqqqqqqqqqqqqqqqqqqqqqqqqqfhlllls9luhea"
 	tx := &transaction.Transaction{
 		Nonce:    101,
 		SndAddr:  decodeAddress(address1),

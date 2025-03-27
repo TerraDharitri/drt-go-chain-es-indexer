@@ -605,8 +605,8 @@ func TestTxsDatabaseProcessor_IssueDCDTTx(t *testing.T) {
 	pool := &outport.TransactionPool{
 		Transactions: map[string]*outport.TxInfo{
 			hex.EncodeToString([]byte("t1")): {Transaction: &transaction.Transaction{
-				SndAddr: decodeBech32("drt1dglncxk6sl9a3xumj78n6z2xux4ghp5c92cstv5zsn56tjgtdwpsk46qrs"),
-				RcvAddr: decodeBech32("drt1qqqqqqqqqqqqqqqpqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqzllls8a5w6u"),
+				SndAddr: decodeBech32("drt1dglncxk6sl9a3xumj78n6z2xux4ghp5c92cstv5zsn56tjgtdwpstfdrqw"),
+				RcvAddr: decodeBech32("drt1qqqqqqqqqqqqqqqpqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqzllls6prdez"),
 				Data:    []byte("issue@4141414141@41414141414141@0186a0@01@63616e467265657a65@74727565@63616e57697065@74727565@63616e5061757365@74727565@63616e4d696e74@74727565@63616e4275726e@74727565@63616e4368616e67654f776e6572@74727565@63616e55706772616465@74727565"),
 			}, FeeInfo: &outport.FeeInfo{}},
 		},
@@ -614,14 +614,14 @@ func TestTxsDatabaseProcessor_IssueDCDTTx(t *testing.T) {
 			hex.EncodeToString([]byte("scr1")): {SmartContractResult: &smartContractResult.SmartContractResult{
 				OriginalTxHash: []byte("t1"),
 				Data:           []byte("DCDTTransfer@414141414141412d323436626461@0186a0"),
-				SndAddr:        decodeBech32("drt1qqqqqqqqqqqqqqqpqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqzllls8a5w6u"),
-				RcvAddr:        decodeBech32("drt1dglncxk6sl9a3xumj78n6z2xux4ghp5c92cstv5zsn56tjgtdwpsk46qrs"),
+				SndAddr:        decodeBech32("drt1qqqqqqqqqqqqqqqpqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqzllls6prdez"),
+				RcvAddr:        decodeBech32("drt1dglncxk6sl9a3xumj78n6z2xux4ghp5c92cstv5zsn56tjgtdwpstfdrqw"),
 			}, FeeInfo: &outport.FeeInfo{}},
 			hex.EncodeToString([]byte("scr2")): {SmartContractResult: &smartContractResult.SmartContractResult{
 				OriginalTxHash: []byte("t1"),
 				Data:           []byte("@6f6b"),
-				SndAddr:        decodeBech32("drt1qqqqqqqqqqqqqqqpqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqzllls8a5w6u"),
-				RcvAddr:        decodeBech32("drt1dglncxk6sl9a3xumj78n6z2xux4ghp5c92cstv5zsn56tjgtdwpsk46qrs"),
+				SndAddr:        decodeBech32("drt1qqqqqqqqqqqqqqqpqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqzllls6prdez"),
+				RcvAddr:        decodeBech32("drt1dglncxk6sl9a3xumj78n6z2xux4ghp5c92cstv5zsn56tjgtdwpstfdrqw"),
 			}, FeeInfo: &outport.FeeInfo{}},
 		},
 	}
@@ -634,8 +634,8 @@ func TestTxsDatabaseProcessor_IssueDCDTTx(t *testing.T) {
 	pool = &outport.TransactionPool{
 		Transactions: map[string]*outport.TxInfo{
 			hex.EncodeToString([]byte("t1")): {Transaction: &transaction.Transaction{
-				SndAddr: decodeBech32("drt1dglncxk6sl9a3xumj78n6z2xux4ghp5c92cstv5zsn56tjgtdwpsk46qrs"),
-				RcvAddr: decodeBech32("drt1qqqqqqqqqqqqqqqpqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqzllls8a5w6u"),
+				SndAddr: decodeBech32("drt1dglncxk6sl9a3xumj78n6z2xux4ghp5c92cstv5zsn56tjgtdwpstfdrqw"),
+				RcvAddr: decodeBech32("drt1qqqqqqqqqqqqqqqpqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqzllls6prdez"),
 				Data:    []byte("issue@4141414141@41414141414141@0186a0@01@63616e467265657a65@74727565@63616e57697065@74727565@63616e5061757365@74727565@63616e4d696e74@74727565@63616e4275726e@74727565@63616e4368616e67654f776e6572@74727565@63616e55706772616465@74727565"),
 			}, FeeInfo: &outport.FeeInfo{}},
 		},
@@ -643,8 +643,8 @@ func TestTxsDatabaseProcessor_IssueDCDTTx(t *testing.T) {
 			hex.EncodeToString([]byte("scr1")): {SmartContractResult: &smartContractResult.SmartContractResult{
 				OriginalTxHash: []byte("t1"),
 				Data:           []byte("75736572206572726f72"),
-				SndAddr:        decodeBech32("drt1qqqqqqqqqqqqqqqpqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqzllls8a5w6u"),
-				RcvAddr:        decodeBech32("drt1dglncxk6sl9a3xumj78n6z2xux4ghp5c92cstv5zsn56tjgtdwpsk46qrs"),
+				SndAddr:        decodeBech32("drt1qqqqqqqqqqqqqqqpqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqzllls6prdez"),
+				RcvAddr:        decodeBech32("drt1dglncxk6sl9a3xumj78n6z2xux4ghp5c92cstv5zsn56tjgtdwpstfdrqw"),
 			}, FeeInfo: &outport.FeeInfo{}},
 		},
 	}

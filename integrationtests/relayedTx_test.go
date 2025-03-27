@@ -12,7 +12,7 @@ import (
 	"github.com/TerraDharitri/drt-go-chain-core/data/outport"
 	"github.com/TerraDharitri/drt-go-chain-core/data/smartContractResult"
 	"github.com/TerraDharitri/drt-go-chain-core/data/transaction"
-	indexdrtata "github.com/TerraDharitri/drt-go-chain-es-indexer/process/dataindexer"
+	indexerdata "github.com/TerraDharitri/drt-go-chain-es-indexer/process/dataindexer"
 	"github.com/stretchr/testify/require"
 )
 
@@ -49,9 +49,9 @@ func TestRelayedTransactionGasUsedCrossShard(t *testing.T) {
 		},
 	}
 
-	address1 := "drt1k7j6ewjsla4zsgv8v6f6fe3dvrkgv3d0d9jerczw45hzedhyed8sh2u34u"
-	address2 := "drt14eyayfrvlrhzfrwg5zwleua25mkzgncggn35nvc6xhv5yxwml2es0f3dht"
-	address3 := "drt1qqqqqqqqqqqqqpgq3dswlnnlkfd3gqrcv3dhzgnvh8ryf27g5rfsecnn2s"
+	address1 := "drt1k7j6ewjsla4zsgv8v6f6fe3dvrkgv3d0d9jerczw45hzedhyed8s2ktjkz"
+	address2 := "drt14eyayfrvlrhzfrwg5zwleua25mkzgncggn35nvc6xhv5yxwml2esj4xw54"
+	address3 := "drt1qqqqqqqqqqqqqpgq3dswlnnlkfd3gqrcv3dhzgnvh8ryf27g5rfsyyysfw"
 	initialTx := &transaction.Transaction{
 		Nonce:    1196667,
 		SndAddr:  decodeAddress(address1),
@@ -96,7 +96,7 @@ func TestRelayedTransactionGasUsedCrossShard(t *testing.T) {
 
 	ids := []string{hex.EncodeToString(txHash)}
 	genericResponse := &GenericResponse{}
-	err = esClient.DoMultiGet(context.Background(), ids, indexdrtata.TransactionsIndex, true, genericResponse)
+	err = esClient.DoMultiGet(context.Background(), ids, indexerdata.TransactionsIndex, true, genericResponse)
 	require.Nil(t, err)
 
 	require.JSONEq(t,
@@ -136,7 +136,7 @@ func TestRelayedTransactionGasUsedCrossShard(t *testing.T) {
 	err = esProc.SaveTransactions(createOutportBlockWithHeader(bodyDstShard, header, poolDstShard, nil, testNumOfShards))
 	require.Nil(t, err)
 
-	err = esClient.DoMultiGet(context.Background(), ids, indexdrtata.TransactionsIndex, true, genericResponse)
+	err = esClient.DoMultiGet(context.Background(), ids, indexerdata.TransactionsIndex, true, genericResponse)
 	require.Nil(t, err)
 
 	require.JSONEq(t,
@@ -178,8 +178,8 @@ func TestRelayedTransactionIntraShard(t *testing.T) {
 		},
 	}
 
-	address1 := "drt1k7j6ewjsla4zsgv8v6f6fe3dvrkgv3d0d9jerczw45hzedhyed8sh2u34u"
-	address2 := "drt14eyayfrvlrhzfrwg5zwleua25mkzgncggn35nvc6xhv5yxwml2es0f3dht"
+	address1 := "drt1k7j6ewjsla4zsgv8v6f6fe3dvrkgv3d0d9jerczw45hzedhyed8s2ktjkz"
+	address2 := "drt14eyayfrvlrhzfrwg5zwleua25mkzgncggn35nvc6xhv5yxwml2esj4xw54"
 	initialTx := &transaction.Transaction{
 		Nonce:    1196665,
 		SndAddr:  decodeAddress(address1),
@@ -237,7 +237,7 @@ func TestRelayedTransactionIntraShard(t *testing.T) {
 
 	ids := []string{hex.EncodeToString(txHash)}
 	genericResponse := &GenericResponse{}
-	err = esClient.DoMultiGet(context.Background(), ids, indexdrtata.TransactionsIndex, true, genericResponse)
+	err = esClient.DoMultiGet(context.Background(), ids, indexerdata.TransactionsIndex, true, genericResponse)
 	require.Nil(t, err)
 
 	require.JSONEq(t,
