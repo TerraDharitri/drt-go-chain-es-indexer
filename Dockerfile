@@ -2,10 +2,10 @@ FROM golang:1.20.7 as builder
 
 RUN apt-get update && apt-get install -y
 
-WORKDIR /Dharitri
+WORKDIR /dharitri
 COPY . .
 
-WORKDIR /Dharitri/cmd/elasticindexer
+WORKDIR /dharitri/cmd/elasticindexer
 
 RUN go build -o elasticindexer
 
@@ -16,11 +16,11 @@ RUN apt-get update && apt-get install -y
 RUN useradd -m -u 1000 appuser
 USER appuser
 
-COPY --from=builder --chown=appuser /Dharitri/cmd/elasticindexer /Dharitri
+COPY --from=builder --chown=appuser /dharitri/cmd/elasticindexer /dharitri
 
 EXPOSE 22111
 
-WORKDIR /Dharitri
+WORKDIR /dharitri
 
 ENTRYPOINT ["./elasticindexer"]
 CMD ["--log-level", "*:DEBUG"]

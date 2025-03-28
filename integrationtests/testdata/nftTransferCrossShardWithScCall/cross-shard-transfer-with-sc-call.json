@@ -4,8 +4,8 @@
   "round": 50,
   "value": "0",
   "valueNum": 0,
-  "receiver": "drt1ure7ea247clj6yqjg80unz6xzjhlj2zwm4gtg6sudcmtsd2cw3xs74hasv",
-  "sender": "drt1ure7ea247clj6yqjg80unz6xzjhlj2zwm4gtg6sudcmtsd2cw3xs74hasv",
+  "receiver": "drt1ure7ea247clj6yqjg80unz6xzjhlj2zwm4gtg6sudcmtsd2cw3xsrfq7nj",
+  "sender": "drt1ure7ea247clj6yqjg80unz6xzjhlj2zwm4gtg6sudcmtsd2cw3xsrfq7nj",
   "receiverShard": 0,
   "senderShard": 0,
   "gasPrice": 1000000000,
@@ -21,7 +21,7 @@
   "searchOrder": 0,
   "hasScResults": true,
   "tokens": [
-    "MEXFARM-ccb252-078b"
+    "MOAFARM-ccb252-078b"
   ],
   "dcdtValues": [
     "15482888667631250736752"
@@ -30,11 +30,12 @@
     15482.88866763125
   ],
   "receivers": [
-    "drt1qqqqqqqqqqqqqpgq57szwud2quysucrlq2e97ntdysdl7v4ejz3qn3njq4"
+    "drt1qqqqqqqqqqqqqpgq57szwud2quysucrlq2e97ntdysdl7v4ejz3qwdy3rt"
   ],
   "receiversShardIDs": [
     2
   ],
   "operation": "DCDTNFTTransfer",
-  "function": "claimRewards"
+  "function": "claimRewards",
+  "epoch": 0
 }

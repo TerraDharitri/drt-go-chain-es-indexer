@@ -6,8 +6,8 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/TerraDharitri/drt-go-chain-es-indexer/data"
 	"github.com/TerraDharitri/drt-go-chain-core/data/outport"
+	"github.com/TerraDharitri/drt-go-chain-es-indexer/data"
 	logger "github.com/TerraDharitri/drt-go-chain-logger"
 )
 

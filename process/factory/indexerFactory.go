@@ -6,6 +6,11 @@ import (
 	"net/http"
 	"time"
 
+	"github.com/TerraDharitri/drt-go-chain-core/core"
+	"github.com/TerraDharitri/drt-go-chain-core/core/check"
+	"github.com/TerraDharitri/drt-go-chain-core/data/block"
+	"github.com/TerraDharitri/drt-go-chain-core/hashing"
+	"github.com/TerraDharitri/drt-go-chain-core/marshal"
 	"github.com/TerraDharitri/drt-go-chain-es-indexer/client"
 	"github.com/TerraDharitri/drt-go-chain-es-indexer/client/logging"
 	"github.com/TerraDharitri/drt-go-chain-es-indexer/client/transport"
@@ -13,13 +18,8 @@ import (
 	"github.com/TerraDharitri/drt-go-chain-es-indexer/process/dataindexer"
 	"github.com/TerraDharitri/drt-go-chain-es-indexer/process/elasticproc"
 	"github.com/TerraDharitri/drt-go-chain-es-indexer/process/elasticproc/factory"
-	"github.com/elastic/go-elasticsearch/v7"
-	"github.com/TerraDharitri/drt-go-chain-core/core"
-	"github.com/TerraDharitri/drt-go-chain-core/core/check"
-	"github.com/TerraDharitri/drt-go-chain-core/data/block"
-	"github.com/TerraDharitri/drt-go-chain-core/hashing"
-	"github.com/TerraDharitri/drt-go-chain-core/marshal"
 	logger "github.com/TerraDharitri/drt-go-chain-logger"
+	"github.com/elastic/go-elasticsearch/v7"
 )
 
 var log = logger.GetOrCreate("indexer/factory")

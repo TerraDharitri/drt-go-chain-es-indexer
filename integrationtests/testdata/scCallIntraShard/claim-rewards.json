@@ -4,8 +4,8 @@
   "round": 50,
   "value": "0",
   "valueNum": 0,
-  "receiver": "drt1qqqqqqqqqqqqqqqpqqqqqqqqqqqqqqqqqqqqqqqqqqqqqfhllllscrt56r",
-  "sender": "drt1ure7ea247clj6yqjg80unz6xzjhlj2zwm4gtg6sudcmtsd2cw3xs74hasv",
+  "receiver": "drt1qqqqqqqqqqqqqqqpqqqqqqqqqqqqqqqqqqqqqqqqqqqqqfhlllls9luhea",
+  "sender": "drt1ure7ea247clj6yqjg80unz6xzjhlj2zwm4gtg6sudcmtsd2cw3xsrfq7nj",
   "receiverShard": 0,
   "senderShard": 0,
   "gasPrice": 1000000000,
@@ -22,5 +22,6 @@
   "hasScResults": true,
   "operation": "transfer",
   "isScCall": true,
-  "function": "claimRewards"
+  "function": "claimRewards",
+  "epoch": 0
 }

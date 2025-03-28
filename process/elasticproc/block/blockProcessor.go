@@ -7,9 +7,6 @@ import (
 	"strconv"
 	"time"
 
-	"github.com/TerraDharitri/drt-go-chain-es-indexer/data"
-	indexer "github.com/TerraDharitri/drt-go-chain-es-indexer/process/dataindexer"
-	"github.com/TerraDharitri/drt-go-chain-es-indexer/process/elasticproc/converters"
 	"github.com/TerraDharitri/drt-go-chain-core/core"
 	"github.com/TerraDharitri/drt-go-chain-core/core/check"
 	coreData "github.com/TerraDharitri/drt-go-chain-core/data"
@@ -18,6 +15,9 @@ import (
 	"github.com/TerraDharitri/drt-go-chain-core/data/outport"
 	"github.com/TerraDharitri/drt-go-chain-core/hashing"
 	"github.com/TerraDharitri/drt-go-chain-core/marshal"
+	"github.com/TerraDharitri/drt-go-chain-es-indexer/data"
+	indexer "github.com/TerraDharitri/drt-go-chain-es-indexer/process/dataindexer"
+	"github.com/TerraDharitri/drt-go-chain-es-indexer/process/elasticproc/converters"
 	logger "github.com/TerraDharitri/drt-go-chain-logger"
 )
 
@@ -111,6 +111,7 @@ func (bp *blockProcessor) PrepareBlockForDB(obh *outport.OutportBlockWithHeader)
 		SoftwareVersion:       hex.EncodeToString(obh.Header.GetSoftwareVersion()),
 		ReceiptsHash:          hex.EncodeToString(obh.Header.GetReceiptsHash()),
 		Reserved:              obh.Header.GetReserved(),
+		UUID:                  converters.GenerateBase64UUID(),
 	}
 
 	additionalData := obh.Header.GetAdditionalData()

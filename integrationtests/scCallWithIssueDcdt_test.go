@@ -50,8 +50,8 @@ func TestScCallIntraShardWithIssueDCDT(t *testing.T) {
 		},
 	}
 
-	sndAddress := "drt148m2sx48mfm8322c2kpfmgj78g5j0x7r6z6y4z8j28qk45a74nwq5pq2ts"
-	contractAddress := "drt1qqqqqqqqqqqqqpgqahumqen35dr9k4rmcnd70mqt5t4mt7ey4nwqwjme9g"
+	sndAddress := "drt148m2sx48mfm8322c2kpfmgj78g5j0x7r6z6y4z8j28qk45a74nwqfahfgw"
+	contractAddress := "drt1qqqqqqqqqqqqqpgqahumqen35dr9k4rmcnd70mqt5t4mt7ey4nwqnwv6xk"
 	tx := &transaction.Transaction{
 		Nonce:    46,
 		SndAddr:  decodeAddress(sndAddress),
@@ -62,7 +62,7 @@ func TestScCallIntraShardWithIssueDCDT(t *testing.T) {
 		Value:    big.NewInt(50000000000000000),
 	}
 
-	dcdtSystemSC := "drt1qqqqqqqqqqqqqqqpqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqzllls8a5w6u"
+	dcdtSystemSC := "drt1qqqqqqqqqqqqqqqpqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqzllls6prdez"
 	scrWithIssueDCDT := &smartContractResult.SmartContractResult{
 		Nonce:          0,
 		SndAddr:        decodeAddress(contractAddress),

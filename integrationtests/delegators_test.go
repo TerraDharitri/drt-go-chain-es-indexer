@@ -13,7 +13,7 @@ import (
 	dataBlock "github.com/TerraDharitri/drt-go-chain-core/data/block"
 	"github.com/TerraDharitri/drt-go-chain-core/data/outport"
 	"github.com/TerraDharitri/drt-go-chain-core/data/transaction"
-	indexdrtata "github.com/TerraDharitri/drt-go-chain-es-indexer/process/dataindexer"
+	indexerdata "github.com/TerraDharitri/drt-go-chain-es-indexer/process/dataindexer"
 	"github.com/stretchr/testify/require"
 )
 
@@ -37,7 +37,7 @@ func TestDelegateUnDelegateAndWithdraw(t *testing.T) {
 		ShardID:   core.MetachainShardId,
 	}
 
-	address1 := "drt1v7e552pz9py4hv6raan0c4jflez3e6csdmzcgrncg0qrnk4tywvsqx0h5j"
+	address1 := "drt1v7e552pz9py4hv6raan0c4jflez3e6csdmzcgrncg0qrnk4tywvsa6c5hv"
 
 	// delegate
 	delegatedValue, _ := big.NewInt(0).SetString("200000000000000000000", 10)
@@ -46,7 +46,7 @@ func TestDelegateUnDelegateAndWithdraw(t *testing.T) {
 			{
 				TxHash: hex.EncodeToString([]byte("h1")),
 				Log: &transaction.Log{
-					Address: decodeAddress("drt1qqqqqqqqqqqqqqqpqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqhllllsajxzat"),
+					Address: decodeAddress("drt1qqqqqqqqqqqqqqqpqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqhllllsqw3p74"),
 					Events: []*transaction.Event{
 						{
 							Address:    decodeAddress(address1),
@@ -65,7 +65,7 @@ func TestDelegateUnDelegateAndWithdraw(t *testing.T) {
 
 	ids := []string{"9v/pLAXxUZJ4Oy1U+x5al/Xg5sebh1dYCRTeZwg/u68="}
 	genericResponse := &GenericResponse{}
-	err = esClient.DoMultiGet(context.Background(), ids, indexdrtata.DelegatorsIndex, true, genericResponse)
+	err = esClient.DoMultiGet(context.Background(), ids, indexerdata.DelegatorsIndex, true, genericResponse)
 	require.Nil(t, err)
 	require.JSONEq(t, readExpectedResult("./testdata/delegators/delegator-after-delegate.json"), string(genericResponse.Docs[0].Source))
 
@@ -77,7 +77,7 @@ func TestDelegateUnDelegateAndWithdraw(t *testing.T) {
 			{
 				TxHash: hex.EncodeToString([]byte("h2")),
 				Log: &transaction.Log{
-					Address: decodeAddress("drt1qqqqqqqqqqqqqqqpqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqhllllsajxzat"),
+					Address: decodeAddress("drt1qqqqqqqqqqqqqqqpqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqhllllsqw3p74"),
 					Events: []*transaction.Event{
 						{
 							Address:    decodeAddress(address1),
@@ -95,7 +95,7 @@ func TestDelegateUnDelegateAndWithdraw(t *testing.T) {
 	err = esProc.SaveTransactions(createOutportBlockWithHeader(body, header, pool, nil, testNumOfShards))
 	require.Nil(t, err)
 
-	err = esClient.DoMultiGet(context.Background(), ids, indexdrtata.DelegatorsIndex, true, genericResponse)
+	err = esClient.DoMultiGet(context.Background(), ids, indexerdata.DelegatorsIndex, true, genericResponse)
 	require.Nil(t, err)
 	require.JSONEq(t, readExpectedResult("./testdata/delegators/delegator-after-un-delegate-1.json"), string(genericResponse.Docs[0].Source))
 
@@ -107,7 +107,7 @@ func TestDelegateUnDelegateAndWithdraw(t *testing.T) {
 			{
 				TxHash: hex.EncodeToString([]byte("h3")),
 				Log: &transaction.Log{
-					Address: decodeAddress("drt1qqqqqqqqqqqqqqqpqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqhllllsajxzat"),
+					Address: decodeAddress("drt1qqqqqqqqqqqqqqqpqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqhllllsqw3p74"),
 					Events: []*transaction.Event{
 						{
 							Address:    decodeAddress(address1),
@@ -125,7 +125,7 @@ func TestDelegateUnDelegateAndWithdraw(t *testing.T) {
 	err = esProc.SaveTransactions(createOutportBlockWithHeader(body, header, pool, nil, testNumOfShards))
 	require.Nil(t, err)
 
-	err = esClient.DoMultiGet(context.Background(), ids, indexdrtata.DelegatorsIndex, true, genericResponse)
+	err = esClient.DoMultiGet(context.Background(), ids, indexerdata.DelegatorsIndex, true, genericResponse)
 	require.Nil(t, err)
 	require.JSONEq(t, readExpectedResult("./testdata/delegators/delegator-after-un-delegate-2.json"), string(genericResponse.Docs[0].Source))
 	time.Sleep(time.Second)
@@ -136,7 +136,7 @@ func TestDelegateUnDelegateAndWithdraw(t *testing.T) {
 	require.Nil(t, err)
 
 	time.Sleep(time.Second)
-	err = esClient.DoMultiGet(context.Background(), ids, indexdrtata.DelegatorsIndex, true, genericResponse)
+	err = esClient.DoMultiGet(context.Background(), ids, indexerdata.DelegatorsIndex, true, genericResponse)
 	require.Nil(t, err)
 	require.JSONEq(t, readExpectedResult("./testdata/delegators/delegator-after-revert.json"), string(genericResponse.Docs[0].Source))
 
@@ -147,7 +147,7 @@ func TestDelegateUnDelegateAndWithdraw(t *testing.T) {
 			{
 				TxHash: hex.EncodeToString([]byte("h4")),
 				Log: &transaction.Log{
-					Address: decodeAddress("drt1qqqqqqqqqqqqqqqpqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqhllllsajxzat"),
+					Address: decodeAddress("drt1qqqqqqqqqqqqqqqpqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqhllllsqw3p74"),
 					Events: []*transaction.Event{
 						{
 							Address:    decodeAddress(address1),
@@ -165,7 +165,7 @@ func TestDelegateUnDelegateAndWithdraw(t *testing.T) {
 	err = esProc.SaveTransactions(createOutportBlockWithHeader(body, header, pool, nil, testNumOfShards))
 	require.Nil(t, err)
 
-	err = esClient.DoMultiGet(context.Background(), ids, indexdrtata.DelegatorsIndex, true, genericResponse)
+	err = esClient.DoMultiGet(context.Background(), ids, indexerdata.DelegatorsIndex, true, genericResponse)
 	require.Nil(t, err)
 	require.JSONEq(t, readExpectedResult("./testdata/delegators/delegator-after-withdraw.json"), string(genericResponse.Docs[0].Source))
 }

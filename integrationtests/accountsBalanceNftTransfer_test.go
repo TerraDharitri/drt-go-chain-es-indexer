@@ -15,7 +15,7 @@ import (
 	dataBlock "github.com/TerraDharitri/drt-go-chain-core/data/block"
 	"github.com/TerraDharitri/drt-go-chain-core/data/outport"
 	"github.com/TerraDharitri/drt-go-chain-core/data/transaction"
-	indexdrtata "github.com/TerraDharitri/drt-go-chain-es-indexer/process/dataindexer"
+	indexerdata "github.com/TerraDharitri/drt-go-chain-es-indexer/process/dataindexer"
 	"github.com/stretchr/testify/require"
 )
 
@@ -49,7 +49,7 @@ func TestAccountBalanceNFTTransfer(t *testing.T) {
 	// ################ CREATE NFT ##########################
 	body := &dataBlock.Body{}
 
-	addr := "drt1wdylghcn2uu393t703vufwa3ycdqfachgqyanha2xm2aqmsa5kfqg8qgrl"
+	addr := "drt1wdylghcn2uu393t703vufwa3ycdqfachgqyanha2xm2aqmsa5kfq4mhtqp"
 
 	esProc, err := CreateElasticProcessor(esClient)
 	require.Nil(t, err)
@@ -96,13 +96,13 @@ func TestAccountBalanceNFTTransfer(t *testing.T) {
 
 	ids := []string{fmt.Sprintf("%s-NFT-abcdef-718863", addr)}
 	genericResponse := &GenericResponse{}
-	err = esClient.DoMultiGet(context.Background(), ids, indexdrtata.AccountsDCDTIndex, true, genericResponse)
+	err = esClient.DoMultiGet(context.Background(), ids, indexerdata.AccountsDCDTIndex, true, genericResponse)
 	require.Nil(t, err)
 	require.JSONEq(t, readExpectedResult("./testdata/accountsBalanceNftTransfer/balance-nft-after-create.json"), string(genericResponse.Docs[0].Source))
 
 	// ################ TRANSFER NFT ##########################
 
-	addrReceiver := "drt1caejdhq28fc03wddsf2lqs90jlwqlzesxjlyd0k2zeekxckpp6qsxty5x2"
+	addrReceiver := "drt1caejdhq28fc03wddsf2lqs90jlwqlzesxjlyd0k2zeekxckpp6qsmhnh95"
 	header = &dataBlock.Header{
 		Round:     51,
 		TimeStamp: 5600,
@@ -157,13 +157,13 @@ func TestAccountBalanceNFTTransfer(t *testing.T) {
 
 	ids = []string{fmt.Sprintf("%s-NFT-abcdef-718863", addr)}
 	genericResponse = &GenericResponse{}
-	err = esClient.DoMultiGet(context.Background(), ids, indexdrtata.AccountsDCDTIndex, true, genericResponse)
+	err = esClient.DoMultiGet(context.Background(), ids, indexerdata.AccountsDCDTIndex, true, genericResponse)
 	require.Nil(t, err)
 	require.False(t, genericResponse.Docs[0].Found)
 
 	ids = []string{fmt.Sprintf("%s-NFT-abcdef-718863", addrReceiver)}
 	genericResponse = &GenericResponse{}
-	err = esClient.DoMultiGet(context.Background(), ids, indexdrtata.AccountsDCDTIndex, true, genericResponse)
+	err = esClient.DoMultiGet(context.Background(), ids, indexerdata.AccountsDCDTIndex, true, genericResponse)
 	require.Nil(t, err)
 	require.JSONEq(t, readExpectedResult("./testdata/accountsBalanceNftTransfer/balance-nft-after-transfer.json"), string(genericResponse.Docs[0].Source))
 }
