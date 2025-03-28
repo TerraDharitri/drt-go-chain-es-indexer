@@ -36,8 +36,8 @@ github.com/BurntSushi/toml v1.4.0/go.mod h1:ukJfTF/6rtPPRCnwkur4qwRxa8vTRFBF0uk2
 github.com/BurntSushi/xgb v0.0.0-20160522181843-27f122750802/go.mod h1:IVnqGOEym/WlBOVXweHU+Q+/VP0lqqI8lqeDx9IjBqo=
 github.com/TerraDharitri/drt-go-chain-communication v0.0.4 h1:mGLbGgqi/oFarRRbjajcDaXZYUXZbyU8g79NiiWaqLM=
 github.com/TerraDharitri/drt-go-chain-communication v0.0.4/go.mod h1:3cvC/Cv+6sOazl523LHv/ch0matWm50Ao5/JlpfXVkc=
-github.com/TerraDharitri/drt-go-chain-core v0.0.6 h1:jcvsc8Gg68HmzotkhTRPUrPhNbnMTMmYO579EnN7Hds=
-github.com/TerraDharitri/drt-go-chain-core v0.0.6/go.mod h1:pfcNSq98o/hpOX5vpt1OwQPnneRX/S3lzlFXQoXO1kQ=
+github.com/TerraDharitri/drt-go-chain-core v0.0.7 h1:NzSDJcR/9gOZZFwwIM15h8gXHIOOEmMZuxCnPeEY87M=
+github.com/TerraDharitri/drt-go-chain-core v0.0.7/go.mod h1:JM/Lp4bLe772CeSRnwMZcvAazYtZmogaNBqFP27i3dA=
 github.com/TerraDharitri/drt-go-chain-crypto v0.0.5 h1:C+PY99Cws11NI+4CiPT3b10D+FrGgCud3V/gfFpcZD4=
 github.com/TerraDharitri/drt-go-chain-logger v0.0.3 h1:Q8Ff5sC/VRAVw9ZwzciYDSQEDcVdnFVJpFZ+nqVIISQ=
 github.com/TerraDharitri/drt-go-chain-logger v0.0.3/go.mod h1:0LDt8MpTLZtLK9a0WQfRVL9Tu0MwMX9Bfar9PyBGQZ4=

@@ -4,7 +4,7 @@ go 1.20
 
 require (
 	github.com/TerraDharitri/drt-go-chain-communication v0.0.4
-	github.com/TerraDharitri/drt-go-chain-core v0.0.6
+	github.com/TerraDharitri/drt-go-chain-core v0.0.7
 	github.com/TerraDharitri/drt-go-chain-logger v0.0.3
 	github.com/TerraDharitri/drt-go-chain-vm-common v0.0.4
 	github.com/elastic/go-elasticsearch/v7 v7.12.0
