@@ -55,7 +55,7 @@ Before proceeding, ensure you have the following prerequisites:
 - Go programming environment set up.
 - Access to an Elasticsearch database instance.
 - One has to setup one or multiple observers. For running an observing squad, these [docs](https://docs.dharitri.org/integrators/observing-squad/) cover the whole process.
-The required configs for launching an observer/s with a driver attached, can be found [here](https://github.com/TerraDharitri/drt-go-chain/blob/master/cmd/node/config/external.toml).
+The required configs for launching an observer/s with a driver attached, can be found [here](https://github.com/TerraDharitri/drt-go-chain/blob/main/cmd/node/config/external.toml).
 
 The corresponding config section for enabling the driver:
 
@@ -108,7 +108,7 @@ The **_[prefs.toml](./cmd/elasticindexer/config/prefs.toml)_** file:
         url = "localhost:22111"
         # This flag describes the mode to start the WebSocket connector. Can be "client" or "server"
         mode = "server"
-        # Possible values: json, gogo protobuf. Should be compatible with drt-node-chain outport driver config
+        # Possible values: json, gogo protobuf. Should be compatible with drt-chain-node outport driver config
         data-marshaller-type = "json"
         # Retry duration (receive/send ack signal) in seconds
         retry-duration-in-seconds = 5

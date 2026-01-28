@@ -4,7 +4,8 @@ import (
 	"encoding/hex"
 	"fmt"
 	"math/big"
-	"time"
+
+	logger "github.com/TerraDharitri/drt-go-chain-logger"
 
 	"github.com/TerraDharitri/drt-go-chain-core/core"
 	"github.com/TerraDharitri/drt-go-chain-core/core/check"
@@ -12,7 +13,6 @@ import (
 	"github.com/TerraDharitri/drt-go-chain-es-indexer/data"
 	"github.com/TerraDharitri/drt-go-chain-es-indexer/process/dataindexer"
 	"github.com/TerraDharitri/drt-go-chain-es-indexer/process/elasticproc/converters"
-	logger "github.com/TerraDharitri/drt-go-chain-logger"
 )
 
 var log = logger.GetOrCreate("indexer/process/accounts")
@@ -101,8 +101,9 @@ func notZeroBalance(balance string) bool {
 }
 
 // PrepareRegularAccountsMap will prepare a map of regular accounts
-func (ap *accountsProcessor) PrepareRegularAccountsMap(timestamp uint64, accounts []*data.Account, shardID uint32) map[string]*data.AccountInfo {
+func (ap *accountsProcessor) PrepareRegularAccountsMap(accounts []*data.Account, shardID uint32, timestampMs uint64) map[string]*data.AccountInfo {
 	accountsMap := make(map[string]*data.AccountInfo)
+	timestampSeconds := converters.MillisecondsToSeconds(timestampMs)
 	for _, userAccount := range accounts {
 		address := userAccount.UserAccount.Address
 		addressBytes, err := ap.addressPubkeyConverter.Decode(address)
@@ -129,8 +130,9 @@ func (ap *accountsProcessor) PrepareRegularAccountsMap(timestamp uint64, account
 			BalanceNum:      balanceAsFloat,
 			IsSender:        userAccount.IsSender,
 			IsSmartContract: core.IsSmartContractAddress(addressBytes),
-			Timestamp:       time.Duration(timestamp),
+			Timestamp:       timestampSeconds,
 			ShardID:         shardID,
+			TimestampMs:     timestampMs,
 		}
 
 		ap.addAdditionalDataInAccount(userAccount.UserAccount.AdditionalData, acc)
@@ -179,13 +181,14 @@ func (ap *accountsProcessor) addDeveloperRewardsInAccount(additionalData *altere
 
 // PrepareAccountsMapDCDT will prepare a map of accounts with DCDT tokens
 func (ap *accountsProcessor) PrepareAccountsMapDCDT(
-	timestamp uint64,
 	accounts []*data.AccountDCDT,
 	tagsCount data.CountTags,
 	shardID uint32,
+	timestampMs uint64,
 ) (map[string]*data.AccountInfo, data.TokensHandler) {
 	tokensData := data.NewTokensInfo()
 	accountsDCDTMap := make(map[string]*data.AccountInfo)
+	timestampSeconds := converters.MillisecondsToSeconds(timestampMs)
 	for _, accountDCDT := range accounts {
 		address := accountDCDT.Account.Address
 		addressBytes, err := ap.addressPubkeyConverter.Decode(address)
@@ -224,8 +227,9 @@ func (ap *accountsProcessor) PrepareAccountsMapDCDT(
 			IsSender:        accountDCDT.IsSender,
 			IsSmartContract: core.IsSmartContractAddress(addressBytes),
 			Data:            tokenMetaData,
-			Timestamp:       time.Duration(timestamp),
+			Timestamp:       timestampSeconds,
 			ShardID:         shardID,
+			TimestampMs:     timestampMs,
 		}
 
 		if acc.TokenNonce == 0 {
@@ -250,22 +254,24 @@ func (ap *accountsProcessor) PrepareAccountsMapDCDT(
 
 // PrepareAccountsHistory will prepare a map of accounts history balance from a map of accounts
 func (ap *accountsProcessor) PrepareAccountsHistory(
-	timestamp uint64,
 	accounts map[string]*data.AccountInfo,
 	shardID uint32,
+	timestampMs uint64,
 ) map[string]*data.AccountBalanceHistory {
+	timestampSeconds := converters.MillisecondsToSeconds(timestampMs)
 	accountsMap := make(map[string]*data.AccountBalanceHistory)
 	for _, userAccount := range accounts {
 		acc := &data.AccountBalanceHistory{
 			Address:         userAccount.Address,
 			Balance:         userAccount.Balance,
-			Timestamp:       time.Duration(timestamp),
+			Timestamp:       timestampSeconds,
 			Token:           userAccount.TokenName,
 			TokenNonce:      userAccount.TokenNonce,
 			IsSender:        userAccount.IsSender,
 			IsSmartContract: userAccount.IsSmartContract,
 			Identifier:      converters.ComputeTokenIdentifier(userAccount.TokenName, userAccount.TokenNonce),
 			ShardID:         shardID,
+			TimestampMs:     timestampMs,
 		}
 		keyInMap := fmt.Sprintf("%s-%s-%d", acc.Address, acc.Token, acc.TokenNonce)
 		accountsMap[keyInMap] = acc

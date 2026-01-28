@@ -9,9 +9,10 @@ import (
 	"net/http"
 	"strings"
 
+	logger "github.com/TerraDharitri/drt-go-chain-logger"
+
 	"github.com/TerraDharitri/drt-go-chain-es-indexer/data"
 	"github.com/TerraDharitri/drt-go-chain-es-indexer/process/dataindexer"
-	logger "github.com/TerraDharitri/drt-go-chain-logger"
 	"github.com/elastic/go-elasticsearch/v7"
 	"github.com/elastic/go-elasticsearch/v7/esapi"
 )

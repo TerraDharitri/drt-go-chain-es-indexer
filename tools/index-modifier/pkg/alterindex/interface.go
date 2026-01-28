@@ -1,6 +1,9 @@
 package alterindex
 
-import "bytes"
+import (
+	"bytes"
+	"context"
+)
 
 // ScrollClient defines what a scroll client should do
 type ScrollClient interface {
@@ -13,5 +16,5 @@ type ScrollClient interface {
 
 // BulkClient defines what s bulk client should do
 type BulkClient interface {
-	DoBulkRequest(buff *bytes.Buffer, index string) error
+	DoBulkRequest(ctx context.Context, buff *bytes.Buffer, index string) error
 }

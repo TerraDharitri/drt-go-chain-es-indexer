@@ -3,9 +3,10 @@ package groups
 import (
 	"strings"
 
+	logger "github.com/TerraDharitri/drt-go-chain-logger"
+
 	"github.com/TerraDharitri/drt-go-chain-es-indexer/api/shared"
 	"github.com/TerraDharitri/drt-go-chain-es-indexer/config"
-	logger "github.com/TerraDharitri/drt-go-chain-logger"
 	"github.com/gin-gonic/gin"
 )
 

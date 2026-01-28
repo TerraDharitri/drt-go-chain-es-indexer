@@ -3,7 +3,6 @@ package transactions
 import (
 	"encoding/hex"
 	"fmt"
-	"time"
 
 	"github.com/TerraDharitri/drt-go-chain-core/core"
 	"github.com/TerraDharitri/drt-go-chain-core/core/sharding"
@@ -17,20 +16,23 @@ import (
 )
 
 type dbTransactionBuilder struct {
-	addressPubkeyConverter core.PubkeyConverter
-	dataFieldParser        DataFieldParser
-	balanceConverter       dataindexer.BalanceConverter
+	addressPubkeyConverter  core.PubkeyConverter
+	dataFieldParser         DataFieldParser
+	balanceConverter        dataindexer.BalanceConverter
+	relayedV1V2DisableEpoch uint32
 }
 
 func newTransactionDBBuilder(
 	addressPubkeyConverter core.PubkeyConverter,
 	dataFieldParser DataFieldParser,
 	balanceConverter dataindexer.BalanceConverter,
+	relayedV1V2DisableEpoch uint32,
 ) *dbTransactionBuilder {
 	return &dbTransactionBuilder{
-		addressPubkeyConverter: addressPubkeyConverter,
-		dataFieldParser:        dataFieldParser,
-		balanceConverter:       balanceConverter,
+		addressPubkeyConverter:  addressPubkeyConverter,
+		dataFieldParser:         dataFieldParser,
+		balanceConverter:        balanceConverter,
+		relayedV1V2DisableEpoch: relayedV1V2DisableEpoch,
 	}
 }
 
@@ -42,6 +44,7 @@ func (dtb *dbTransactionBuilder) prepareTransaction(
 	header coreData.HeaderHandler,
 	txStatus string,
 	numOfShards uint32,
+	timestampMs uint64,
 ) *data.Transaction {
 	tx := txInfo.Transaction
 
@@ -106,7 +109,7 @@ func (dtb *dbTransactionBuilder) prepareTransaction(
 		GasLimit:          tx.GasLimit,
 		Data:              tx.Data,
 		Signature:         hex.EncodeToString(tx.Signature),
-		Timestamp:         time.Duration(header.GetTimeStamp()),
+		Timestamp:         header.GetTimeStamp(),
 		Status:            txStatus,
 		GasUsed:           feeInfo.GasUsed,
 		InitialPaidFee:    feeInfo.InitialPaidFee.String(),
@@ -128,6 +131,7 @@ func (dtb *dbTransactionBuilder) prepareTransaction(
 		HadRefund:         feeInfo.HadRefund,
 		UUID:              converters.GenerateBase64UUID(),
 		Epoch:             header.GetEpoch(),
+		TimestampMs:       timestampMs,
 	}
 
 	hasValidRelayer := len(eTx.RelayedAddr) == len(eTx.Sender) && len(eTx.RelayedAddr) > 0
@@ -137,7 +141,19 @@ func (dtb *dbTransactionBuilder) prepareTransaction(
 	eTx.Function = converters.TruncateFieldIfExceedsMaxLength(res.Function)
 	eTx.Tokens = converters.TruncateSliceElementsIfExceedsMaxLength(res.Tokens)
 	eTx.ReceiversShardIDs = res.ReceiversShardID
+
+	relayedV1V2Enabled := header.GetEpoch() < dtb.relayedV1V2DisableEpoch
 	eTx.IsRelayed = res.IsRelayed || isRelayedV3
+
+	if res.IsRelayed && !relayedV1V2Enabled {
+		// will be treated as move balance, so reset some fields
+		eTx.IsRelayed = false
+		eTx.Function = ""
+		eTx.RelayedAddr = ""
+		eTx.RelayedSignature = ""
+		eTx.Receivers = []string{}
+		eTx.ReceiversShardIDs = []uint32{}
+	}
 
 	return eTx
 }
@@ -149,6 +165,7 @@ func (dtb *dbTransactionBuilder) prepareRewardTransaction(
 	mb *block.MiniBlock,
 	header coreData.HeaderHandler,
 	txStatus string,
+	timestampMs uint64,
 ) *data.Transaction {
 	rTx := rTxInfo.Reward
 	valueNum, err := dtb.balanceConverter.ConvertBigValueToFloat(rTx.Value)
@@ -174,12 +191,13 @@ func (dtb *dbTransactionBuilder) prepareRewardTransaction(
 		GasLimit:       0,
 		Data:           make([]byte, 0),
 		Signature:      "",
-		Timestamp:      time.Duration(header.GetTimeStamp()),
+		Timestamp:      header.GetTimeStamp(),
 		Status:         txStatus,
 		Operation:      rewardsOperation,
 		ExecutionOrder: int(rTxInfo.ExecutionOrder),
 		UUID:           converters.GenerateBase64UUID(),
 		Epoch:          header.GetEpoch(),
+		TimestampMs:    timestampMs,
 	}
 }
 
@@ -187,15 +205,17 @@ func (dtb *dbTransactionBuilder) prepareReceipt(
 	recHashHex string,
 	rec *receipt.Receipt,
 	header coreData.HeaderHandler,
+	timestampMs uint64,
 ) *data.Receipt {
 	senderAddr := dtb.addressPubkeyConverter.SilentEncode(rec.SndAddr, log)
 
 	return &data.Receipt{
-		Hash:      recHashHex,
-		Value:     rec.Value.String(),
-		Sender:    senderAddr,
-		Data:      string(rec.Data),
-		TxHash:    hex.EncodeToString(rec.TxHash),
-		Timestamp: time.Duration(header.GetTimeStamp()),
+		Hash:        recHashHex,
+		Value:       rec.Value.String(),
+		Sender:      senderAddr,
+		Data:        string(rec.Data),
+		TxHash:      hex.EncodeToString(rec.TxHash),
+		Timestamp:   header.GetTimeStamp(),
+		TimestampMs: timestampMs,
 	}
 }

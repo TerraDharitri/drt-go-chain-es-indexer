@@ -8,12 +8,13 @@ import (
 	"sync"
 	"time"
 
+	logger "github.com/TerraDharitri/drt-go-chain-logger"
+	"github.com/TerraDharitri/drt-go-chain-logger/file"
+
 	"github.com/TerraDharitri/drt-go-chain-core/core/check"
 	"github.com/TerraDharitri/drt-go-chain-core/core/closing"
 	"github.com/TerraDharitri/drt-go-chain-es-indexer/tools/clusters-checker/pkg/checkers"
 	"github.com/TerraDharitri/drt-go-chain-es-indexer/tools/clusters-checker/pkg/config"
-	logger "github.com/TerraDharitri/drt-go-chain-logger"
-	"github.com/TerraDharitri/drt-go-chain-logger/file"
 	"github.com/pelletier/go-toml"
 	"github.com/urfave/cli"
 )

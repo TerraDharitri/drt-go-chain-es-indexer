@@ -4,11 +4,11 @@ import (
 	"bytes"
 	"encoding/json"
 	"fmt"
-	"time"
+
+	logger "github.com/TerraDharitri/drt-go-chain-logger"
 
 	"github.com/TerraDharitri/drt-go-chain-core/data/outport"
 	"github.com/TerraDharitri/drt-go-chain-es-indexer/data"
-	logger "github.com/TerraDharitri/drt-go-chain-logger"
 )
 
 var log = logger.GetOrCreate("indexer/process/statistics")
@@ -31,7 +31,8 @@ func (sp *statisticsProcessor) SerializeRoundsInfo(rounds *outport.RoundsInfo) *
 			BlockWasProposed: info.BlockWasProposed,
 			ShardId:          info.ShardId,
 			Epoch:            info.Epoch,
-			Timestamp:        time.Duration(info.Timestamp),
+			Timestamp:        info.Timestamp,
+			TimestampMs:      info.TimestampMs,
 		})
 
 		buff.Grow(len(meta) + len(serializedRoundInfo))

@@ -6,10 +6,12 @@
   "currentOwner": "drt1sqy2ywvswp09ef7qwjhv8zwr9kzz3xas6y2ye5nuryaz0wcnfzzswuc7c0",
   "type": "SemiFungibleDCDT",
   "timestamp": 5040,
+  "timestampMs": 5040000,
   "ownersHistory": [
     {
       "address": "drt1sqy2ywvswp09ef7qwjhv8zwr9kzz3xas6y2ye5nuryaz0wcnfzzswuc7c0",
-      "timestamp": 5040
+      "timestamp": 5040,
+      "timestampMs": 5040000
     }
   ],
   "properties": {

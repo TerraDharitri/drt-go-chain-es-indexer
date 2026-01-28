@@ -33,3 +33,8 @@ func (be balancesDCDT) getBalancesForAddress(address string) map[string]string {
 func (be balancesDCDT) getBalance(address, tokenIdentifier string) string {
 	return be[address][tokenIdentifier]
 }
+
+//
+
+var _ = (*balanceChecker).handlerFuncScrollAccountDCDT
+var _ = (balancesDCDT).getBalance

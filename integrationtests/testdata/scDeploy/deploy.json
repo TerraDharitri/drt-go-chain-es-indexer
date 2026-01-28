@@ -3,6 +3,7 @@
   "deployer": "drt12m3x8jp6dl027pj5f2nw6ght2cyhhjfrs86cdwsa8xn83r375qfq7jkw93",
   "currentOwner": "drt12m3x8jp6dl027pj5f2nw6ght2cyhhjfrs86cdwsa8xn83r375qfq7jkw93",
   "timestamp": 5040,
+  "timestampMs": 5040000,
   "initialCodeHash": "Y29kZUhhc2g=",
   "upgrades": [],
   "owners": []

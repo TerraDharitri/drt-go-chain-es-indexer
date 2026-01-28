@@ -38,7 +38,7 @@ func CreateBalanceChecker(cfg *config.Config, repair bool) (*balanceChecker, err
 		return nil, err
 	}
 
-	pubKeyConverter, err := pubkeyConverter.NewBech32PubkeyConverter(32, log)
+	pubKeyConverter, err := pubkeyConverter.NewBech32PubkeyConverter(32, "drt")
 	if err != nil {
 		return nil, err
 	}

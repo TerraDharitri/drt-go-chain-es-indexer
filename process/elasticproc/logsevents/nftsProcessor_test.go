@@ -5,7 +5,6 @@ import (
 	"encoding/json"
 	"math/big"
 	"testing"
-	"time"
 
 	"github.com/TerraDharitri/drt-go-chain-core/core"
 	"github.com/TerraDharitri/drt-go-chain-core/data/dcdt"
@@ -82,6 +81,6 @@ func TestNftsProcessor_processLogAndEventsNFTs_Wipe(t *testing.T) {
 		Identifier: "nft-0123-14",
 		Token:      "nft-0123",
 		Nonce:      20,
-		Timestamp:  time.Duration(10000),
+		Timestamp:  10000,
 	}, tokensSupply.GetAll()[0])
 }

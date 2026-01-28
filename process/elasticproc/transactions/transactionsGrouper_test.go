@@ -19,7 +19,7 @@ func TestGroupNormalTxs(t *testing.T) {
 
 	parser := createDataFieldParserMock()
 	ap, _ := converters.NewBalanceConverter(18)
-	txBuilder := newTransactionDBBuilder(&mock.PubkeyConverterMock{}, parser, ap)
+	txBuilder := newTransactionDBBuilder(&mock.PubkeyConverterMock{}, parser, ap, 0)
 	grouper := newTxsGrouper(txBuilder, &mock.HasherMock{}, &mock.MarshalizerMock{})
 
 	txHash1 := []byte("txHash1")
@@ -28,7 +28,7 @@ func TestGroupNormalTxs(t *testing.T) {
 		TxHashes: [][]byte{txHash1, txHash2},
 		Type:     block.TxBlock,
 	}
-	header := &block.Header{}
+	header := &block.Header{TimeStamp: 1234}
 	txs := map[string]*outport.TxInfo{
 		hex.EncodeToString(txHash1): {
 			Transaction: &transaction.Transaction{
@@ -46,8 +46,10 @@ func TestGroupNormalTxs(t *testing.T) {
 		},
 	}
 
-	normalTxs, _ := grouper.groupNormalTxs(0, mb, header, txs, false, 3)
+	normalTxs, _ := grouper.groupNormalTxs(0, mb, header, txs, false, 3, 1234000)
 	require.Len(t, normalTxs, 2)
+	require.Equal(t, uint64(1234), normalTxs[string(txHash1)].Timestamp)
+	require.Equal(t, uint64(1234000), normalTxs[string(txHash1)].TimestampMs)
 }
 
 func TestGroupRewardsTxs(t *testing.T) {
@@ -55,7 +57,7 @@ func TestGroupRewardsTxs(t *testing.T) {
 
 	parser := createDataFieldParserMock()
 	ap, _ := converters.NewBalanceConverter(18)
-	txBuilder := newTransactionDBBuilder(&mock.PubkeyConverterMock{}, parser, ap)
+	txBuilder := newTransactionDBBuilder(&mock.PubkeyConverterMock{}, parser, ap, 0)
 	grouper := newTxsGrouper(txBuilder, &mock.HasherMock{}, &mock.MarshalizerMock{})
 
 	txHash1 := []byte("txHash1")
@@ -64,7 +66,7 @@ func TestGroupRewardsTxs(t *testing.T) {
 		TxHashes: [][]byte{txHash1, txHash2},
 		Type:     block.RewardsBlock,
 	}
-	header := &block.Header{}
+	header := &block.Header{TimeStamp: 1234}
 	txs := map[string]*outport.RewardInfo{
 		hex.EncodeToString(txHash1): {Reward: &rewardTx.RewardTx{
 			RcvAddr: []byte("receiver1"),
@@ -74,8 +76,10 @@ func TestGroupRewardsTxs(t *testing.T) {
 		}},
 	}
 
-	normalTxs, _ := grouper.groupRewardsTxs(0, mb, header, txs, false)
+	normalTxs, _ := grouper.groupRewardsTxs(0, mb, header, txs, false, 1234000)
 	require.Len(t, normalTxs, 2)
+	require.Equal(t, uint64(1234), normalTxs[string(txHash1)].Timestamp)
+	require.Equal(t, uint64(1234000), normalTxs[string(txHash1)].TimestampMs)
 }
 
 func TestGroupInvalidTxs(t *testing.T) {
@@ -83,7 +87,7 @@ func TestGroupInvalidTxs(t *testing.T) {
 
 	parser := createDataFieldParserMock()
 	ap, _ := converters.NewBalanceConverter(18)
-	txBuilder := newTransactionDBBuilder(mock.NewPubkeyConverterMock(32), parser, ap)
+	txBuilder := newTransactionDBBuilder(mock.NewPubkeyConverterMock(32), parser, ap, 0)
 	grouper := newTxsGrouper(txBuilder, &mock.HasherMock{}, &mock.MarshalizerMock{})
 
 	txHash1 := []byte("txHash1")
@@ -92,7 +96,7 @@ func TestGroupInvalidTxs(t *testing.T) {
 		TxHashes: [][]byte{txHash1, txHash2},
 		Type:     block.InvalidBlock,
 	}
-	header := &block.Header{}
+	header := &block.Header{TimeStamp: 1234}
 	txs := map[string]*outport.TxInfo{
 		hex.EncodeToString(txHash1): {
 			Transaction: &transaction.Transaction{
@@ -106,8 +110,10 @@ func TestGroupInvalidTxs(t *testing.T) {
 			}, FeeInfo: &outport.FeeInfo{}},
 	}
 
-	normalTxs, _ := grouper.groupInvalidTxs(0, mb, header, txs, 3)
+	normalTxs, _ := grouper.groupInvalidTxs(0, mb, header, txs, 3, 1234000)
 	require.Len(t, normalTxs, 2)
+	require.Equal(t, uint64(1234), normalTxs[string(txHash1)].Timestamp)
+	require.Equal(t, uint64(1234000), normalTxs[string(txHash1)].TimestampMs)
 }
 
 func TestGroupReceipts(t *testing.T) {
@@ -115,12 +121,12 @@ func TestGroupReceipts(t *testing.T) {
 
 	parser := createDataFieldParserMock()
 	ap, _ := converters.NewBalanceConverter(18)
-	txBuilder := newTransactionDBBuilder(&mock.PubkeyConverterMock{}, parser, ap)
+	txBuilder := newTransactionDBBuilder(&mock.PubkeyConverterMock{}, parser, ap, 0)
 	grouper := newTxsGrouper(txBuilder, &mock.HasherMock{}, &mock.MarshalizerMock{})
 
 	txHash1 := []byte("txHash1")
 	txHash2 := []byte("txHash2")
-	header := &block.Header{}
+	header := &block.Header{TimeStamp: 1234}
 	txs := map[string]*receipt.Receipt{
 		hex.EncodeToString(txHash1): {
 			SndAddr: []byte("sender1"),
@@ -130,6 +136,8 @@ func TestGroupReceipts(t *testing.T) {
 		},
 	}
 
-	receipts := grouper.groupReceipts(header, txs)
+	receipts := grouper.groupReceipts(header, txs, 1234000)
 	require.Len(t, receipts, 2)
+	require.Equal(t, uint64(1234), receipts[0].Timestamp)
+	require.Equal(t, uint64(1234000), receipts[0].TimestampMs)
 }

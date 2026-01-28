@@ -4,6 +4,8 @@ import (
 	"encoding/hex"
 	"math/big"
 
+	logger "github.com/TerraDharitri/drt-go-chain-logger"
+
 	"github.com/TerraDharitri/drt-go-chain-core/core"
 	"github.com/TerraDharitri/drt-go-chain-core/core/check"
 	coreData "github.com/TerraDharitri/drt-go-chain-core/data"
@@ -11,9 +13,9 @@ import (
 	"github.com/TerraDharitri/drt-go-chain-core/data/outport"
 	"github.com/TerraDharitri/drt-go-chain-core/hashing"
 	"github.com/TerraDharitri/drt-go-chain-core/marshal"
+	"github.com/TerraDharitri/drt-go-chain-es-indexer/config"
 	"github.com/TerraDharitri/drt-go-chain-es-indexer/data"
 	"github.com/TerraDharitri/drt-go-chain-es-indexer/process/dataindexer"
-	logger "github.com/TerraDharitri/drt-go-chain-logger"
 	datafield "github.com/TerraDharitri/drt-go-chain-vm-common/parsers/dataField"
 )
 
@@ -26,6 +28,7 @@ type ArgsTransactionProcessor struct {
 	Hasher                 hashing.Hasher
 	Marshalizer            marshal.Marshalizer
 	BalanceConverter       dataindexer.BalanceConverter
+	EnableEpochsConfig     config.EnableEpochsConfig
 }
 
 type txsDatabaseProcessor struct {
@@ -51,9 +54,9 @@ func NewTransactionsProcessor(args *ArgsTransactionProcessor) (*txsDatabaseProce
 		return nil, err
 	}
 
-	txBuilder := newTransactionDBBuilder(args.AddressPubkeyConverter, operationsDataParser, args.BalanceConverter)
+	txBuilder := newTransactionDBBuilder(args.AddressPubkeyConverter, operationsDataParser, args.BalanceConverter, args.EnableEpochsConfig.RelayedTransactionsV1V2DisableEpoch)
 	txsDBGrouper := newTxsGrouper(txBuilder, args.Hasher, args.Marshalizer)
-	scrProc := newSmartContractResultsProcessor(args.AddressPubkeyConverter, args.Marshalizer, args.Hasher, operationsDataParser, args.BalanceConverter)
+	scrProc := newSmartContractResultsProcessor(args.AddressPubkeyConverter, args.Marshalizer, args.Hasher, operationsDataParser, args.BalanceConverter, args.EnableEpochsConfig.RelayedTransactionsV1V2DisableEpoch)
 	scrsDataToTxs := newScrsDataToTransactions(args.BalanceConverter)
 
 	return &txsDatabaseProcessor{
@@ -71,6 +74,7 @@ func (tdp *txsDatabaseProcessor) PrepareTransactionsForDatabase(
 	pool *outport.TransactionPool,
 	isImportDB bool,
 	numOfShards uint32,
+	timestampMs uint64,
 ) *data.PreparedResults {
 	err := checkPrepareTransactionForDatabaseArguments(header, pool)
 	if err != nil {
@@ -93,21 +97,21 @@ func (tdp *txsDatabaseProcessor) PrepareTransactionsForDatabase(
 				continue
 			}
 
-			txs, errGroup := tdp.txsGrouper.groupNormalTxs(mbIndex, mb, header, pool.Transactions, isImportDB, numOfShards)
+			txs, errGroup := tdp.txsGrouper.groupNormalTxs(mbIndex, mb, header, pool.Transactions, isImportDB, numOfShards, timestampMs)
 			if errGroup != nil {
 				log.Warn("txsDatabaseProcessor.groupNormalTxs", "error", errGroup)
 				continue
 			}
 			mergeTxsMaps(normalTxs, txs)
 		case block.RewardsBlock:
-			txs, errGroup := tdp.txsGrouper.groupRewardsTxs(mbIndex, mb, header, pool.Rewards, isImportDB)
+			txs, errGroup := tdp.txsGrouper.groupRewardsTxs(mbIndex, mb, header, pool.Rewards, isImportDB, timestampMs)
 			if errGroup != nil {
 				log.Warn("txsDatabaseProcessor.groupRewardsTxs", "error", errGroup)
 				continue
 			}
 			mergeTxsMaps(rewardsTxs, txs)
 		case block.InvalidBlock:
-			txs, errGroup := tdp.txsGrouper.groupInvalidTxs(mbIndex, mb, header, pool.InvalidTxs, numOfShards)
+			txs, errGroup := tdp.txsGrouper.groupInvalidTxs(mbIndex, mb, header, pool.InvalidTxs, numOfShards, timestampMs)
 			if errGroup != nil {
 				log.Warn("txsDatabaseProcessor.groupInvalidTxs", "error", errGroup)
 				continue
@@ -119,8 +123,8 @@ func (tdp *txsDatabaseProcessor) PrepareTransactionsForDatabase(
 	}
 
 	normalTxs = tdp.setTransactionSearchOrder(normalTxs)
-	dbReceipts := tdp.txsGrouper.groupReceipts(header, pool.Receipts)
-	dbSCResults := tdp.scrsProc.processSCRs(miniBlocks, header, pool.SmartContractResults, numOfShards)
+	dbReceipts := tdp.txsGrouper.groupReceipts(header, pool.Receipts, timestampMs)
+	dbSCResults := tdp.scrsProc.processSCRs(miniBlocks, header, pool.SmartContractResults, numOfShards, timestampMs)
 
 	srcsNoTxInCurrentShard := tdp.scrsDataToTxs.attachSCRsToTransactionsAndReturnSCRsWithoutTx(normalTxs, dbSCResults)
 	tdp.scrsDataToTxs.processTransactionsAfterSCRsWereAttached(normalTxs)

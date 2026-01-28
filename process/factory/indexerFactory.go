@@ -6,6 +6,8 @@ import (
 	"net/http"
 	"time"
 
+	logger "github.com/TerraDharitri/drt-go-chain-logger"
+
 	"github.com/TerraDharitri/drt-go-chain-core/core"
 	"github.com/TerraDharitri/drt-go-chain-core/core/check"
 	"github.com/TerraDharitri/drt-go-chain-core/data/block"
@@ -14,11 +16,11 @@ import (
 	"github.com/TerraDharitri/drt-go-chain-es-indexer/client"
 	"github.com/TerraDharitri/drt-go-chain-es-indexer/client/logging"
 	"github.com/TerraDharitri/drt-go-chain-es-indexer/client/transport"
+	"github.com/TerraDharitri/drt-go-chain-es-indexer/config"
 	indexerCore "github.com/TerraDharitri/drt-go-chain-es-indexer/core"
 	"github.com/TerraDharitri/drt-go-chain-es-indexer/process/dataindexer"
 	"github.com/TerraDharitri/drt-go-chain-es-indexer/process/elasticproc"
 	"github.com/TerraDharitri/drt-go-chain-es-indexer/process/elasticproc/factory"
-	logger "github.com/TerraDharitri/drt-go-chain-logger"
 	"github.com/elastic/go-elasticsearch/v7"
 )
 
@@ -44,6 +46,7 @@ type ArgsIndexerFactory struct {
 	AddressPubkeyConverter   core.PubkeyConverter
 	ValidatorPubkeyConverter core.PubkeyConverter
 	StatusMetrics            indexerCore.StatusMetricsHandler
+	EnableEpochsConfig       config.EnableEpochsConfig
 }
 
 // NewIndexer will create a new instance of Indexer
@@ -97,6 +100,7 @@ func createElasticProcessor(args ArgsIndexerFactory) (dataindexer.ElasticProcess
 		BulkRequestMaxSize:       args.BulkRequestMaxSize,
 		ImportDB:                 args.ImportDB,
 		Version:                  args.Version,
+		EnableEpochsConfig:       args.EnableEpochsConfig,
 	}
 
 	return factory.CreateElasticProcessor(argsElasticProcFac)

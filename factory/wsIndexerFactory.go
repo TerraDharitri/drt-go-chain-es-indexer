@@ -1,6 +1,8 @@
 package factory
 
 import (
+	logger "github.com/TerraDharitri/drt-go-chain-logger"
+
 	"github.com/TerraDharitri/drt-go-chain-communication/websocket/data"
 	factoryHost "github.com/TerraDharitri/drt-go-chain-communication/websocket/factory"
 	"github.com/TerraDharitri/drt-go-chain-core/core/pubkeyConverter"
@@ -11,19 +13,24 @@ import (
 	"github.com/TerraDharitri/drt-go-chain-es-indexer/core"
 	"github.com/TerraDharitri/drt-go-chain-es-indexer/process/factory"
 	"github.com/TerraDharitri/drt-go-chain-es-indexer/process/wsindexer"
-	logger "github.com/TerraDharitri/drt-go-chain-logger"
 )
 
 var log = logger.GetOrCreate("elasticindexer")
 
 // CreateWsIndexer will create a new instance of wsindexer.WSClient
-func CreateWsIndexer(cfg config.Config, clusterCfg config.ClusterConfig, statusMetrics core.StatusMetricsHandler, version string) (wsindexer.WSClient, error) {
+func CreateWsIndexer(
+	cfg config.Config,
+	clusterCfg config.ClusterConfig,
+	epochsCfg config.EnableEpochsConfig,
+	statusMetrics core.StatusMetricsHandler,
+	version string,
+) (wsindexer.WSClient, error) {
 	wsMarshaller, err := factoryMarshaller.NewMarshalizer(clusterCfg.Config.WebSocket.DataMarshallerType)
 	if err != nil {
 		return nil, err
 	}
 
-	dataIndexer, err := createDataIndexer(cfg, clusterCfg, wsMarshaller, statusMetrics, version)
+	dataIndexer, err := createDataIndexer(cfg, clusterCfg, epochsCfg, wsMarshaller, statusMetrics, version)
 	if err != nil {
 		return nil, err
 	}
@@ -54,6 +61,7 @@ func CreateWsIndexer(cfg config.Config, clusterCfg config.ClusterConfig, statusM
 func createDataIndexer(
 	cfg config.Config,
 	clusterCfg config.ClusterConfig,
+	enableEpochsCfg config.EnableEpochsConfig,
 	wsMarshaller marshal.Marshalizer,
 	statusMetrics core.StatusMetricsHandler,
 	version string,
@@ -90,6 +98,7 @@ func createDataIndexer(
 		HeaderMarshaller:         wsMarshaller,
 		StatusMetrics:            statusMetrics,
 		Version:                  version,
+		EnableEpochsConfig:       enableEpochsCfg,
 	})
 }
 

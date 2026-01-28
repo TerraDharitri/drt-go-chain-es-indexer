@@ -8,6 +8,7 @@ import (
 	"net/http"
 
 	logger "github.com/TerraDharitri/drt-go-chain-logger"
+
 	"github.com/elastic/go-elasticsearch/v7/esapi"
 )
 

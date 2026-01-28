@@ -6,10 +6,12 @@
   "currentOwner": "drt1ju8pkvg57cwdmjsjx58jlmnuf4l9yspstrhr9tgsrt98n9edpm2qkrl8xm",
   "type": "NonFungibleDCDT",
   "timestamp": 5040,
+  "timestampMs": 5040000,
   "ownersHistory": [
     {
       "address": "drt1ju8pkvg57cwdmjsjx58jlmnuf4l9yspstrhr9tgsrt98n9edpm2qkrl8xm",
-      "timestamp": 5040
+      "timestamp": 5040,
+      "timestampMs": 5040000
     }
   ],
   "properties": {

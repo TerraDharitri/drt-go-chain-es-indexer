@@ -91,7 +91,7 @@ func TestAccountsDCDTDeleteOnRollback(t *testing.T) {
 	require.JSONEq(t, readExpectedResult("./testdata/accountsDCDTRollback/account-after-create.json"), string(genericResponse.Docs[0].Source))
 
 	// DO ROLLBACK
-	err = esProc.RemoveAccountsDCDT(5040, 2)
+	err = esProc.RemoveAccountsDCDT(2, 5040000)
 	require.Nil(t, err)
 
 	err = esClient.DoMultiGet(context.Background(), ids, indexerdata.AccountsDCDTIndex, true, genericResponse)

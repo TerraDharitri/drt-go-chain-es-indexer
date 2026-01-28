@@ -7,12 +7,13 @@ import (
 	"os"
 	"time"
 
+	logger "github.com/TerraDharitri/drt-go-chain-logger"
+	"github.com/TerraDharitri/drt-go-chain-logger/file"
+
 	checkNil "github.com/TerraDharitri/drt-go-chain-core/core/check"
 	"github.com/TerraDharitri/drt-go-chain-core/core/closing"
 	"github.com/TerraDharitri/drt-go-chain-es-indexer/tools/accounts-balance-checker/pkg/check"
 	"github.com/TerraDharitri/drt-go-chain-es-indexer/tools/accounts-balance-checker/pkg/config"
-	logger "github.com/TerraDharitri/drt-go-chain-logger"
-	"github.com/TerraDharitri/drt-go-chain-logger/file"
 	"github.com/urfave/cli"
 )
 

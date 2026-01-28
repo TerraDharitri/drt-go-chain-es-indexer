@@ -2,7 +2,8 @@ package logsevents
 
 import (
 	"math/big"
-	"time"
+
+	logger "github.com/TerraDharitri/drt-go-chain-logger"
 
 	"github.com/TerraDharitri/drt-go-chain-core/core"
 	"github.com/TerraDharitri/drt-go-chain-core/core/sharding"
@@ -12,7 +13,6 @@ import (
 	"github.com/TerraDharitri/drt-go-chain-core/marshal"
 	"github.com/TerraDharitri/drt-go-chain-es-indexer/data"
 	"github.com/TerraDharitri/drt-go-chain-es-indexer/process/elasticproc/converters"
-	logger "github.com/TerraDharitri/drt-go-chain-logger"
 )
 
 const (
@@ -65,7 +65,7 @@ func (np *nftsProcessor) processEvent(args *argsProcessEvent) argOutputProcessEv
 	sender := args.event.GetAddress()
 	senderShardID := sharding.ComputeShardID(sender, args.numOfShards)
 	if senderShardID == args.selfShardID {
-		np.processNFTEventOnSender(args.event, args.tokens, args.tokensSupply, args.timestamp)
+		np.processNFTEventOnSender(args.event, args.tokens, args.tokensSupply, args.timestamp, args.timestampMs)
 	}
 
 	token := string(topics[0])
@@ -87,10 +87,11 @@ func (np *nftsProcessor) processEvent(args *argsProcessEvent) argOutputProcessEv
 
 	if eventIdentifier == core.BuiltInFunctionDCDTWipe {
 		args.tokensSupply.Add(&data.TokenInfo{
-			Token:      token,
-			Identifier: identifier,
-			Timestamp:  time.Duration(args.timestamp),
-			Nonce:      nonceBig.Uint64(),
+			Token:       token,
+			Identifier:  identifier,
+			Timestamp:   args.timestamp,
+			TimestampMs: args.timestampMs,
+			Nonce:       nonceBig.Uint64(),
 		})
 	}
 
@@ -116,6 +117,7 @@ func (np *nftsProcessor) processNFTEventOnSender(
 	tokensCreateInfo data.TokensHandler,
 	tokensSupply data.TokensHandler,
 	timestamp uint64,
+	timestampMs uint64,
 ) {
 	topics := event.GetTopics()
 	token := string(topics[0])
@@ -123,10 +125,11 @@ func (np *nftsProcessor) processNFTEventOnSender(
 	eventIdentifier := string(event.GetIdentifier())
 	if eventIdentifier == core.BuiltInFunctionDCDTNFTBurn || eventIdentifier == core.BuiltInFunctionDCDTWipe {
 		tokensSupply.Add(&data.TokenInfo{
-			Token:      token,
-			Identifier: converters.ComputeTokenIdentifier(token, nonceBig.Uint64()),
-			Timestamp:  time.Duration(timestamp),
-			Nonce:      nonceBig.Uint64(),
+			Token:       token,
+			Identifier:  converters.ComputeTokenIdentifier(token, nonceBig.Uint64()),
+			Timestamp:   timestamp,
+			TimestampMs: timestampMs,
+			Nonce:       nonceBig.Uint64(),
 		})
 	}
 
@@ -146,11 +149,12 @@ func (np *nftsProcessor) processNFTEventOnSender(
 
 	tokenMetaData := converters.PrepareTokenMetaData(convertMetaData(np.pubKeyConverter, dcdtToken.TokenMetaData))
 	tokensCreateInfo.Add(&data.TokenInfo{
-		Token:      token,
-		Identifier: converters.ComputeTokenIdentifier(token, nonceBig.Uint64()),
-		Timestamp:  time.Duration(timestamp),
-		Data:       tokenMetaData,
-		Nonce:      nonceBig.Uint64(),
+		Token:       token,
+		Identifier:  converters.ComputeTokenIdentifier(token, nonceBig.Uint64()),
+		Timestamp:   timestamp,
+		TimestampMs: timestampMs,
+		Data:        tokenMetaData,
+		Nonce:       nonceBig.Uint64(),
 	})
 }
 

@@ -6,7 +6,6 @@ import (
 	"errors"
 	"math/big"
 	"testing"
-	"time"
 
 	"github.com/TerraDharitri/drt-go-chain-core/core"
 	"github.com/TerraDharitri/drt-go-chain-core/data/alteredAccount"
@@ -74,7 +73,7 @@ func TestAccountsProcessor_PrepareRegularAccountsMapWithNil(t *testing.T) {
 
 	ap, _ := NewAccountsProcessor(mock.NewPubkeyConverterMock(32), balanceConverter)
 
-	accountsInfo := ap.PrepareRegularAccountsMap(0, nil, 0)
+	accountsInfo := ap.PrepareRegularAccountsMap(nil, 0, 0)
 	require.Len(t, accountsInfo, 0)
 }
 
@@ -285,14 +284,15 @@ func TestAccountsProcessor_PrepareAccountsMapREWA(t *testing.T) {
 
 	balanceNum, _ := balanceConverter.ComputeBalanceAsFloat(big.NewInt(1000))
 
-	res := ap.PrepareRegularAccountsMap(123, []*data.Account{rewaAccount}, 0)
+	res := ap.PrepareRegularAccountsMap([]*data.Account{rewaAccount}, 0, 123000)
 	require.Equal(t, &data.AccountInfo{
 		Address:         addr,
 		Nonce:           1,
 		Balance:         "1000",
 		BalanceNum:      balanceNum,
 		IsSmartContract: true,
-		Timestamp:       time.Duration(123),
+		Timestamp:       uint64(123),
+		TimestampMs:     uint64(123000),
 		CodeHash:        []byte("code"),
 		CodeMetadata:    []byte("metadata"),
 		RootHash:        []byte("root"),
@@ -337,7 +337,7 @@ func TestAccountsProcessor_PrepareAccountsMapDCDT(t *testing.T) {
 	}
 
 	tagsCount := tags.NewTagsCount()
-	res, _ := ap.PrepareAccountsMapDCDT(123, accountsDCDT, tagsCount, 0)
+	res, _ := ap.PrepareAccountsMapDCDT(accountsDCDT, tagsCount, 0, 123000)
 	require.Len(t, res, 2)
 
 	balanceNum, _ := balanceConverter.ComputeBalanceAsFloat(big.NewInt(1000))
@@ -353,7 +353,8 @@ func TestAccountsProcessor_PrepareAccountsMapDCDT(t *testing.T) {
 			Creator:    "creator",
 			Attributes: make([]byte, 0),
 		},
-		Timestamp: time.Duration(123),
+		Timestamp:   uint64(123),
+		TimestampMs: uint64(123000),
 	}, res[hex.EncodeToString([]byte(addr))+"-token-15"])
 
 	require.Equal(t, &data.AccountInfo{
@@ -368,7 +369,8 @@ func TestAccountsProcessor_PrepareAccountsMapDCDT(t *testing.T) {
 			Creator:    "creator",
 			Attributes: make([]byte, 0),
 		},
-		Timestamp: time.Duration(123),
+		Timestamp:   uint64(123),
+		TimestampMs: uint64(123000),
 	}, res[hex.EncodeToString([]byte(addr))+"-token-16"])
 }
 
@@ -387,16 +389,17 @@ func TestAccountsProcessor_PrepareAccountsHistory(t *testing.T) {
 
 	ap, _ := NewAccountsProcessor(mock.NewPubkeyConverterMock(32), balanceConverter)
 
-	res := ap.PrepareAccountsHistory(100, accounts, 0)
+	res := ap.PrepareAccountsHistory(accounts, 0, 100000)
 	accountBalanceHistory := res["addr1-token-112-10"]
 	require.Equal(t, &data.AccountBalanceHistory{
-		Address:    "addr1",
-		Timestamp:  100,
-		Balance:    "112",
-		Token:      "token-112",
-		IsSender:   true,
-		TokenNonce: 10,
-		Identifier: "token-112-0a",
+		Address:     "addr1",
+		Timestamp:   100,
+		TimestampMs: 100000,
+		Balance:     "112",
+		Token:       "token-112",
+		IsSender:    true,
+		TokenNonce:  10,
+		Identifier:  "token-112-0a",
 	}, accountBalanceHistory)
 }
 
