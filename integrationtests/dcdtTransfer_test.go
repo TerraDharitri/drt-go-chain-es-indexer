@@ -255,8 +255,8 @@ func TestDCDTTransferCrossShardIndexFirstOnDestinationAndAfterSource(t *testing.
 			Value:    big.NewInt(0),
 		},
 		FeeInfo: &outport.FeeInfo{
-			GasUsed:        500_000,
-			Fee:            big.NewInt(137660000000000),
+			GasUsed:        334_000,
+			Fee:            big.NewInt(136000000000000),
 			InitialPaidFee: big.NewInt(137660000000000),
 		},
 	}

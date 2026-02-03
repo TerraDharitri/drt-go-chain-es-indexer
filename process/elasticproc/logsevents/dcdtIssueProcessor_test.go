@@ -2,7 +2,6 @@ package logsevents
 
 import (
 	"testing"
-	"time"
 
 	"github.com/TerraDharitri/drt-go-chain-core/core"
 	"github.com/TerraDharitri/drt-go-chain-core/data/transaction"
@@ -25,6 +24,7 @@ func TestIssueDCDTProcessor(t *testing.T) {
 		timestamp:   1234,
 		event:       event,
 		selfShardID: core.MetachainShardId,
+		timestampMs: 1234000,
 	}
 
 	res := dcdtIssueProc.processEvent(args)
@@ -33,14 +33,16 @@ func TestIssueDCDTProcessor(t *testing.T) {
 		Token:        "MYTOKEN-abcd",
 		Name:         "my-token",
 		Ticker:       "MYTOKEN",
-		Timestamp:    time.Duration(1234),
+		Timestamp:    1234,
+		TimestampMs:  1234000,
 		Type:         core.NonFungibleDCDT,
 		Issuer:       "61646472",
 		CurrentOwner: "61646472",
 		OwnersHistory: []*data.OwnerData{
 			{
-				Address:   "61646472",
-				Timestamp: time.Duration(1234),
+				Address:     "61646472",
+				Timestamp:   1234,
+				TimestampMs: 1234000,
 			},
 		},
 		Properties: &data.TokenProperties{},
@@ -59,6 +61,7 @@ func TestIssueDCDTProcessor_TransferOwnership(t *testing.T) {
 	}
 	args := &argsProcessEvent{
 		timestamp:   1234,
+		timestampMs: 1234000,
 		event:       event,
 		selfShardID: core.MetachainShardId,
 	}
@@ -69,14 +72,16 @@ func TestIssueDCDTProcessor_TransferOwnership(t *testing.T) {
 		Token:        "MYTOKEN-abcd",
 		Name:         "my-token",
 		Ticker:       "MYTOKEN",
-		Timestamp:    time.Duration(1234),
+		Timestamp:    1234,
+		TimestampMs:  1234000,
 		Type:         core.NonFungibleDCDT,
 		Issuer:       "61646472",
 		CurrentOwner: "6e65774f776e6572",
 		OwnersHistory: []*data.OwnerData{
 			{
-				Address:   "6e65774f776e6572",
-				Timestamp: time.Duration(1234),
+				Address:     "6e65774f776e6572",
+				Timestamp:   1234,
+				TimestampMs: 1234000,
 			},
 		},
 		TransferOwnership: true,
@@ -96,6 +101,7 @@ func TestIssueDCDTProcessor_EventWithShardID0ShouldBeIgnored(t *testing.T) {
 	}
 	args := &argsProcessEvent{
 		timestamp:   1234,
+		timestampMs: 1234000,
 		event:       event,
 		selfShardID: 0,
 	}

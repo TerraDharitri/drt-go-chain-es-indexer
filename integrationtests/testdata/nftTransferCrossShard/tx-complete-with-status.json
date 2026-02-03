@@ -3,7 +3,7 @@
     2
   ],
   "receiver": "drt1ure7ea247clj6yqjg80unz6xzjhlj2zwm4gtg6sudcmtsd2cw3xsrfq7nj",
-  "data": "RVNEVE5GVFRyYW5zZmVyQDQzNGY0YzRjNDU0MzU0NDk0ZjRlMmQzMjM2NjMzMTM4MzhAMDFAMDFAMDAwMDAwMDAwMDAwMDAwMDA1MDBhN2EwMjc3MWFhMDcwOTBlNjA3ZjAyYjI1ZjRkNmQyNDFiZmYzMmI5OTBhMg==",
+  "data": "RENEVE5GVFRyYW5zZmVyQDQzNGY0YzRjNDU0MzU0NDk0ZjRlMmQzMjM2NjMzMTM4MzhAMDFAMDFAMDAwMDAwMDAwMDAwMDAwMDA1MDBhN2EwMjc3MWFhMDcwOTBlNjA3ZjAyYjI1ZjRkNmQyNDFiZmYzMmI5OTBhMg==",
   "signature": "",
   "fee": "238820000000000",
   "feeNum": 0.00023882,
@@ -33,6 +33,7 @@
   "operation": "DCDTNFTTransfer",
   "gasPrice": 1000000000,
   "timestamp": 5040,
+  "timestampMs": 5040000,
   "status": "fail",
   "initialPaidFee": "595490000000000",
   "searchOrder": 0,

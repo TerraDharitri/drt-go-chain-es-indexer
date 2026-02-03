@@ -3,7 +3,6 @@ package logsevents
 import (
 	"encoding/hex"
 	"fmt"
-	"time"
 
 	"github.com/TerraDharitri/drt-go-chain-core/core"
 	"github.com/TerraDharitri/drt-go-chain-core/core/check"
@@ -95,8 +94,9 @@ func (lep *logsAndEventsProcessor) ExtractDataFromLogs(
 	timestamp uint64,
 	shardID uint32,
 	numOfShards uint32,
+	timestampMs uint64,
 ) *data.PreparedLogsResults {
-	lgData := newLogsData(timestamp, preparedResults.Transactions, preparedResults.ScResults)
+	lgData := newLogsData(timestamp, preparedResults.Transactions, preparedResults.ScResults, timestampMs)
 	for _, txLog := range logsAndEvents {
 		if txLog == nil {
 			continue
@@ -117,7 +117,7 @@ func (lep *logsAndEventsProcessor) ExtractDataFromLogs(
 		}
 	}
 
-	dbLogs, dbEvents := lep.prepareLogsForDB(lgData, logsAndEvents, timestamp, shardID)
+	dbLogs, dbEvents := lep.prepareLogsForDB(lgData, logsAndEvents, timestamp, shardID, timestampMs)
 
 	return &data.PreparedLogsResults{
 		Tokens:                  lgData.tokens,
@@ -153,6 +153,7 @@ func (lep *logsAndEventsProcessor) processEvent(lgData *logsData, logHashHexEnco
 			tokens:                  lgData.tokens,
 			tokensSupply:            lgData.tokensSupply,
 			timestamp:               lgData.timestamp,
+			timestampMs:             lgData.timestampMs,
 			scDeploys:               lgData.scDeploys,
 			txs:                     lgData.txsMap,
 			scrs:                    lgData.scrsMap,
@@ -194,6 +195,7 @@ func (lep *logsAndEventsProcessor) prepareLogsForDB(
 	logsAndEvents []*outport.LogData,
 	timestamp uint64,
 	shardID uint32,
+	timestampMs uint64,
 ) ([]*data.Logs, []*data.LogEvent) {
 	logs := make([]*data.Logs, 0, len(logsAndEvents))
 	events := make([]*data.LogEvent, 0)
@@ -203,7 +205,7 @@ func (lep *logsAndEventsProcessor) prepareLogsForDB(
 			continue
 		}
 
-		dbLog, logEvents := lep.prepareLog(lgData, txLog.TxHash, txLog.Log, timestamp, shardID)
+		dbLog, logEvents := lep.prepareLog(lgData, txLog.TxHash, txLog.Log, timestamp, shardID, timestampMs)
 
 		logs = append(logs, dbLog)
 		events = append(events, logEvents...)
@@ -218,6 +220,7 @@ func (lep *logsAndEventsProcessor) prepareLog(
 	eventLogs *transaction.Log,
 	timestamp uint64,
 	shardID uint32,
+	timestampMs uint64,
 ) (*data.Logs, []*data.LogEvent) {
 	originalTxHash := lep.getOriginalTxHash(lgData, logHashHex)
 	encodedAddr := lep.pubKeyConverter.SilentEncode(eventLogs.GetAddress(), log)
@@ -226,8 +229,9 @@ func (lep *logsAndEventsProcessor) prepareLog(
 		ID:             logHashHex,
 		OriginalTxHash: originalTxHash,
 		Address:        encodedAddr,
-		Timestamp:      time.Duration(timestamp),
+		Timestamp:      timestamp,
 		Events:         make([]*data.Event, 0, len(eventLogs.Events)),
+		TimestampMs:    timestampMs,
 	}
 
 	dbEvents := make([]*data.LogEvent, 0, len(eventLogs.Events))
@@ -247,13 +251,13 @@ func (lep *logsAndEventsProcessor) prepareLog(
 		logsDB.Events = append(logsDB.Events, logEvent)
 
 		executionOrder := lep.getExecutionOrder(lgData, logHashHex)
-		dbEvents = append(dbEvents, lep.prepareLogEvent(logsDB, logEvent, shardID, executionOrder))
+		dbEvents = append(dbEvents, lep.prepareLogEvent(logsDB, logEvent, shardID, executionOrder, timestampMs))
 	}
 
 	return logsDB, dbEvents
 }
 
-func (lep *logsAndEventsProcessor) prepareLogEvent(dbLog *data.Logs, event *data.Event, shardID uint32, execOrder int) *data.LogEvent {
+func (lep *logsAndEventsProcessor) prepareLogEvent(dbLog *data.Logs, event *data.Event, shardID uint32, execOrder int, timestampMs uint64) *data.LogEvent {
 	dbEvent := &data.LogEvent{
 		UUID:           converters.GenerateBase64UUID(),
 		TxHash:         dbLog.ID,
@@ -269,6 +273,7 @@ func (lep *logsAndEventsProcessor) prepareLogEvent(dbLog *data.Logs, event *data
 		OriginalTxHash: dbLog.OriginalTxHash,
 		Timestamp:      dbLog.Timestamp,
 		ID:             fmt.Sprintf(eventIDFormat, dbLog.ID, shardID, event.Order),
+		TimestampMs:    timestampMs,
 	}
 
 	return dbEvent

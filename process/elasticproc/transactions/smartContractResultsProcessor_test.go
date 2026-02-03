@@ -4,7 +4,6 @@ import (
 	"encoding/hex"
 	"math/big"
 	"testing"
-	"time"
 
 	"github.com/TerraDharitri/drt-go-chain-core/data/block"
 	"github.com/TerraDharitri/drt-go-chain-core/data/outport"
@@ -32,7 +31,7 @@ func TestPrepareSmartContractResult(t *testing.T) {
 	parser := createDataFieldParserMock()
 	pubKeyConverter := &mock.PubkeyConverterMock{}
 	ap, _ := converters.NewBalanceConverter(18)
-	scrsProc := newSmartContractResultsProcessor(pubKeyConverter, &mock.MarshalizerMock{}, &mock.HasherMock{}, parser, ap)
+	scrsProc := newSmartContractResultsProcessor(pubKeyConverter, &mock.MarshalizerMock{}, &mock.HasherMock{}, parser, ap, 0)
 
 	nonce := uint64(10)
 	txHash := []byte("txHash")
@@ -60,7 +59,7 @@ func TestPrepareSmartContractResult(t *testing.T) {
 	header := &block.Header{TimeStamp: 100}
 
 	mbHash := []byte("hash")
-	scRes := scrsProc.prepareSmartContractResult(scHash, mbHash, scrInfo, header, 0, 1, 3)
+	scRes := scrsProc.prepareSmartContractResult(scHash, mbHash, scrInfo, header, 0, 1, 3, 100000)
 	scRes.UUID = ""
 
 	senderAddr, err := pubKeyConverter.Encode(sndAddr)
@@ -79,7 +78,8 @@ func TestPrepareSmartContractResult(t *testing.T) {
 		Receiver:           receiverAddr,
 		Value:              "<nil>",
 		CallType:           "1",
-		Timestamp:          time.Duration(100),
+		Timestamp:          uint64(100),
+		TimestampMs:        uint64(100000),
 		SenderShard:        0,
 		ReceiverShard:      1,
 		Operation:          "transfer",

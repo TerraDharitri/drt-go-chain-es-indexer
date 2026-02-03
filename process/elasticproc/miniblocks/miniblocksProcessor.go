@@ -2,7 +2,8 @@ package miniblocks
 
 import (
 	"encoding/hex"
-	"time"
+
+	logger "github.com/TerraDharitri/drt-go-chain-logger"
 
 	"github.com/TerraDharitri/drt-go-chain-core/core"
 	"github.com/TerraDharitri/drt-go-chain-core/core/check"
@@ -12,7 +13,6 @@ import (
 	"github.com/TerraDharitri/drt-go-chain-core/marshal"
 	"github.com/TerraDharitri/drt-go-chain-es-indexer/data"
 	"github.com/TerraDharitri/drt-go-chain-es-indexer/process/dataindexer"
-	logger "github.com/TerraDharitri/drt-go-chain-logger"
 )
 
 var log = logger.GetOrCreate("indexer/process/miniblocks")
@@ -41,7 +41,7 @@ func NewMiniblocksProcessor(
 }
 
 // PrepareDBMiniblocks will prepare miniblocks
-func (mp *miniblocksProcessor) PrepareDBMiniblocks(header coreData.HeaderHandler, miniBlocks []*block.MiniBlock) []*data.Miniblock {
+func (mp *miniblocksProcessor) PrepareDBMiniblocks(header coreData.HeaderHandler, miniBlocks []*block.MiniBlock, timestampMS uint64) []*data.Miniblock {
 	headerHash, err := mp.calculateHash(header)
 	if err != nil {
 		log.Warn("indexer: could not calculate header hash", "error", err)
@@ -56,7 +56,7 @@ func (mp *miniblocksProcessor) PrepareDBMiniblocks(header coreData.HeaderHandler
 			continue
 		}
 
-		dbMiniBlock, errPrepareMiniBlock := mp.prepareMiniblockForDB(mbIndex, miniBlock, header, headerHash)
+		dbMiniBlock, errPrepareMiniBlock := mp.prepareMiniblockForDB(mbIndex, miniBlock, header, headerHash, timestampMS)
 		if errPrepareMiniBlock != nil {
 			log.Warn("miniblocksProcessor.PrepareDBMiniBlocks cannot prepare miniblock", "error", errPrepareMiniBlock)
 			continue
@@ -73,6 +73,7 @@ func (mp *miniblocksProcessor) prepareMiniblockForDB(
 	miniblock *block.MiniBlock,
 	header coreData.HeaderHandler,
 	headerHash []byte,
+	timestampMS uint64,
 ) (*data.Miniblock, error) {
 	mbHash, err := mp.calculateHash(miniblock)
 	if err != nil {
@@ -86,7 +87,8 @@ func (mp *miniblocksProcessor) prepareMiniblockForDB(
 		SenderShardID:   miniblock.SenderShardID,
 		ReceiverShardID: miniblock.ReceiverShardID,
 		Type:            miniblock.Type.String(),
-		Timestamp:       time.Duration(header.GetTimeStamp()),
+		Timestamp:       header.GetTimeStamp(),
+		TimestampMs:     timestampMS,
 		Reserved:        miniblock.Reserved,
 	}
 

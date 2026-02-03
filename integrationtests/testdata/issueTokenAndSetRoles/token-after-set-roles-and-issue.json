@@ -1,23 +1,16 @@
 {
-  "ticker": "SEMI",
-  "currentOwner": "drt1k04pxr6c0gvlcx4rd5fje0a4uy33axqxwz0fpcrgtfdy3nrqauqq4s3zqj",
-  "roles": {
-    "DCDTRoleNFTCreate": [
-      "drt1k04pxr6c0gvlcx4rd5fje0a4uy33axqxwz0fpcrgtfdy3nrqauqq4s3zqj"
-    ],
-    "DCDTRoleNFTBurn": [
-      "drt1k04pxr6c0gvlcx4rd5fje0a4uy33axqxwz0fpcrgtfdy3nrqauqq4s3zqj"
-    ]
-  },
-  "name": "semi-token",
-  "type": "SemiFungibleDCDT",
-  "issuer": "drt1k04pxr6c0gvlcx4rd5fje0a4uy33axqxwz0fpcrgtfdy3nrqauqq4s3zqj",
   "token": "TTT-abcd",
-  "timestamp": 10000,
+  "name": "semi-token",
+  "ticker": "SEMI",
+  "type": "SemiFungibleDCDT",
+  "numDecimals": 0,
+  "issuer": "drt1k04pxr6c0gvlcx4rd5fje0a4uy33axqxwz0fpcrgtfdy3nrqauqq4s3zqj",
+  "currentOwner": "drt1k04pxr6c0gvlcx4rd5fje0a4uy33axqxwz0fpcrgtfdy3nrqauqq4s3zqj",
   "ownersHistory": [
     {
       "address": "drt1k04pxr6c0gvlcx4rd5fje0a4uy33axqxwz0fpcrgtfdy3nrqauqq4s3zqj",
-      "timestamp": 10000
+      "timestamp": 10000,
+      "timestampMs": 10000000
     }
   ],
   "properties": {
@@ -32,5 +25,14 @@
     "canChangeOwner": false,
     "canCreateMultiShard": false
   },
-  "numDecimals": 0
+  "roles": {
+    "DCDTRoleNFTBurn": [
+      "drt1k04pxr6c0gvlcx4rd5fje0a4uy33axqxwz0fpcrgtfdy3nrqauqq4s3zqj"
+    ],
+    "DCDTRoleNFTCreate": [
+      "drt1k04pxr6c0gvlcx4rd5fje0a4uy33axqxwz0fpcrgtfdy3nrqauqq4s3zqj"
+    ]
+  },
+  "timestamp": 10000,
+  "timestampMs": 10000000
 }

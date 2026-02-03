@@ -5,12 +5,13 @@ import (
 	"errors"
 	"fmt"
 	"strconv"
-	"time"
+
+	logger "github.com/TerraDharitri/drt-go-chain-logger"
 
 	"github.com/TerraDharitri/drt-go-chain-core/core"
 	"github.com/TerraDharitri/drt-go-chain-core/core/check"
 	coreData "github.com/TerraDharitri/drt-go-chain-core/data"
-	"github.com/TerraDharitri/drt-go-chain-core/data/block"
+	"github.com/TerraDharitri/drt-go-chain-core/data/api"
 	nodeBlock "github.com/TerraDharitri/drt-go-chain-core/data/block"
 	"github.com/TerraDharitri/drt-go-chain-core/data/outport"
 	"github.com/TerraDharitri/drt-go-chain-core/hashing"
@@ -18,7 +19,6 @@ import (
 	"github.com/TerraDharitri/drt-go-chain-es-indexer/data"
 	indexer "github.com/TerraDharitri/drt-go-chain-es-indexer/process/dataindexer"
 	"github.com/TerraDharitri/drt-go-chain-es-indexer/process/elasticproc/converters"
-	logger "github.com/TerraDharitri/drt-go-chain-logger"
 )
 
 const (
@@ -33,22 +33,27 @@ var (
 )
 
 type blockProcessor struct {
-	hasher      hashing.Hasher
-	marshalizer marshal.Marshalizer
+	hasher                    hashing.Hasher
+	marshalizer               marshal.Marshalizer
+	validatorsPubKeyConverter core.PubkeyConverter
 }
 
 // NewBlockProcessor will create a new instance of block processor
-func NewBlockProcessor(hasher hashing.Hasher, marshalizer marshal.Marshalizer) (*blockProcessor, error) {
+func NewBlockProcessor(hasher hashing.Hasher, marshalizer marshal.Marshalizer, validatorsPubKeyConverter core.PubkeyConverter) (*blockProcessor, error) {
 	if check.IfNil(hasher) {
 		return nil, indexer.ErrNilHasher
 	}
 	if check.IfNil(marshalizer) {
 		return nil, indexer.ErrNilMarshalizer
 	}
+	if check.IfNil(validatorsPubKeyConverter) {
+		return nil, indexer.ErrNilPubkeyConverter
+	}
 
 	return &blockProcessor{
-		hasher:      hasher,
-		marshalizer: marshalizer,
+		hasher:                    hasher,
+		marshalizer:               marshalizer,
+		validatorsPubKeyConverter: validatorsPubKeyConverter,
 	}, nil
 }
 
@@ -74,7 +79,6 @@ func (bp *blockProcessor) PrepareBlockForDB(obh *outport.OutportBlockWithHeader)
 
 	sizeTxs := computeSizeOfTransactions(obh.TransactionPool)
 	miniblocksHashes := bp.getEncodedMBSHashes(obh.BlockData.Body, obh.BlockData.IntraShardMiniBlocks)
-	leaderIndex := bp.getLeaderIndex(obh.SignersIndexes)
 
 	numTxs, notarizedTxs := getTxsCount(obh.Header)
 	elasticBlock := &data.Block{
@@ -85,12 +89,14 @@ func (bp *blockProcessor) PrepareBlockForDB(obh *outport.OutportBlockWithHeader)
 		Hash:                  hex.EncodeToString(obh.BlockData.HeaderHash),
 		MiniBlocksHashes:      miniblocksHashes,
 		NotarizedBlocksHashes: obh.NotarizedHeadersHashes,
-		Proposer:              leaderIndex,
+		Proposer:              getLeaderIndex(obh),
+		ProposerBlsKey:        hex.EncodeToString(obh.LeaderBLSKey),
 		Validators:            obh.SignersIndexes,
 		PubKeyBitmap:          hex.EncodeToString(obh.Header.GetPubKeysBitmap()),
 		Size:                  int64(blockSizeInBytes),
 		SizeTxs:               int64(sizeTxs),
-		Timestamp:             time.Duration(obh.Header.GetTimeStamp()),
+		Timestamp:             obh.Header.GetTimeStamp(),
+		TimestampMs:           obh.OutportBlock.BlockData.GetTimestampMs(),
 		TxCount:               numTxs,
 		NotarizedTxsCount:     notarizedTxs,
 		StateRootHash:         hex.EncodeToString(obh.Header.GetRootHash()),
@@ -131,7 +137,41 @@ func (bp *blockProcessor) PrepareBlockForDB(obh *outport.OutportBlockWithHeader)
 	appendBlockDetailsFromHeaders(elasticBlock, obh.Header, obh.BlockData.Body, obh.TransactionPool)
 	appendBlockDetailsFromIntraShardMbs(elasticBlock, obh.BlockData.IntraShardMiniBlocks, obh.TransactionPool, len(obh.Header.GetMiniBlockHeaderHandlers()))
 
+	addProofs(elasticBlock, obh)
+
 	return elasticBlock, nil
+}
+
+func getLeaderIndex(obh *outport.OutportBlockWithHeader) uint64 {
+	if obh.BlockData.HeaderProof != nil {
+		return obh.LeaderIndex
+	}
+
+	if len(obh.SignersIndexes) > 0 {
+		return obh.SignersIndexes[0]
+	}
+
+	return 0
+}
+
+func addProofs(elasticBlock *data.Block, obh *outport.OutportBlockWithHeader) {
+	if obh.BlockData.HeaderProof != nil {
+		elasticBlock.Proof = proofToAPIProof(obh.BlockData.HeaderProof)
+		elasticBlock.PubKeyBitmap = elasticBlock.Proof.PubKeysBitmap
+	}
+}
+
+func proofToAPIProof(headerProof coreData.HeaderProofHandler) *api.HeaderProof {
+	return &api.HeaderProof{
+		PubKeysBitmap:       hex.EncodeToString(headerProof.GetPubKeysBitmap()),
+		AggregatedSignature: hex.EncodeToString(headerProof.GetAggregatedSignature()),
+		HeaderHash:          hex.EncodeToString(headerProof.GetHeaderHash()),
+		HeaderEpoch:         headerProof.GetHeaderEpoch(),
+		HeaderNonce:         headerProof.GetHeaderNonce(),
+		HeaderShardId:       headerProof.GetHeaderShardId(),
+		HeaderRound:         headerProof.GetHeaderRound(),
+		IsStartOfEpoch:      headerProof.GetIsStartOfEpoch(),
+	}
 }
 
 func getTxsCount(header coreData.HeaderHandler) (numTxs, notarizedTxs uint32) {
@@ -149,7 +189,7 @@ func getTxsCount(header coreData.HeaderHandler) (numTxs, notarizedTxs uint32) {
 	notarizedTxs = metaHeader.TxCount
 	numTxs = 0
 	for _, mb := range metaHeader.MiniBlockHeaders {
-		if mb.Type == block.PeerBlock {
+		if mb.Type == nodeBlock.PeerBlock {
 			continue
 		}
 
@@ -230,7 +270,7 @@ func (bp *blockProcessor) addEpochStartShardDataForMeta(epochStartShardData node
 	block.EpochStartShardsData = append(block.EpochStartShardsData, shardData)
 }
 
-func (bp *blockProcessor) getEncodedMBSHashes(body *block.Body, intraShardMbs []*nodeBlock.MiniBlock) []string {
+func (bp *blockProcessor) getEncodedMBSHashes(body *nodeBlock.Body, intraShardMbs []*nodeBlock.MiniBlock) []string {
 	miniblocksHashes := make([]string, 0)
 	mbs := append(body.MiniBlocks, intraShardMbs...)
 	for _, miniblock := range mbs {
@@ -248,7 +288,7 @@ func (bp *blockProcessor) getEncodedMBSHashes(body *block.Body, intraShardMbs []
 	return miniblocksHashes
 }
 
-func appendBlockDetailsFromHeaders(block *data.Block, header coreData.HeaderHandler, body *block.Body, pool *outport.TransactionPool) {
+func appendBlockDetailsFromHeaders(block *data.Block, header coreData.HeaderHandler, body *nodeBlock.Body, pool *outport.TransactionPool) {
 	for idx, mbHeader := range header.GetMiniBlockHeaderHandlers() {
 		mbType := nodeBlock.Type(mbHeader.GetTypeInt32())
 		if mbType == nodeBlock.PeerBlock {
@@ -270,7 +310,7 @@ func appendBlockDetailsFromHeaders(block *data.Block, header coreData.HeaderHand
 	}
 }
 
-func appendBlockDetailsFromIntraShardMbs(block *data.Block, intraShardMbs []*block.MiniBlock, pool *outport.TransactionPool, offset int) {
+func appendBlockDetailsFromIntraShardMbs(block *data.Block, intraShardMbs []*nodeBlock.MiniBlock, pool *outport.TransactionPool, offset int) {
 	for idx, intraMB := range intraShardMbs {
 		if intraMB.Type == nodeBlock.PeerBlock || intraMB.Type == nodeBlock.ReceiptBlock {
 			continue
@@ -290,7 +330,7 @@ func appendBlockDetailsFromIntraShardMbs(block *data.Block, intraShardMbs []*blo
 	}
 }
 
-func extractExecutionOrderIntraShardMBUnsigned(mb *block.MiniBlock, pool *outport.TransactionPool) []int {
+func extractExecutionOrderIntraShardMBUnsigned(mb *nodeBlock.MiniBlock, pool *outport.TransactionPool) []int {
 	executionOrderTxsIndices := make([]int, len(mb.TxHashes))
 	for idx, txHash := range mb.TxHashes {
 		executionOrder, found := getExecutionOrderForTx(txHash, int32(mb.Type), pool)
@@ -357,7 +397,7 @@ func getExecutionOrderForTx(txHash []byte, mbType int32, pool *outport.Transacti
 	return tx.GetExecutionOrder(), true
 }
 
-func (bp *blockProcessor) computeBlockSize(headerBytes []byte, body *block.Body) (int, error) {
+func (bp *blockProcessor) computeBlockSize(headerBytes []byte, body *nodeBlock.Body) (int, error) {
 	bodyBytes, err := bp.marshalizer.Marshal(body)
 	if err != nil {
 		return 0, err
@@ -366,14 +406,6 @@ func (bp *blockProcessor) computeBlockSize(headerBytes []byte, body *block.Body)
 	blockSize := len(headerBytes) + len(bodyBytes)
 
 	return blockSize, nil
-}
-
-func (bp *blockProcessor) getLeaderIndex(signersIndexes []uint64) uint64 {
-	if len(signersIndexes) > 0 {
-		return signersIndexes[0]
-	}
-
-	return 0
 }
 
 func computeBlockSearchOrder(header coreData.HeaderHandler) uint64 {

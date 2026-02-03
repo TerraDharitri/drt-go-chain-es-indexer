@@ -5,13 +5,14 @@ import (
 	"fmt"
 	"time"
 
+	logger "github.com/TerraDharitri/drt-go-chain-logger"
+
 	"github.com/TerraDharitri/drt-go-chain-core/core"
 	"github.com/TerraDharitri/drt-go-chain-core/core/check"
 	"github.com/TerraDharitri/drt-go-chain-core/data"
 	"github.com/TerraDharitri/drt-go-chain-core/data/block"
 	"github.com/TerraDharitri/drt-go-chain-core/data/outport"
 	"github.com/TerraDharitri/drt-go-chain-core/marshal"
-	logger "github.com/TerraDharitri/drt-go-chain-logger"
 )
 
 var log = logger.GetOrCreate("dataindexer")
@@ -115,7 +116,7 @@ func (di *dataIndexer) saveBlockData(outportBlock *outport.OutportBlock, header 
 	}
 
 	miniBlocks := append(outportBlock.BlockData.Body.MiniBlocks, outportBlock.BlockData.IntraShardMiniBlocks...)
-	err = di.elasticProcessor.SaveMiniblocks(header, miniBlocks)
+	err = di.elasticProcessor.SaveMiniblocks(header, miniBlocks, outportBlock.BlockData.GetTimestampMs())
 	if err != nil {
 		return fmt.Errorf("%w when saving miniblocks, block hash %s, nonce %d",
 			err, hex.EncodeToString(headerHash), headerNonce)
@@ -152,12 +153,12 @@ func (di *dataIndexer) RevertIndexedBlock(blockData *outport.BlockData) error {
 		return err
 	}
 
-	err = di.elasticProcessor.RemoveTransactions(header, blockData.Body)
+	err = di.elasticProcessor.RemoveTransactions(header, blockData.Body, blockData.TimestampMs)
 	if err != nil {
 		return err
 	}
 
-	return di.elasticProcessor.RemoveAccountsDCDT(header.GetTimeStamp(), header.GetShardID())
+	return di.elasticProcessor.RemoveAccountsDCDT(header.GetShardID(), blockData.TimestampMs)
 }
 
 // SaveRoundsInfo will save data about a slice of rounds in elasticsearch

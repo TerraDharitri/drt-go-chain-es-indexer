@@ -128,7 +128,7 @@ func TestNFTTransferCrossShardWithSCCall(t *testing.T) {
 				PrevTxHash:     []byte("f639cb7a0231191e04ec19dcb1359bd93a03fe8dc4a28a80d00835c5d1c988f8"),
 				OriginalTxHash: txHash,
 				Value:          refundValueBig,
-				Data:           []byte("@6f6b@017d15@0000000e4d4f414641524d2d6239336536300000000000017d15000000097045173cc97554b65d@0178af"),
+				Data:           []byte("@6f6b@017d15@0000000e4d45584641524d2d6239336536300000000000017d15000000097045173cc97554b65d@0178af"),
 			}, FeeInfo: &outport.FeeInfo{GasUsed: 139832352, Fee: big.NewInt(1802738520000000)}},
 		},
 	}

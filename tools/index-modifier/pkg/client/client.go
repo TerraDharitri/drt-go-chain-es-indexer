@@ -9,6 +9,7 @@ import (
 	"time"
 
 	logger "github.com/TerraDharitri/drt-go-chain-logger"
+
 	"github.com/elastic/go-elasticsearch/v7"
 	"github.com/elastic/go-elasticsearch/v7/esapi"
 	"github.com/tidwall/gjson"

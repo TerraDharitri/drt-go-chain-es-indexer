@@ -1,7 +1,8 @@
 {
   "address": "drt17umc0uvel62ng30k5uprqcxh3ue33hq608njejaqljuqzqlxtzuqyq4umj",
-  "balance": "0",
+  "balance": "2000",
   "balanceNum": 0,
-  "timestamp": 5600,
+  "timestamp": 6000,
+  "timestampMs": 6000000,
   "shardID": 2
 }

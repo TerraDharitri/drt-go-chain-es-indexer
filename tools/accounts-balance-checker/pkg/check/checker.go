@@ -6,12 +6,13 @@ import (
 	"fmt"
 	"time"
 
+	logger "github.com/TerraDharitri/drt-go-chain-logger"
+
 	"github.com/TerraDharitri/drt-go-chain-core/core"
 	"github.com/TerraDharitri/drt-go-chain-core/core/check"
 	indexerData "github.com/TerraDharitri/drt-go-chain-es-indexer/data"
 	indexer "github.com/TerraDharitri/drt-go-chain-es-indexer/process/dataindexer"
 	"github.com/TerraDharitri/drt-go-chain-es-indexer/tools/accounts-balance-checker/pkg/utils"
-	logger "github.com/TerraDharitri/drt-go-chain-logger"
 )
 
 const (

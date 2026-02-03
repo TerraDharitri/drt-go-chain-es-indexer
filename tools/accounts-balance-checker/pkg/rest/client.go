@@ -7,8 +7,9 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/TerraDharitri/drt-go-chain-es-indexer/tools/accounts-balance-checker/pkg/utils"
 	logger "github.com/TerraDharitri/drt-go-chain-logger"
+
+	"github.com/TerraDharitri/drt-go-chain-es-indexer/tools/accounts-balance-checker/pkg/utils"
 )
 
 const maxNumOfRetries = 10

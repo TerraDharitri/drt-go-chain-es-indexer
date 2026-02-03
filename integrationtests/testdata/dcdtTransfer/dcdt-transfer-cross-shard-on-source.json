@@ -1,5 +1,5 @@
 {
-  "miniBlockHash": "579fe2f60e8fa9c396254b2173282c6ecb6e736b42e015c3b744c86001be3981",
+  "miniBlockHash": "39de2ddb638d71e35f26e4fa058530a97c3c861b137cdddf3025c8a4ce613588",
   "nonce": 1,
   "round": 50,
   "value": "0",
@@ -14,9 +14,10 @@
   "fee": "136000000000000",
   "feeNum": 0.000136,
   "initialPaidFee": "137660000000000",
-  "data": "RVNEVFRyYW5zZmVyQDU0NDc0ZTJkMzgzODYyMzgzMzY2QDBh",
+  "data": "RENEVFRyYW5zZmVyQDU0NDc0ZTJkMzgzODYyMzgzMzY2QDBh",
   "signature": "",
   "timestamp": 10101,
+  "timestampMs": 10101000,
   "status": "pending",
   "searchOrder": 0,
   "hasScResults": true,

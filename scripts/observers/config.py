@@ -135,10 +135,10 @@ def prepare_indexer_server(meta_id, working_dir):
 
 
 def generate_new_config(working_dir):
-    drt_chain_go_folder = working_dir / "drt-go-chain" / "scripts" / "testnet"
+    drt_go_chain_folder = working_dir / "drt-go-chain" / "scripts" / "testnet"
     num_of_shards = str(os.getenv('NUM_OF_SHARDS'))
 
-    with open(drt_chain_go_folder / "local.sh", "w") as file:
+    with open(drt_go_chain_folder / "local.sh", "w") as file:
         file.write(f'export SHARDCOUNT={num_of_shards}\n')
         file.write("export SHARD_VALIDATORCOUNT=1\n")
         file.write("export SHARD_OBSERVERCOUNT=0\n")
@@ -152,21 +152,21 @@ def generate_new_config(working_dir):
         file.write('export USE_PROXY=0\n')
 
 
-def clone_drt_chain_go(working_dir):
+def clone_drt_go_chain(working_dir):
     print("cloning drt-go-chain....")
-    drt_chain_go_folder = working_dir / "drt-go-chain"
-    if not os.path.isdir(drt_chain_go_folder):
-        Repo.clone_from(os.getenv('NODE_GO_URL'), drt_chain_go_folder)
+    drt_go_chain_folder = working_dir / "drt-go-chain"
+    if not os.path.isdir(drt_go_chain_folder):
+        Repo.clone_from(os.getenv('NODE_GO_URL'), drt_go_chain_folder)
 
-    repo_drt_chain_go = Repo(drt_chain_go_folder)
-    repo_drt_chain_go.git.checkout(os.getenv('NODE_GO_BRANCH'))
+    repo_drt_go_chain = Repo(drt_go_chain_folder)
+    repo_drt_go_chain.git.checkout(os.getenv('NODE_GO_BRANCH'))
 
 
 def clone_dependencies(working_dir):
     print("cloning dependencies")
     drt_chain_deploy_folder = working_dir / "drt-go-chain-deploy"
     if not os.path.isdir(drt_chain_deploy_folder):
-        Repo.clone_from(os.getenv('DRT_CHAIN_DEPLOY_GO_URL'), drt_chain_deploy_folder)
+        Repo.clone_from(os.getenv('DRT_GO_CHAIN_DEPLOY_URL'), drt_chain_deploy_folder)
 
     drt_chain_proxy_folder = working_dir / "drt-go-chain-proxy"
     if not os.path.isdir(drt_chain_proxy_folder):
@@ -178,10 +178,10 @@ def prepare_seed_node(working_dir):
     seed_node = Path.home() / "DharitrI/testnet/seednode"
     shutil.copytree(seed_node, working_dir / "seednode")
 
-    drt_chain_go_folder = working_dir / "drt-go-chain"
-    subprocess.check_call(["go", "build"], cwd=drt_chain_go_folder / "cmd/seednode")
+    drt_go_chain_folder = working_dir / "drt-go-chain"
+    subprocess.check_call(["go", "build"], cwd=drt_go_chain_folder / "cmd/seednode")
 
-    seed_node_exec = drt_chain_go_folder / "cmd/seednode/seednode"
+    seed_node_exec = drt_go_chain_folder / "cmd/seednode/seednode"
     shutil.copyfile(seed_node_exec, working_dir / "seednode/seednode")
 
     st = os.stat(working_dir / "seednode/seednode")
@@ -190,15 +190,15 @@ def prepare_seed_node(working_dir):
 
 def prepare_proxy(working_dir):
     print("preparing proxy")
-    drt_chain_proxy_go_folder = working_dir / "drt-go-chain-proxy"
-    subprocess.check_call(["go", "build"], cwd=drt_chain_proxy_go_folder / "cmd/proxy")
+    drt_go_chain_proxy_folder = working_dir / "drt-go-chain-proxy"
+    subprocess.check_call(["go", "build"], cwd=drt_go_chain_proxy_folder / "cmd/proxy")
 
-    drt_chain_proxy_go_binary_folder = drt_chain_proxy_go_folder / "cmd/proxy"
-    st = os.stat(drt_chain_proxy_go_binary_folder / "proxy")
-    os.chmod(drt_chain_proxy_go_binary_folder / "proxy", st.st_mode | stat.S_IEXEC)
+    drt_go_chain_proxy_binary_folder = drt_go_chain_proxy_folder / "cmd/proxy"
+    st = os.stat(drt_go_chain_proxy_binary_folder / "proxy")
+    os.chmod(drt_go_chain_proxy_binary_folder / "proxy", st.st_mode | stat.S_IEXEC)
 
     # config.toml
-    path_config = drt_chain_proxy_go_binary_folder / "config/config.toml"
+    path_config = drt_go_chain_proxy_binary_folder / "config/config.toml"
     config_data = toml.load(str(path_config))
 
     proxy_port = int(os.getenv('PROXY_PORT'))
@@ -254,7 +254,7 @@ def main():
     check_num_of_shards(num_of_shards)
 
     # clone drt-go-chain
-    clone_drt_chain_go(working_dir)
+    clone_drt_go_chain(working_dir)
     # clone dependencies
     clone_dependencies(working_dir)
     # generate configs
@@ -267,9 +267,9 @@ def main():
 
     # build binary drt-go-chain
     print("building node...")
-    drt_chain_go_folder = working_dir / "drt-go-chain"
+    drt_go_chain_folder = working_dir / "drt-go-chain"
     flags = '-gcflags=all=-N -l'
-    subprocess.check_call(["go", "build", flags], cwd=drt_chain_go_folder / "cmd/node")
+    subprocess.check_call(["go", "build", flags], cwd=drt_go_chain_folder / "cmd/node")
 
     # build binary indexer
     print("building indexer...")

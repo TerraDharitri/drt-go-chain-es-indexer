@@ -4,24 +4,26 @@ import (
 	"encoding/json"
 	"fmt"
 	"io"
-	"io/ioutil"
 	"net/http"
 	"net/url"
 	"os"
 	"path"
 
+	logger "github.com/TerraDharitri/drt-go-chain-logger"
+
 	"github.com/TerraDharitri/drt-go-chain-core/core/pubkeyConverter"
 	"github.com/TerraDharitri/drt-go-chain-es-indexer/client"
 	"github.com/TerraDharitri/drt-go-chain-es-indexer/client/logging"
+	"github.com/TerraDharitri/drt-go-chain-es-indexer/config"
 	"github.com/TerraDharitri/drt-go-chain-es-indexer/mock"
 	"github.com/TerraDharitri/drt-go-chain-es-indexer/process/dataindexer"
 	"github.com/TerraDharitri/drt-go-chain-es-indexer/process/elasticproc"
 	"github.com/TerraDharitri/drt-go-chain-es-indexer/process/elasticproc/factory"
-	logger "github.com/TerraDharitri/drt-go-chain-logger"
 	"github.com/elastic/go-elasticsearch/v7"
 )
 
 var (
+	// nolint
 	log                = logger.GetOrCreate("integration-tests")
 	pubKeyConverter, _ = pubkeyConverter.NewBech32PubkeyConverter(32, addressPrefix)
 )
@@ -61,6 +63,9 @@ func CreateElasticProcessor(
 			dataindexer.ReceiptsIndex, dataindexer.BlockIndex, dataindexer.AccountsIndex, dataindexer.TokensIndex, dataindexer.TagsIndex, dataindexer.EventsIndex,
 			dataindexer.OperationsIndex, dataindexer.DelegatorsIndex, dataindexer.DCDTsIndex, dataindexer.SCDeploysIndex, dataindexer.MiniblocksIndex, dataindexer.ValuesIndex},
 		Denomination: 18,
+		EnableEpochsConfig: config.EnableEpochsConfig{
+			RelayedTransactionsV1V2DisableEpoch: 1,
+		},
 	}
 
 	return factory.CreateElasticProcessor(args)
@@ -93,7 +98,7 @@ func getIndexMappings(index string) (string, error) {
 		return "", err
 	}
 
-	body, err := ioutil.ReadAll(res.Body)
+	body, err := io.ReadAll(res.Body)
 	if err != nil {
 		return "", err
 	}

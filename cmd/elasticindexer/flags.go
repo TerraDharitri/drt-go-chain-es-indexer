@@ -2,6 +2,7 @@ package main
 
 import (
 	logger "github.com/TerraDharitri/drt-go-chain-logger"
+
 	"github.com/urfave/cli"
 )
 
@@ -28,6 +29,11 @@ var (
 		Usage: "The `" + filePathPlaceholder + "` for the api configuration file. This TOML file contains " +
 			"all available routes for Rest API and options to enable or disable them.",
 		Value: "config/api.toml",
+	}
+	configurationEnableEpochsFile = cli.StringFlag{
+		Name:  "config-enable-epochs",
+		Usage: "The configuration file for the activation epochs",
+		Value: "./config/enableEpochs.toml",
 	}
 
 	logLevel = cli.StringFlag{

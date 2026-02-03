@@ -7,10 +7,11 @@ import (
 	"os"
 	"path"
 
+	logger "github.com/TerraDharitri/drt-go-chain-logger"
+
 	"github.com/TerraDharitri/drt-go-chain-es-indexer/client"
 	"github.com/TerraDharitri/drt-go-chain-es-indexer/client/logging"
 	"github.com/TerraDharitri/drt-go-chain-es-indexer/tools/indexes-creator/reader"
-	logger "github.com/TerraDharitri/drt-go-chain-logger"
 	"github.com/elastic/go-elasticsearch/v7"
 	"github.com/pelletier/go-toml"
 	"github.com/urfave/cli"

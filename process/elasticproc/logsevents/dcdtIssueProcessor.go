@@ -2,7 +2,6 @@ package logsevents
 
 import (
 	"math/big"
-	"time"
 
 	"github.com/TerraDharitri/drt-go-chain-core/core"
 	"github.com/TerraDharitri/drt-go-chain-es-indexer/data"
@@ -91,11 +90,13 @@ func (eip *dcdtIssueProcessor) processEvent(args *argsProcessEvent) argOutputPro
 		NumDecimals:  numDecimals,
 		Issuer:       encodedAddr,
 		CurrentOwner: encodedAddr,
-		Timestamp:    time.Duration(args.timestamp),
+		Timestamp:    args.timestamp,
+		TimestampMs:  args.timestampMs,
 		OwnersHistory: []*data.OwnerData{
 			{
-				Address:   encodedAddr,
-				Timestamp: time.Duration(args.timestamp),
+				Address:     encodedAddr,
+				Timestamp:   args.timestamp,
+				TimestampMs: args.timestampMs,
 			},
 		},
 		Properties: &data.TokenProperties{},

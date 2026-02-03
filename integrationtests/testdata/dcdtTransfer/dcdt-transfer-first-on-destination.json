@@ -1,7 +1,7 @@
 {
-  "data": "RVNEVFRyYW5zZmVyQDU0NDc0ZTJkMzgzODYyMzgzMzY2QDBh",
+  "data": "RENEVFRyYW5zZmVyQDU0NDc0ZTJkMzgzODYyMzgzMzY2QDBh",
   "signature": "",
-  "fee": "137660000000000",
+  "fee": "136000000000000",
   "dcdtValues": [
     "10"
   ],
@@ -11,8 +11,8 @@
   "dcdtValuesNum": [
     1e-17
   ],
-  "gasUsed": 500000,
-  "miniBlockHash": "d0f273198e773465908be139872605d93e86115b6320f9b34edb6a5e38668989",
+  "gasUsed": 334000,
+  "miniBlockHash": "cf96cc695c7014d89da8d47b337754a8285c6f8b9c99535ac315ade4fd842484",
   "senderShard": 2,
   "tokens": [
     "TGN-88b83f"
@@ -20,9 +20,10 @@
   "value": "0",
   "gasPrice": 1000000000,
   "timestamp": 10102,
+  "timestampMs": 10102000,
   "receiver": "drt13u7zyekzvdvzek8768r5gau9p6677ufppsjuklu9e6t7yx7rhg4s8mwfp8",
   "valueNum": 0,
-  "feeNum": 0.00013766,
+  "feeNum": 0.000136,
   "nonce": 1,
   "round": 55,
   "hasScResults": true,

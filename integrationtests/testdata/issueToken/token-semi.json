@@ -3,14 +3,52 @@
   "ticker": "SSSS",
   "token": "SSSS-abcd",
   "issuer": "drt1v7e552pz9py4hv6raan0c4jflez3e6csdmzcgrncg0qrnk4tywvsa6c5hv",
-  "currentOwner": "drt1v7e552pz9py4hv6raan0c4jflez3e6csdmzcgrncg0qrnk4tywvsa6c5hv",
+  "currentOwner": "drt1acjlnuhkd8773sqhmw85r0ur4lcyuqgm0n69h9ttxh0gwxtuuzxqgr045y",
   "type": "SemiFungibleDCDT",
   "timestamp": 5040,
+  "timestampMs": 5040000,
   "ownersHistory": [
-    {
+     {
       "address": "drt1v7e552pz9py4hv6raan0c4jflez3e6csdmzcgrncg0qrnk4tywvsa6c5hv",
-      "timestamp": 5040
+      "timestamp": 5040,
+      "timestampMs": 5040000
+    },
+    {
+      "address": "drt1acjlnuhkd8773sqhmw85r0ur4lcyuqgm0n69h9ttxh0gwxtuuzxqgr045y",
+      "timestamp": 10000,
+      "timestampMs": 10000000
+    },
+    {
+      "address": "drt1acjlnuhkd8773sqhmw85r0ur4lcyuqgm0n69h9ttxh0gwxtuuzxqgr045y",
+      "timestamp": 10000,
+      "timestampMs": 10000000
+    },
+    {
+      "address": "drt1acjlnuhkd8773sqhmw85r0ur4lcyuqgm0n69h9ttxh0gwxtuuzxqgr045y",
+      "timestamp": 10000,
+      "timestampMs": 10000000
+    },
+    {
+      "address": "drt1acjlnuhkd8773sqhmw85r0ur4lcyuqgm0n69h9ttxh0gwxtuuzxqgr045y",
+      "timestamp": 10000,
+      "timestampMs": 10000000
+    },
+     {
+      "address": "drt1acjlnuhkd8773sqhmw85r0ur4lcyuqgm0n69h9ttxh0gwxtuuzxqgr045y",
+      "timestamp": 10000,
+      "timestampMs": 10000000
+    },
+     {
+      "address": "drt1acjlnuhkd8773sqhmw85r0ur4lcyuqgm0n69h9ttxh0gwxtuuzxqgr045y",
+      "timestamp": 10000,
+      "timestampMs": 10000000
+    },
+     {
+      "address": "drt1acjlnuhkd8773sqhmw85r0ur4lcyuqgm0n69h9ttxh0gwxtuuzxqgr045y",
+      "timestamp": 10000,
+      "timestampMs": 10000000
     }
+
   ],
   "numDecimals": 18,
   "properties": {
@@ -24,5 +62,7 @@
     "canWipe": false,
     "canChangeOwner": false,
     "canCreateMultiShard": false
-  }
+   
+  },
+   "paused": false
 }

@@ -4,6 +4,7 @@ import (
 	"github.com/TerraDharitri/drt-go-chain-core/core"
 	"github.com/TerraDharitri/drt-go-chain-core/hashing"
 	"github.com/TerraDharitri/drt-go-chain-core/marshal"
+	"github.com/TerraDharitri/drt-go-chain-es-indexer/config"
 	"github.com/TerraDharitri/drt-go-chain-es-indexer/process/dataindexer"
 	"github.com/TerraDharitri/drt-go-chain-es-indexer/process/elasticproc"
 	"github.com/TerraDharitri/drt-go-chain-es-indexer/process/elasticproc/accounts"
@@ -31,19 +32,12 @@ type ArgElasticProcessorFactory struct {
 	BulkRequestMaxSize       int
 	UseKibana                bool
 	ImportDB                 bool
+	EnableEpochsConfig       config.EnableEpochsConfig
 }
 
 // CreateElasticProcessor will create a new instance of ElasticProcessor
 func CreateElasticProcessor(arguments ArgElasticProcessorFactory) (dataindexer.ElasticProcessor, error) {
-	templatesAndPoliciesReader := templatesAndPolicies.CreateTemplatesAndPoliciesReader(arguments.UseKibana)
-	indexTemplates, indexPolicies, err := templatesAndPoliciesReader.GetElasticTemplatesAndPolicies()
-	if err != nil {
-		return nil, err
-	}
-	extraMappings, err := templatesAndPoliciesReader.GetExtraMappings()
-	if err != nil {
-		return nil, err
-	}
+	templatesAndPoliciesReader := templatesAndPolicies.NewTemplatesAndPolicyReader()
 
 	enabledIndexesMap := make(map[string]struct{})
 	for _, index := range arguments.EnabledIndexes {
@@ -66,7 +60,7 @@ func CreateElasticProcessor(arguments ArgElasticProcessorFactory) (dataindexer.E
 		return nil, err
 	}
 
-	blockProcHandler, err := blockProc.NewBlockProcessor(arguments.Hasher, arguments.Marshalizer)
+	blockProcHandler, err := blockProc.NewBlockProcessor(arguments.Hasher, arguments.Marshalizer, arguments.ValidatorPubkeyConverter)
 	if err != nil {
 		return nil, err
 	}
@@ -87,6 +81,7 @@ func CreateElasticProcessor(arguments ArgElasticProcessorFactory) (dataindexer.E
 		Hasher:                 arguments.Hasher,
 		Marshalizer:            arguments.Marshalizer,
 		BalanceConverter:       balanceConverter,
+		EnableEpochsConfig:     arguments.EnableEpochsConfig,
 	}
 	txsProc, err := transactions.NewTransactionsProcessor(argsTxsProc)
 	if err != nil {
@@ -121,12 +116,10 @@ func CreateElasticProcessor(arguments ArgElasticProcessorFactory) (dataindexer.E
 		DBClient:           arguments.DBClient,
 		EnabledIndexes:     enabledIndexesMap,
 		UseKibana:          arguments.UseKibana,
-		IndexTemplates:     indexTemplates,
-		IndexPolicies:      indexPolicies,
-		ExtraMappings:      extraMappings,
 		OperationsProc:     operationsProc,
 		ImportDB:           arguments.ImportDB,
 		Version:            arguments.Version,
+		MappingsHandler:    templatesAndPoliciesReader,
 	}
 
 	return elasticproc.NewElasticProcessor(args)

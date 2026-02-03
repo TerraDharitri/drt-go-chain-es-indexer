@@ -5,12 +5,13 @@ import (
 	"encoding/json"
 	"fmt"
 
+	logger "github.com/TerraDharitri/drt-go-chain-logger"
+
 	"github.com/TerraDharitri/drt-go-chain-core/core"
 	"github.com/TerraDharitri/drt-go-chain-core/core/pubkeyConverter"
 	factoryMarshalizer "github.com/TerraDharitri/drt-go-chain-core/marshal/factory"
 	"github.com/TerraDharitri/drt-go-chain-es-indexer/data"
 	"github.com/TerraDharitri/drt-go-chain-es-indexer/process/elasticproc/transactions"
-	logger "github.com/TerraDharitri/drt-go-chain-logger"
 	datafield "github.com/TerraDharitri/drt-go-chain-vm-common/parsers/dataField"
 )
 
@@ -57,7 +58,7 @@ func createOperationParser() (transactions.DataFieldParser, error) {
 }
 
 func createPubKeyConverterAndParser() (core.PubkeyConverter, transactions.DataFieldParser, error) {
-	pubKeyConverter, err := pubkeyConverter.NewBech32PubkeyConverter(32, log)
+	pubKeyConverter, err := pubkeyConverter.NewBech32PubkeyConverter(32, "drt")
 	if err != nil {
 		return nil, nil, err
 	}
