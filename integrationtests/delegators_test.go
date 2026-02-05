@@ -63,7 +63,7 @@ func TestDelegateUnDelegateAndWithdraw(t *testing.T) {
 	err = esProc.SaveTransactions(createOutportBlockWithHeader(body, header, pool, nil, testNumOfShards))
 	require.Nil(t, err)
 
-	ids := []string{"9v/pLAXxUZJ4Oy1U+x5al/Xg5sebh1dYCRTeZwg/u68="}
+	ids := []string{"Qfja/mlMtNDcOyi0R9SV6KBfXnDR1ZV1QN8wit15QeY="}
 	genericResponse := &GenericResponse{}
 	err = esClient.DoMultiGet(context.Background(), ids, indexerdata.DelegatorsIndex, true, genericResponse)
 	require.Nil(t, err)

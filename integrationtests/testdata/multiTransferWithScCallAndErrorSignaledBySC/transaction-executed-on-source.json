@@ -41,8 +41,7 @@
   "sender": "drt1ju8pkvg57cwdmjsjx58jlmnuf4l9yspstrhr9tgsrt98n9edpm2qkrl8xm",
   "receiverShard": 0,
   "operation": "MultiDCDTNFTTransfer",
-  "status": "fail",
-  	 "errorEvent": true,
+  "status": "success",
   "searchOrder": 0,
   "epoch": 0
 }

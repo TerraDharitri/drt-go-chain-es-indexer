@@ -6,7 +6,7 @@
   "valueNum": 0,
   "receiver": "drt1ef9xx3k3m89azf4c4xc98wpcdnx5h0cnxy6em47r6dc4alud0uwqmkz2h3",
   "sender": "drt1ef9xx3k3m89azf4c4xc98wpcdnx5h0cnxy6em47r6dc4alud0uwqmkz2h3",
-  "receiverShard": 1,
+  "receiverShard": 0,
   "senderShard": 0,
   "gasPrice": 1000000000,
   "gasLimit": 150000000,

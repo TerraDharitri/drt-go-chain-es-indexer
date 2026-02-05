@@ -3,7 +3,6 @@
 	"balance": "1000",
 	"balanceNum": 1e-15,
 	"token": "TTTT-abcd",
-	 "currentOwner": "drt1l29zsl2dqq988kvr2y0xlfv9ydgnvhzkatfd8ccalpag265pje8qwmgnuh",
 	"identifier": "TTTT-abcd-02",
 	"tokenNonce": 2,
 	"properties": "3032",
@@ -14,6 +13,5 @@
 	},
 	"timestamp": 5600,
 	"timestampMs": 5600000,
-	"shardID": 2,
-	"type": "SemiFungibleDCDT"
+	"shardID": 2
 }

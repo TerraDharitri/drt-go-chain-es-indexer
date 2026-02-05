@@ -1,8 +1,8 @@
 {
   "address": "drt1v7e552pz9py4hv6raan0c4jflez3e6csdmzcgrncg0qrnk4tywvsa6c5hv",
   "contract": "drt1qqqqqqqqqqqqqqqpqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqhllllsqw3p74",
-  "activeStake": "124500000000000000000",
-  "activeStakeNum": 124.5,
-  "timestamp": 5070,
-  "timestampMs": 5070000
+  "activeStake": "200000000000000000000",
+  "activeStakeNum": 200,
+  "timestamp": 5040,
+  "timestampMs": 5040000
 }

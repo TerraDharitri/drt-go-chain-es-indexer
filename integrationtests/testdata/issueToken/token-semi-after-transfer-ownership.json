@@ -17,39 +17,8 @@
       "address": "drt1acjlnuhkd8773sqhmw85r0ur4lcyuqgm0n69h9ttxh0gwxtuuzxqgr045y",
       "timestamp": 10000,
       "timestampMs": 10000000
-    },
-    {
-      "address": "drt1acjlnuhkd8773sqhmw85r0ur4lcyuqgm0n69h9ttxh0gwxtuuzxqgr045y",
-      "timestamp": 10000,
-      "timestampMs": 10000000
-    },
-    {
-      "address": "drt1acjlnuhkd8773sqhmw85r0ur4lcyuqgm0n69h9ttxh0gwxtuuzxqgr045y",
-      "timestamp": 10000,
-      "timestampMs": 10000000
-    },
-    {
-      "address": "drt1acjlnuhkd8773sqhmw85r0ur4lcyuqgm0n69h9ttxh0gwxtuuzxqgr045y",
-      "timestamp": 10000,
-      "timestampMs": 10000000
-    },
-    {
-      "address": "drt1acjlnuhkd8773sqhmw85r0ur4lcyuqgm0n69h9ttxh0gwxtuuzxqgr045y",
-      "timestamp": 10000,
-      "timestampMs": 10000000
-    },
-     {
-      "address": "drt1acjlnuhkd8773sqhmw85r0ur4lcyuqgm0n69h9ttxh0gwxtuuzxqgr045y",
-      "timestamp": 10000,
-      "timestampMs": 10000000
-    },
-     {
-      "address": "drt1acjlnuhkd8773sqhmw85r0ur4lcyuqgm0n69h9ttxh0gwxtuuzxqgr045y",
-      "timestamp": 10000,
-      "timestampMs": 10000000
     }
   ],
-  "paused": false,
   "properties": {
     "canMint": false,
     "canBurn": false,

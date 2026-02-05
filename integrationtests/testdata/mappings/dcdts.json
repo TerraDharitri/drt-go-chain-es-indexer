@@ -132,46 +132,6 @@
         },
         "type": {
           "type": "keyword"
-        },
-        "frozen": {
-          "type": "boolean"
-        },
-        "data": {
-          "properties": {
-            "hash": {
-              "type": "text",
-              "fields": {
-                "keyword": {
-                  "type": "keyword",
-                  "ignore_above": 256
-                }
-              }
-            },
-            "name": {
-              "type": "text",
-              "fields": {
-                "keyword": {
-                  "type": "keyword",
-                  "ignore_above": 256
-                }
-              }
-            },
-            "nonEmptyURIs": {
-              "type": "boolean"
-            },
-            "uris": {
-              "type": "text",
-              "fields": {
-                "keyword": {
-                  "type": "keyword",
-                  "ignore_above": 256
-                }
-              }
-            },
-            "whiteListedStorage": {
-              "type": "boolean"
-            }
-          }
         }
       }
     }

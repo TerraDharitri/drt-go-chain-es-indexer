@@ -10,7 +10,5 @@
     "whiteListedStorage": false
   },
   "type": "SemiFungibleDCDT",
-  "numDecimals": 0,
-  	"currentOwner":"drt1l29zsl2dqq988kvr2y0xlfv9ydgnvhzkatfd8ccalpag265pje8qwmgnuh"
-
+  "numDecimals": 0
 }

@@ -16,9 +16,7 @@
   "timestamp": 5040,
   "timestampMs": 5040000,
   "type": "unsigned",
-  "status": "success",
+  "status": "pending",
   "operation": "transfer",
-  "hasLogs": true,
-            "hasOperations":  true,
   "epoch": 0
 }
