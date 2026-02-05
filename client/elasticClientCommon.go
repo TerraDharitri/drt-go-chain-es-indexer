@@ -5,7 +5,6 @@ import (
 	"encoding/json"
 	"fmt"
 	"io"
-	"io/ioutil"
 	"net/http"
 	"net/url"
 	"strings"
@@ -227,7 +226,7 @@ func newRequest(method, path string, body *bytes.Buffer) *http.Request {
 	}
 
 	if body != nil {
-		r.Body = ioutil.NopCloser(body)
+		r.Body = io.NopCloser(body)
 		r.ContentLength = int64(body.Len())
 	}
 

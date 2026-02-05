@@ -3,7 +3,7 @@ package reader
 import (
 	"bytes"
 	"fmt"
-	"io/ioutil"
+	"os"
 	"path/filepath"
 )
 
@@ -29,7 +29,7 @@ func getTemplateByIndex(path string, index string) (*bytes.Buffer, error) {
 
 	fileName := fmt.Sprintf("%s.json", index)
 	filePath := filepath.Join(path, fileName)
-	fileBytes, err := ioutil.ReadFile(filePath)
+	fileBytes, err := os.ReadFile(filePath)
 	if err != nil {
 		return nil, fmt.Errorf("getTemplateByIndex: %w, path %s, error %s", err, filePath, err.Error())
 	}

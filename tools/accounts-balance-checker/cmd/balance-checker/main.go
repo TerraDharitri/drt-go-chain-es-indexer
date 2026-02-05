@@ -3,7 +3,6 @@ package main
 import (
 	"encoding/json"
 	"fmt"
-	"io/ioutil"
 	"os"
 	"time"
 
@@ -145,7 +144,7 @@ func startCheck(ctx *cli.Context) {
 }
 
 func readConfig(ctx *cli.Context) (*config.Config, error) {
-	jsonFile, err := ioutil.ReadFile(ctx.String(configFile.Name))
+	jsonFile, err := os.ReadFile(ctx.String(configFile.Name))
 	if err != nil {
 		return nil, err
 	}

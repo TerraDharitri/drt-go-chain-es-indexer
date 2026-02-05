@@ -4,7 +4,7 @@ import (
 	"bytes"
 	"encoding/json"
 	"fmt"
-	"io/ioutil"
+	"io"
 	"time"
 )
 
@@ -25,7 +25,7 @@ func (esc *esClient) DoGetRequest(index string, body []byte, response interface{
 
 	defer closeBody(res)
 
-	bodyBytes, err := ioutil.ReadAll(res.Body)
+	bodyBytes, err := io.ReadAll(res.Body)
 	if err != nil {
 		return err
 	}

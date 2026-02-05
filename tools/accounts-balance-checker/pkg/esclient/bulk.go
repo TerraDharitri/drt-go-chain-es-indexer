@@ -4,7 +4,7 @@ import (
 	"bytes"
 	"encoding/json"
 	"fmt"
-	"io/ioutil"
+	"io"
 	"net/http"
 
 	logger "github.com/TerraDharitri/drt-go-chain-logger"
@@ -36,7 +36,7 @@ func (ec *esClient) DoBulkRequest(buff *bytes.Buffer, index string) error {
 
 	defer closeBody(res)
 
-	bodyBytes, err := ioutil.ReadAll(res.Body)
+	bodyBytes, err := io.ReadAll(res.Body)
 	if err != nil {
 		return err
 	}

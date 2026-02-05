@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"io/ioutil"
 	"os"
 	"path"
 	"sync"
@@ -172,7 +171,7 @@ func loadConfigFile(pathStr string) (*config.Config, error) {
 }
 
 func loadBytesFromFile(file string) ([]byte, error) {
-	return ioutil.ReadFile(file)
+	return os.ReadFile(file)
 }
 
 func initializeLogger(ctx *cli.Context, cfg config.Config) (closing.Closer, error) {

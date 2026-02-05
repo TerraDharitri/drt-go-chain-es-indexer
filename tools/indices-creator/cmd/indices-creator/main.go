@@ -3,7 +3,6 @@ package main
 import (
 	"bytes"
 	"fmt"
-	"io/ioutil"
 	"os"
 	"path"
 
@@ -159,5 +158,5 @@ func loadConfigFile(pathStr string) (*config, error) {
 }
 
 func loadBytesFromFile(file string) ([]byte, error) {
-	return ioutil.ReadFile(file)
+	return os.ReadFile(file)
 }
