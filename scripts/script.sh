@@ -1,5 +1,5 @@
 IMAGE_NAME=elastic-container
-DEFAULT_ES_VERSION=7.17.0
+DEFAULT_ES_VERSION=7.16.2
 PROMETHEUS_CONTAINER_NAME=prometheus_container
 GRAFANA_CONTAINER_NAME=grafana_container
 GRAFANA_VERSION=10.0.3
@@ -13,40 +13,16 @@ start() {
     ES_VERSION=${DEFAULT_ES_VERSION}
   fi
 
-  # Check for incompatible ES versions on cgroup v2
-  if [ -f /sys/fs/cgroup/cgroup.controllers ]; then
-    # System uses cgroup v2
-    case "${ES_VERSION}" in
-      7.16.*)
-        echo "ERROR: Elasticsearch ${ES_VERSION} is incompatible with cgroup v2"
-        echo "Please use Elasticsearch 7.17.0 or later, or run on ubuntu-20.04"
-        return 1
-        ;;
-    esac
-  fi
-
   docker pull docker.elastic.co/elasticsearch/elasticsearch:${ES_VERSION}
 
   docker rm ${IMAGE_NAME} 2> /dev/null
   docker run -d --name "${IMAGE_NAME}" -p 9200:9200  -p 9300:9300 \
-   -e "discovery.type=single-node" -e "xpack.security.enabled=false" \
-   -e "ES_JAVA_OPTS=-Xms512m -Xmx512m" \
+   -e "discovery.type=single-node" -e "xpack.security.enabled=false" -e "ES_JAVA_OPTS=-Xms512m -Xmx512m" \
     docker.elastic.co/elasticsearch/elasticsearch:${ES_VERSION}
 
   # Wait elastic cluster to start
   echo "Waiting Elasticsearch cluster to start..."
-  for i in {1..60}; do
-    if curl -s http://127.0.0.1:9200/_cluster/health 2>/dev/null | grep -q '"status":"\(green\|yellow\)"'; then
-      echo "Elasticsearch is ready!"
-      sleep 2
-      return 0
-    fi
-    echo "Waiting for Elasticsearch... ($i/60)"
-    sleep 2
-  done
-  echo "ERROR: Elasticsearch failed to start within 120 seconds"
-  docker logs ${IMAGE_NAME}
-  return 1
+  sleep 30s
 }
 
 stop() {
@@ -56,7 +32,6 @@ stop() {
 delete() {
    for str in ${INDICES_LIST[@]}; do
       curl -XDELETE http://localhost:9200/$str-000001
-      curl -s -o /dev/null -w "%{http_code}" -X GET localhost:9200/_ilm/policy/$str-policy | grep -q 200 && curl -X DELETE localhost:9200/_ilm/policy/$str-policy
       echo
    done
 
@@ -78,24 +53,8 @@ start_open_search() {
 
   docker rm ${IMAGE_OPEN_SEARCH} 2> /dev/null
   docker run -d --name "${IMAGE_OPEN_SEARCH}" -p 9200:9200 -p 9600:9600 \
-   -e "discovery.type=single-node" -e "plugins.security.disabled=true" \
-   -e "ES_JAVA_OPTS=-Xms512m -Xmx512m" \
+   -e "discovery.type=single-node" -e "plugins.security.disabled=true" -e "ES_JAVA_OPTS=-Xms512m -Xmx512m" \
    opensearchproject/opensearch:${OPEN_VERSION}
-
-  # Wait for OpenSearch cluster to start
-  echo "Waiting OpenSearch cluster to start..."
-  for i in {1..60}; do
-    if curl -s http://127.0.0.1:9200/_cluster/health 2>/dev/null | grep -q '"status":"\(green\|yellow\)"'; then
-      echo "OpenSearch is ready!"
-      sleep 2
-      return 0
-    fi
-    echo "Waiting for OpenSearch... ($i/60)"
-    sleep 2
-  done
-  echo "ERROR: OpenSearch failed to start within 120 seconds"
-  docker logs ${IMAGE_OPEN_SEARCH}
-  return 1
 
 }
 
