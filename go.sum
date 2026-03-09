@@ -1,6 +1,8 @@
 github.com/BurntSushi/toml v1.4.0/go.mod h1:ukJfTF/6rtPPRCnwkur4qwRxa8vTRFBF0uk2lLoLwho=
 github.com/TerraDharitri/drt-go-chain-communication v1.0.0 h1:3U17ZT36CRwVt0wkNNq0aRz70A6enAek/H8nrRhBWw0=
 github.com/TerraDharitri/drt-go-chain-communication v1.0.0/go.mod h1:qU/N8/BtPjPjRkf8G9CyjzQjmbDbMEhB19KbcwcvOi4=
+github.com/TerraDharitri/drt-go-chain-communication v1.0.1 h1:2Yk1Cl+5IS8JJ0DFvOtVpMM1xe7Pq0RFbOPv+prQoKA=
+github.com/TerraDharitri/drt-go-chain-communication v1.0.1/go.mod h1:Oil6hGoBcxPVGJCpH/xeAYC67pn9wu67FRKCxCEUZ+U=
 github.com/TerraDharitri/drt-go-chain-core v1.0.1 h1:k0B3DZNYJwE/NmibEQBVi/TxDm5Ij1Poo2HOv6HcMMM=
 github.com/TerraDharitri/drt-go-chain-core v1.0.1/go.mod h1:dppf7NEpCEr/YrKYrRCnyVLsehIVnXSWMU4cikdL2/Q=
 github.com/TerraDharitri/drt-go-chain-crypto v1.0.0 h1:WxdvBkBt/kuUzofzFKYIZLok/otu51mD2iFCCnXadmQ=
