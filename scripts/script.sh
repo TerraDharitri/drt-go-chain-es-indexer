@@ -16,11 +16,21 @@ start() {
   docker pull docker.elastic.co/elasticsearch/elasticsearch:${ES_VERSION}
 
   docker rm ${IMAGE_NAME} 2> /dev/null
+  
+  # Create a wrapper script to disable cgroup detection for ES 7.16.x
+  cat > /tmp/es-wrapper.sh << 'EOF'
+#!/bin/bash
+export JAVA_TOOL_OPTIONS="-XX:-UseContainerSupport"
+exec /usr/local/bin/docker-entrypoint.sh "$@"
+EOF
+  chmod +x /tmp/es-wrapper.sh
+  
   docker run -d --name "${IMAGE_NAME}" -p 9200:9200  -p 9300:9300 \
    -e "discovery.type=single-node" -e "xpack.security.enabled=false" \
    -e "ES_JAVA_OPTS=-Xms512m -Xmx512m" \
    -e "ELASTIC_PASSWORD=changeme" \
-   -v /sys/fs/cgroup:/sys/fs/cgroup:ro \
+   -v /tmp/es-wrapper.sh:/usr/local/bin/es-wrapper.sh:ro \
+   --entrypoint /usr/local/bin/es-wrapper.sh \
     docker.elastic.co/elasticsearch/elasticsearch:${ES_VERSION}
 
   # Wait elastic cluster to start
