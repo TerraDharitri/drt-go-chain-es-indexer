@@ -23,6 +23,7 @@ start() {
   # Wait elastic cluster to start
   echo "Waiting Elasticsearch cluster to start..."
   sleep 30s
+  docker ps -a
 }
 
 stop() {
@@ -32,6 +33,7 @@ stop() {
 delete() {
    for str in ${INDICES_LIST[@]}; do
       curl -XDELETE http://localhost:9200/$str-000001
+      curl -s -o /dev/null -w "%{http_code}" -X GET localhost:9200/_ilm/policy/$str-policy | grep -q 200 && curl -X DELETE localhost:9200/_ilm/policy/$str-policy
       echo
    done
 
