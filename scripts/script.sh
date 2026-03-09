@@ -22,7 +22,8 @@ start() {
 
   # Wait elastic cluster to start
   echo "Waiting Elasticsearch cluster to start..."
-  sleep 30s
+  until curl -s http://127.0.0.1:9200 > /dev/null; do sleep 1; done
+  echo "Elasticsearch is ready"
 }
 
 stop() {
