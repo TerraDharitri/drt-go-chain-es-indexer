@@ -23,13 +23,17 @@ start() {
   # Wait elastic cluster to start
   echo "Waiting Elasticsearch cluster to start..."
   for i in {1..60}; do
-    if curl -s http://localhost:9200/_cluster/health > /dev/null 2>&1; then
+    if curl -s http://127.0.0.1:9200/_cluster/health 2>/dev/null | grep -q '"status":"\(green\|yellow\)"'; then
       echo "Elasticsearch is ready!"
-      break
+      sleep 2
+      return 0
     fi
     echo "Waiting for Elasticsearch... ($i/60)"
     sleep 2
   done
+  echo "ERROR: Elasticsearch failed to start within 120 seconds"
+  docker logs ${IMAGE_NAME}
+  return 1
 }
 
 stop() {
@@ -66,13 +70,17 @@ start_open_search() {
   # Wait for OpenSearch cluster to start
   echo "Waiting OpenSearch cluster to start..."
   for i in {1..60}; do
-    if curl -s http://localhost:9200/_cluster/health > /dev/null 2>&1; then
+    if curl -s http://127.0.0.1:9200/_cluster/health 2>/dev/null | grep -q '"status":"\(green\|yellow\)"'; then
       echo "OpenSearch is ready!"
-      break
+      sleep 2
+      return 0
     fi
     echo "Waiting for OpenSearch... ($i/60)"
     sleep 2
   done
+  echo "ERROR: OpenSearch failed to start within 120 seconds"
+  docker logs ${IMAGE_OPEN_SEARCH}
+  return 1
 
 }
 
