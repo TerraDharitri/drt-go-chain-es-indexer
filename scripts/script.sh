@@ -22,7 +22,14 @@ start() {
 
   # Wait elastic cluster to start
   echo "Waiting Elasticsearch cluster to start..."
-  sleep 30s
+  for i in {1..60}; do
+    if curl -s http://localhost:9200/_cluster/health > /dev/null 2>&1; then
+      echo "Elasticsearch is ready!"
+      break
+    fi
+    echo "Waiting for Elasticsearch... ($i/60)"
+    sleep 2
+  done
 }
 
 stop() {
@@ -55,6 +62,17 @@ start_open_search() {
   docker run -d --name "${IMAGE_OPEN_SEARCH}" -p 9200:9200 -p 9600:9600 \
    -e "discovery.type=single-node" -e "plugins.security.disabled=true" -e "ES_JAVA_OPTS=-Xms512m -Xmx512m" \
    opensearchproject/opensearch:${OPEN_VERSION}
+
+  # Wait for OpenSearch cluster to start
+  echo "Waiting OpenSearch cluster to start..."
+  for i in {1..60}; do
+    if curl -s http://localhost:9200/_cluster/health > /dev/null 2>&1; then
+      echo "OpenSearch is ready!"
+      break
+    fi
+    echo "Waiting for OpenSearch... ($i/60)"
+    sleep 2
+  done
 
 }
 
