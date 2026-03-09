@@ -2,9 +2,9 @@ name: Integration tests
 
 on:
   push:
-    branches: [ main, feat/*, rc/* ]
+    branches: [ main, feat/*, rc/*, dev-madhur ]
   pull_request:
-    branches: [ main, feat/*, rc/* ]
+    branches: [ main, feat/*, rc/*, dev-madhur ]
 
 jobs:
   test-0:
