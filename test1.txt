@@ -1,0 +1,7 @@
+ > Running integration tests
+cd scripts && /bin/bash script.sh start 7.16.1
+7.16.1: Pulling from elasticsearch/elasticsearch
+Digest: sha256:1000eae211ce9e3fcd1850928eea4ee45a0a5173154df954f7b4c7a093b849f8
+Status: Image is up to date for docker.elastic.co/elasticsearch/elasticsearch:7.16.1
+docker.elastic.co/elasticsearch/elasticsearch:7.16.1
+Waiting Elasticsearch cluster to start...
