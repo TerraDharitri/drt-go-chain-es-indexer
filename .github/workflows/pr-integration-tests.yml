@@ -9,7 +9,7 @@ on:
 jobs:
   test-0:
     name: Elasticsearch v7.16.1
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     steps:
       - name: Set up Go 1.x
         uses: actions/setup-go@v5
@@ -23,6 +23,8 @@ jobs:
       - name: Get dependencies
         run: |
           go get -v -t -d ./...
+      - name: Configure system for Elasticsearch
+        run: sudo sysctl -w vm.max_map_count=262144
       - name: Run integration tests with Elasticsearch `v7.16.1`
         run: make integration-tests ES_VERSION=7.16.1
   test-1:
@@ -41,6 +43,8 @@ jobs:
       - name: Get dependencies
         run: |
           go get -v -t -d ./...
+      - name: Configure system for Elasticsearch
+        run: sudo sysctl -w vm.max_map_count=262144
       - name: Run integration tests with Elasticsearch `v7.17.8`
         run: make integration-tests ES_VERSION=7.17.8
   test-2:
@@ -59,6 +63,8 @@ jobs:
       - name: Get dependencies
         run: |
           go get -v -t -d ./...
+      - name: Configure system for Elasticsearch
+        run: sudo sysctl -w vm.max_map_count=262144
       - name: Run integration tests with Elasticsearch `v8.16.0`
         run: make integration-tests ES_VERSION=8.16.0
   test-3:
@@ -77,6 +83,8 @@ jobs:
       - name: Get dependencies
         run: |
           go get -v -t -d ./...
+      - name: Configure system for OpenSearch
+        run: sudo sysctl -w vm.max_map_count=262144
       - name: Run integration tests with OpenSearch `v1.3.7`
         run: make integration-tests-open-search OPEN_VERSION=1.3.7
 
@@ -96,5 +104,7 @@ jobs:
       - name: Get dependencies
         run: |
           go get -v -t -d ./...
+      - name: Configure system for OpenSearch
+        run: sudo sysctl -w vm.max_map_count=262144
       - name: Run integration tests with OpenSearch `v2.4.1`
         run: make integration-tests-open-search OPEN_VERSION=2.4.1
