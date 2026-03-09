@@ -3,7 +3,7 @@ module github.com/TerraDharitri/drt-go-chain-es-indexer
 go 1.23
 
 require (
-	github.com/TerraDharitri/drt-go-chain-communication v1.0.1
+	github.com/TerraDharitri/drt-go-chain-communication v1.0.0
 	github.com/TerraDharitri/drt-go-chain-core v1.0.1
 	github.com/TerraDharitri/drt-go-chain-logger v1.0.0
 	github.com/TerraDharitri/drt-go-chain-vm-common v1.0.0

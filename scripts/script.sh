@@ -17,24 +17,12 @@ start() {
 
   docker rm ${IMAGE_NAME} 2> /dev/null
   docker run -d --name "${IMAGE_NAME}" -p 9200:9200  -p 9300:9300 \
-   -e "discovery.type=single-node" -e "xpack.security.enabled=false" \
-   -e "ES_JAVA_OPTS=-Xms512m -Xmx512m" \
+   -e "discovery.type=single-node" -e "xpack.security.enabled=false" -e "ES_JAVA_OPTS=-Xms512m -Xmx512m" \
     docker.elastic.co/elasticsearch/elasticsearch:${ES_VERSION}
 
   # Wait elastic cluster to start
   echo "Waiting Elasticsearch cluster to start..."
-  for i in {1..60}; do
-    if curl -s http://127.0.0.1:9200/_cluster/health 2>/dev/null | grep -q '"status":"\(green\|yellow\)"'; then
-      echo "Elasticsearch is ready!"
-      sleep 2
-      return 0
-    fi
-    echo "Waiting for Elasticsearch... ($i/60)"
-    sleep 2
-  done
-  echo "ERROR: Elasticsearch failed to start within 120 seconds"
-  docker logs ${IMAGE_NAME}
-  return 1
+  sleep 30s
 }
 
 stop() {
@@ -65,24 +53,8 @@ start_open_search() {
 
   docker rm ${IMAGE_OPEN_SEARCH} 2> /dev/null
   docker run -d --name "${IMAGE_OPEN_SEARCH}" -p 9200:9200 -p 9600:9600 \
-   -e "discovery.type=single-node" -e "plugins.security.disabled=true" \
-   -e "ES_JAVA_OPTS=-Xms512m -Xmx512m" \
+   -e "discovery.type=single-node" -e "plugins.security.disabled=true" -e "ES_JAVA_OPTS=-Xms512m -Xmx512m" \
    opensearchproject/opensearch:${OPEN_VERSION}
-
-  # Wait for OpenSearch cluster to start
-  echo "Waiting OpenSearch cluster to start..."
-  for i in {1..60}; do
-    if curl -s http://127.0.0.1:9200/_cluster/health 2>/dev/null | grep -q '"status":"\(green\|yellow\)"'; then
-      echo "OpenSearch is ready!"
-      sleep 2
-      return 0
-    fi
-    echo "Waiting for OpenSearch... ($i/60)"
-    sleep 2
-  done
-  echo "ERROR: OpenSearch failed to start within 120 seconds"
-  docker logs ${IMAGE_OPEN_SEARCH}
-  return 1
 
 }
 
