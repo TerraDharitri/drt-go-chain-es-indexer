@@ -1,0 +1,1063 @@
+ > Running integration tests
+cd scripts && /bin/bash script.sh start 7.16.1
+7.16.1: Pulling from elasticsearch/elasticsearch
+Digest: sha256:1000eae211ce9e3fcd1850928eea4ee45a0a5173154df954f7b4c7a093b849f8
+Status: Image is up to date for docker.elastic.co/elasticsearch/elasticsearch:7.16.1
+docker.elastic.co/elasticsearch/elasticsearch:7.16.1
+elastic-container
+426b29ba52024c0baf5c532467246cac6fc699de2508c43cb0b59e2c4ab9f690
+Waiting Elasticsearch cluster to start...
+Elasticsearch is ready
+go test -v ./integrationtests -tags integrationtests
+=== RUN   TestAccountBalanceNFTTransfer
+[0;36mDEBUG[0m[2026-03-09 20:10:53.069]   ei.elasticProcessor indexer version is empty 
+[0;33mWARN [0m[2026-03-09 20:10:53.069]   bech32PubkeyConverter.SilentEncode       [0;33mhex buff[0m =  [0;33merror[0m = wrong size when encoding address, expected length 32, received 0 [0;33mstack trace[0m = goroutine 20 [running]:
+runtime/debug.Stack()
+	/usr/local/go/src/runtime/debug/stack.go:26 +0x5e
+github.com/TerraDharitri/drt-go-chain-core/core/pubkeyConverter.(*bech32PubkeyConverter).SilentEncode(0x8?, {0x0, 0x0, 0x4?}, {0xd17380, 0xc0001aaf00})
+	/home/divesh/go/pkg/mod/github.com/!terra!dharitri/drt-go-chain-core@v1.0.1/core/pubkeyConverter/bech32PubkeyConverter.go:109 +0x105
+github.com/TerraDharitri/drt-go-chain-es-indexer/process/elasticproc/logsevents.(*logsAndEventsProcessor).prepareLog(0xc0001abcc0, 0xc0000ba320, {0xc000014270, 0x4}, 0xc000118600, 0x15e0, 0x1, 0x557300)
+	/home/divesh/Desktop/shannu/zxc v/drt-go-chain-es-indexer/process/elasticproc/logsevents/logsAndEventsProcessor.go:226 +0x173
+github.com/TerraDharitri/drt-go-chain-es-indexer/process/elasticproc/logsevents.(*logsAndEventsProcessor).prepareLogsForDB(0xc0001abcc0, 0xc0000ba320, {0xc00060a040, 0x1, 0xc0000ba320?}, 0x15e0, 0x1, 0x557300)
+	/home/divesh/Desktop/shannu/zxc v/drt-go-chain-es-indexer/process/elasticproc/logsevents/logsAndEventsProcessor.go:208 +0x109
+github.com/TerraDharitri/drt-go-chain-es-indexer/process/elasticproc/logsevents.(*logsAndEventsProcessor).ExtractDataFromLogs(0xc0001abcc0, {0xc00060a040, 0x1, 0x1}, 0x0?, 0x15e0, 0x1, 0x3, 0x557300)
+	/home/divesh/Desktop/shannu/zxc v/drt-go-chain-es-indexer/process/elasticproc/logsevents/logsAndEventsProcessor.go:120 +0x234
+github.com/TerraDharitri/drt-go-chain-es-indexer/process/elasticproc.(*elasticProcessor).SaveTransactions(0xc0001a9d40, 0xc0002a11d0)
+	/home/divesh/Desktop/shannu/zxc v/drt-go-chain-es-indexer/process/elasticproc/elasticProcessor.go:426 +0x211
+github.com/TerraDharitri/drt-go-chain-es-indexer/integrationtests.TestAccountBalanceNFTTransfer(0xc000201380)
+	/home/divesh/Desktop/shannu/zxc v/drt-go-chain-es-indexer/integrationtests/accountsBalanceNftTransfer_test.go:95 +0x809
+testing.tRunner(0xc000201380, 0xc56060)
+	/usr/local/go/src/testing/testing.go:1690 +0xf4
+created by testing.(*T).Run in goroutine 1
+	/usr/local/go/src/testing/testing.go:1743 +0x390
+ 
+[0;33mWARN [0m[2026-03-09 20:10:53.069]   cannot find hash in the txs map or scrs map [0;33mhash[0m = 6831 
+[0;36mDEBUG[0m[2026-03-09 20:10:53.069]   accountsProcessor.splitAlteredAccounts - nil additional data 
+[0;33mWARN [0m[2026-03-09 20:10:53.069]   accountsProcessor.PrepareRegularAccountsMap: cannot cast account's balance to big int [0;33mvalue[0m =  
+[0;36mDEBUG[0m[2026-03-09 20:10:53.430]   ei.elasticProcessor indexer version is empty 
+[0;33mWARN [0m[2026-03-09 20:10:53.430]   bech32PubkeyConverter.SilentEncode       [0;33mhex buff[0m =  [0;33merror[0m = wrong size when encoding address, expected length 32, received 0 [0;33mstack trace[0m = goroutine 20 [running]:
+runtime/debug.Stack()
+	/usr/local/go/src/runtime/debug/stack.go:26 +0x5e
+github.com/TerraDharitri/drt-go-chain-core/core/pubkeyConverter.(*bech32PubkeyConverter).SilentEncode(0x8?, {0x0, 0x0, 0x4?}, {0xd17380, 0xc0001aaf00})
+	/home/divesh/go/pkg/mod/github.com/!terra!dharitri/drt-go-chain-core@v1.0.1/core/pubkeyConverter/bech32PubkeyConverter.go:109 +0x105
+github.com/TerraDharitri/drt-go-chain-es-indexer/process/elasticproc/logsevents.(*logsAndEventsProcessor).prepareLog(0xc0000a6600, 0xc0001a1b80, {0xc00011b2b4, 0x4}, 0xc00028dd70, 0x15e0, 0x1, 0x557300)
+	/home/divesh/Desktop/shannu/zxc v/drt-go-chain-es-indexer/process/elasticproc/logsevents/logsAndEventsProcessor.go:226 +0x173
+github.com/TerraDharitri/drt-go-chain-es-indexer/process/elasticproc/logsevents.(*logsAndEventsProcessor).prepareLogsForDB(0xc0000a6600, 0xc0001a1b80, {0xc00019e2e8, 0x1, 0xc0001a1b80?}, 0x15e0, 0x1, 0x557300)
+	/home/divesh/Desktop/shannu/zxc v/drt-go-chain-es-indexer/process/elasticproc/logsevents/logsAndEventsProcessor.go:208 +0x109
+github.com/TerraDharitri/drt-go-chain-es-indexer/process/elasticproc/logsevents.(*logsAndEventsProcessor).ExtractDataFromLogs(0xc0000a6600, {0xc00019e2e8, 0x1, 0x1}, 0x0?, 0x15e0, 0x1, 0x3, 0x557300)
+	/home/divesh/Desktop/shannu/zxc v/drt-go-chain-es-indexer/process/elasticproc/logsevents/logsAndEventsProcessor.go:120 +0x234
+github.com/TerraDharitri/drt-go-chain-es-indexer/process/elasticproc.(*elasticProcessor).SaveTransactions(0xc00013ad00, 0xc0002a1338)
+	/home/divesh/Desktop/shannu/zxc v/drt-go-chain-es-indexer/process/elasticproc/elasticProcessor.go:426 +0x211
+github.com/TerraDharitri/drt-go-chain-es-indexer/integrationtests.TestAccountBalanceNFTTransfer(0xc000201380)
+	/home/divesh/Desktop/shannu/zxc v/drt-go-chain-es-indexer/integrationtests/accountsBalanceNftTransfer_test.go:156 +0x1229
+testing.tRunner(0xc000201380, 0xc56060)
+	/usr/local/go/src/testing/testing.go:1690 +0xf4
+created by testing.(*T).Run in goroutine 1
+	/usr/local/go/src/testing/testing.go:1743 +0x390
+ 
+[0;33mWARN [0m[2026-03-09 20:10:53.430]   bech32PubkeyConverter.SilentEncode       [0;33mhex buff[0m = 746573742d616464726573732d62616c616e63652d31 [0;33merror[0m = wrong size when encoding address, expected length 32, received 22 [0;33mstack trace[0m = goroutine 20 [running]:
+runtime/debug.Stack()
+	/usr/local/go/src/runtime/debug/stack.go:26 +0x5e
+github.com/TerraDharitri/drt-go-chain-core/core/pubkeyConverter.(*bech32PubkeyConverter).SilentEncode(0x8?, {0xc0001be738, 0x16, 0x4?}, {0xd17380, 0xc0001aaf00})
+	/home/divesh/go/pkg/mod/github.com/!terra!dharitri/drt-go-chain-core@v1.0.1/core/pubkeyConverter/bech32PubkeyConverter.go:109 +0x105
+github.com/TerraDharitri/drt-go-chain-es-indexer/process/elasticproc/logsevents.(*logsAndEventsProcessor).prepareLog(0xc0000a6600, 0xc0001a1b80, {0xc00011b2b4, 0x4}, 0xc00028dd70, 0x15e0, 0x1, 0x557300)
+	/home/divesh/Desktop/shannu/zxc v/drt-go-chain-es-indexer/process/elasticproc/logsevents/logsAndEventsProcessor.go:244 +0x3a3
+github.com/TerraDharitri/drt-go-chain-es-indexer/process/elasticproc/logsevents.(*logsAndEventsProcessor).prepareLogsForDB(0xc0000a6600, 0xc0001a1b80, {0xc00019e2e8, 0x1, 0xc0001a1b80?}, 0x15e0, 0x1, 0x557300)
+	/home/divesh/Desktop/shannu/zxc v/drt-go-chain-es-indexer/process/elasticproc/logsevents/logsAndEventsProcessor.go:208 +0x109
+github.com/TerraDharitri/drt-go-chain-es-indexer/process/elasticproc/logsevents.(*logsAndEventsProcessor).ExtractDataFromLogs(0xc0000a6600, {0xc00019e2e8, 0x1, 0x1}, 0x0?, 0x15e0, 0x1, 0x3, 0x557300)
+	/home/divesh/Desktop/shannu/zxc v/drt-go-chain-es-indexer/process/elasticproc/logsevents/logsAndEventsProcessor.go:120 +0x234
+github.com/TerraDharitri/drt-go-chain-es-indexer/process/elasticproc.(*elasticProcessor).SaveTransactions(0xc00013ad00, 0xc0002a1338)
+	/home/divesh/Desktop/shannu/zxc v/drt-go-chain-es-indexer/process/elasticproc/elasticProcessor.go:426 +0x211
+github.com/TerraDharitri/drt-go-chain-es-indexer/integrationtests.TestAccountBalanceNFTTransfer(0xc000201380)
+	/home/divesh/Desktop/shannu/zxc v/drt-go-chain-es-indexer/integrationtests/accountsBalanceNftTransfer_test.go:156 +0x1229
+testing.tRunner(0xc000201380, 0xc56060)
+	/usr/local/go/src/testing/testing.go:1690 +0xf4
+created by testing.(*T).Run in goroutine 1
+	/usr/local/go/src/testing/testing.go:1743 +0x390
+ 
+[0;33mWARN [0m[2026-03-09 20:10:53.430]   cannot find hash in the txs map or scrs map [0;33mhash[0m = 6831 
+[0;36mDEBUG[0m[2026-03-09 20:10:53.430]   accountsProcessor.splitAlteredAccounts - nil additional data 
+[0;36mDEBUG[0m[2026-03-09 20:10:53.430]   accountsProcessor.splitAlteredAccounts - nil additional data 
+[0;33mWARN [0m[2026-03-09 20:10:53.430]   accountsProcessor.PrepareRegularAccountsMap: cannot cast account's balance to big int [0;33mvalue[0m =  
+[0;33mWARN [0m[2026-03-09 20:10:53.430]   accountsProcessor.PrepareRegularAccountsMap: cannot cast account's balance to big int [0;33mvalue[0m =  
+--- PASS: TestAccountBalanceNFTTransfer (4.15s)
+=== RUN   TestIndexAccountsBalance
+[0;36mDEBUG[0m[2026-03-09 20:10:53.682]   ei.elasticProcessor indexer version is empty 
+[0;33mWARN [0m[2026-03-09 20:10:53.682]   bech32PubkeyConverter.SilentEncode       [0;33mhex buff[0m =  [0;33merror[0m = wrong size when encoding address, expected length 32, received 0 [0;33mstack trace[0m = goroutine 50 [running]:
+runtime/debug.Stack()
+	/usr/local/go/src/runtime/debug/stack.go:26 +0x5e
+github.com/TerraDharitri/drt-go-chain-core/core/pubkeyConverter.(*bech32PubkeyConverter).SilentEncode(0x8?, {0x0, 0x0, 0x4?}, {0xd17380, 0xc0001aaf00})
+	/home/divesh/go/pkg/mod/github.com/!terra!dharitri/drt-go-chain-core@v1.0.1/core/pubkeyConverter/bech32PubkeyConverter.go:109 +0x105
+github.com/TerraDharitri/drt-go-chain-es-indexer/process/elasticproc/logsevents.(*logsAndEventsProcessor).prepareLog(0xc0001ab280, 0xc0002e0960, {0xc000196b04, 0x4}, 0xc00041f4d0, 0x15e0, 0x2, 0x557300)
+	/home/divesh/Desktop/shannu/zxc v/drt-go-chain-es-indexer/process/elasticproc/logsevents/logsAndEventsProcessor.go:226 +0x173
+github.com/TerraDharitri/drt-go-chain-es-indexer/process/elasticproc/logsevents.(*logsAndEventsProcessor).prepareLogsForDB(0xc0001ab280, 0xc0002e0960, {0xc00060a110, 0x1, 0xc0002e0960?}, 0x15e0, 0x2, 0x557300)
+	/home/divesh/Desktop/shannu/zxc v/drt-go-chain-es-indexer/process/elasticproc/logsevents/logsAndEventsProcessor.go:208 +0x109
+github.com/TerraDharitri/drt-go-chain-es-indexer/process/elasticproc/logsevents.(*logsAndEventsProcessor).ExtractDataFromLogs(0xc0001ab280, {0xc00060a110, 0x1, 0x1}, 0x0?, 0x15e0, 0x2, 0x3, 0x557300)
+	/home/divesh/Desktop/shannu/zxc v/drt-go-chain-es-indexer/process/elasticproc/logsevents/logsAndEventsProcessor.go:120 +0x234
+github.com/TerraDharitri/drt-go-chain-es-indexer/process/elasticproc.(*elasticProcessor).SaveTransactions(0xc0000c0340, 0xc000012450)
+	/home/divesh/Desktop/shannu/zxc v/drt-go-chain-es-indexer/process/elasticproc/elasticProcessor.go:426 +0x211
+github.com/TerraDharitri/drt-go-chain-es-indexer/integrationtests.TestIndexAccountsBalance(0xc0002001a0)
+	/home/divesh/Desktop/shannu/zxc v/drt-go-chain-es-indexer/integrationtests/accountsBalanceWithLowerTimestamp_test.go:82 +0x7bf
+testing.tRunner(0xc0002001a0, 0xc560c0)
+	/usr/local/go/src/testing/testing.go:1690 +0xf4
+created by testing.(*T).Run in goroutine 1
+	/usr/local/go/src/testing/testing.go:1743 +0x390
+ 
+[0;33mWARN [0m[2026-03-09 20:10:53.682]   bech32PubkeyConverter.SilentEncode       [0;33mhex buff[0m = 6565656562626262 [0;33merror[0m = wrong size when encoding address, expected length 32, received 8 [0;33mstack trace[0m = goroutine 50 [running]:
+runtime/debug.Stack()
+	/usr/local/go/src/runtime/debug/stack.go:26 +0x5e
+github.com/TerraDharitri/drt-go-chain-core/core/pubkeyConverter.(*bech32PubkeyConverter).SilentEncode(0x8?, {0xc000196b08, 0x8, 0x4?}, {0xd17380, 0xc0001aaf00})
+	/home/divesh/go/pkg/mod/github.com/!terra!dharitri/drt-go-chain-core@v1.0.1/core/pubkeyConverter/bech32PubkeyConverter.go:109 +0x105
+github.com/TerraDharitri/drt-go-chain-es-indexer/process/elasticproc/logsevents.(*logsAndEventsProcessor).prepareLog(0xc0001ab280, 0xc0002e0960, {0xc000196b04, 0x4}, 0xc00041f4d0, 0x15e0, 0x2, 0x557300)
+	/home/divesh/Desktop/shannu/zxc v/drt-go-chain-es-indexer/process/elasticproc/logsevents/logsAndEventsProcessor.go:244 +0x3a3
+github.com/TerraDharitri/drt-go-chain-es-indexer/process/elasticproc/logsevents.(*logsAndEventsProcessor).prepareLogsForDB(0xc0001ab280, 0xc0002e0960, {0xc00060a110, 0x1, 0xc0002e0960?}, 0x15e0, 0x2, 0x557300)
+	/home/divesh/Desktop/shannu/zxc v/drt-go-chain-es-indexer/process/elasticproc/logsevents/logsAndEventsProcessor.go:208 +0x109
+github.com/TerraDharitri/drt-go-chain-es-indexer/process/elasticproc/logsevents.(*logsAndEventsProcessor).ExtractDataFromLogs(0xc0001ab280, {0xc00060a110, 0x1, 0x1}, 0x0?, 0x15e0, 0x2, 0x3, 0x557300)
+	/home/divesh/Desktop/shannu/zxc v/drt-go-chain-es-indexer/process/elasticproc/logsevents/logsAndEventsProcessor.go:120 +0x234
+github.com/TerraDharitri/drt-go-chain-es-indexer/process/elasticproc.(*elasticProcessor).SaveTransactions(0xc0000c0340, 0xc000012450)
+	/home/divesh/Desktop/shannu/zxc v/drt-go-chain-es-indexer/process/elasticproc/elasticProcessor.go:426 +0x211
+github.com/TerraDharitri/drt-go-chain-es-indexer/integrationtests.TestIndexAccountsBalance(0xc0002001a0)
+	/home/divesh/Desktop/shannu/zxc v/drt-go-chain-es-indexer/integrationtests/accountsBalanceWithLowerTimestamp_test.go:82 +0x7bf
+testing.tRunner(0xc0002001a0, 0xc560c0)
+	/usr/local/go/src/testing/testing.go:1690 +0xf4
+created by testing.(*T).Run in goroutine 1
+	/usr/local/go/src/testing/testing.go:1743 +0x390
+ 
+[0;33mWARN [0m[2026-03-09 20:10:53.682]   cannot find hash in the txs map or scrs map [0;33mhash[0m = 6831 
+[0;36mDEBUG[0m[2026-03-09 20:10:53.682]   accountsProcessor.splitAlteredAccounts - nil additional data 
+[0;36mDEBUG[0m[2026-03-09 20:10:53.682]   accountsProcessor.splitAlteredAccounts - nil additional data 
+[0;33mWARN [0m[2026-03-09 20:10:53.706]   bech32PubkeyConverter.SilentEncode       [0;33mhex buff[0m =  [0;33merror[0m = wrong size when encoding address, expected length 32, received 0 [0;33mstack trace[0m = goroutine 50 [running]:
+runtime/debug.Stack()
+	/usr/local/go/src/runtime/debug/stack.go:26 +0x5e
+github.com/TerraDharitri/drt-go-chain-core/core/pubkeyConverter.(*bech32PubkeyConverter).SilentEncode(0x8?, {0x0, 0x0, 0x4?}, {0xd17380, 0xc0001aaf00})
+	/home/divesh/go/pkg/mod/github.com/!terra!dharitri/drt-go-chain-core@v1.0.1/core/pubkeyConverter/bech32PubkeyConverter.go:109 +0x105
+github.com/TerraDharitri/drt-go-chain-es-indexer/process/elasticproc/logsevents.(*logsAndEventsProcessor).prepareLog(0xc0001ab280, 0xc0002e0f00, {0xc000196b04, 0x4}, 0xc00041f4d0, 0x1388, 0x2, 0x4c4b40)
+	/home/divesh/Desktop/shannu/zxc v/drt-go-chain-es-indexer/process/elasticproc/logsevents/logsAndEventsProcessor.go:226 +0x173
+github.com/TerraDharitri/drt-go-chain-es-indexer/process/elasticproc/logsevents.(*logsAndEventsProcessor).prepareLogsForDB(0xc0001ab280, 0xc0002e0f00, {0xc00060a110, 0x1, 0xc0002e0f00?}, 0x1388, 0x2, 0x4c4b40)
+	/home/divesh/Desktop/shannu/zxc v/drt-go-chain-es-indexer/process/elasticproc/logsevents/logsAndEventsProcessor.go:208 +0x109
+github.com/TerraDharitri/drt-go-chain-es-indexer/process/elasticproc/logsevents.(*logsAndEventsProcessor).ExtractDataFromLogs(0xc0001ab280, {0xc00060a110, 0x1, 0x1}, 0x0?, 0x1388, 0x2, 0x3, 0x4c4b40)
+	/home/divesh/Desktop/shannu/zxc v/drt-go-chain-es-indexer/process/elasticproc/logsevents/logsAndEventsProcessor.go:120 +0x234
+github.com/TerraDharitri/drt-go-chain-es-indexer/process/elasticproc.(*elasticProcessor).SaveTransactions(0xc0000c0340, 0xc000012630)
+	/home/divesh/Desktop/shannu/zxc v/drt-go-chain-es-indexer/process/elasticproc/elasticProcessor.go:426 +0x211
+github.com/TerraDharitri/drt-go-chain-es-indexer/integrationtests.TestIndexAccountsBalance(0xc0002001a0)
+	/home/divesh/Desktop/shannu/zxc v/drt-go-chain-es-indexer/integrationtests/accountsBalanceWithLowerTimestamp_test.go:105 +0xb4f
+testing.tRunner(0xc0002001a0, 0xc560c0)
+	/usr/local/go/src/testing/testing.go:1690 +0xf4
+created by testing.(*T).Run in goroutine 1
+	/usr/local/go/src/testing/testing.go:1743 +0x390
+ 
+[0;33mWARN [0m[2026-03-09 20:10:53.706]   bech32PubkeyConverter.SilentEncode       [0;33mhex buff[0m = 6565656562626262 [0;33merror[0m = wrong size when encoding address, expected length 32, received 8 [0;33mstack trace[0m = goroutine 50 [running]:
+runtime/debug.Stack()
+	/usr/local/go/src/runtime/debug/stack.go:26 +0x5e
+github.com/TerraDharitri/drt-go-chain-core/core/pubkeyConverter.(*bech32PubkeyConverter).SilentEncode(0x8?, {0xc000196b08, 0x8, 0x4?}, {0xd17380, 0xc0001aaf00})
+	/home/divesh/go/pkg/mod/github.com/!terra!dharitri/drt-go-chain-core@v1.0.1/core/pubkeyConverter/bech32PubkeyConverter.go:109 +0x105
+github.com/TerraDharitri/drt-go-chain-es-indexer/process/elasticproc/logsevents.(*logsAndEventsProcessor).prepareLog(0xc0001ab280, 0xc0002e0f00, {0xc000196b04, 0x4}, 0xc00041f4d0, 0x1388, 0x2, 0x4c4b40)
+	/home/divesh/Desktop/shannu/zxc v/drt-go-chain-es-indexer/process/elasticproc/logsevents/logsAndEventsProcessor.go:244 +0x3a3
+github.com/TerraDharitri/drt-go-chain-es-indexer/process/elasticproc/logsevents.(*logsAndEventsProcessor).prepareLogsForDB(0xc0001ab280, 0xc0002e0f00, {0xc00060a110, 0x1, 0xc0002e0f00?}, 0x1388, 0x2, 0x4c4b40)
+	/home/divesh/Desktop/shannu/zxc v/drt-go-chain-es-indexer/process/elasticproc/logsevents/logsAndEventsProcessor.go:208 +0x109
+github.com/TerraDharitri/drt-go-chain-es-indexer/process/elasticproc/logsevents.(*logsAndEventsProcessor).ExtractDataFromLogs(0xc0001ab280, {0xc00060a110, 0x1, 0x1}, 0x0?, 0x1388, 0x2, 0x3, 0x4c4b40)
+	/home/divesh/Desktop/shannu/zxc v/drt-go-chain-es-indexer/process/elasticproc/logsevents/logsAndEventsProcessor.go:120 +0x234
+github.com/TerraDharitri/drt-go-chain-es-indexer/process/elasticproc.(*elasticProcessor).SaveTransactions(0xc0000c0340, 0xc000012630)
+	/home/divesh/Desktop/shannu/zxc v/drt-go-chain-es-indexer/process/elasticproc/elasticProcessor.go:426 +0x211
+github.com/TerraDharitri/drt-go-chain-es-indexer/integrationtests.TestIndexAccountsBalance(0xc0002001a0)
+	/home/divesh/Desktop/shannu/zxc v/drt-go-chain-es-indexer/integrationtests/accountsBalanceWithLowerTimestamp_test.go:105 +0xb4f
+testing.tRunner(0xc0002001a0, 0xc560c0)
+	/usr/local/go/src/testing/testing.go:1690 +0xf4
+created by testing.(*T).Run in goroutine 1
+	/usr/local/go/src/testing/testing.go:1743 +0x390
+ 
+[0;33mWARN [0m[2026-03-09 20:10:53.706]   cannot find hash in the txs map or scrs map [0;33mhash[0m = 6831 
+[0;33mWARN [0m[2026-03-09 20:10:53.721]   bech32PubkeyConverter.SilentEncode       [0;33mhex buff[0m =  [0;33merror[0m = wrong size when encoding address, expected length 32, received 0 [0;33mstack trace[0m = goroutine 50 [running]:
+runtime/debug.Stack()
+	/usr/local/go/src/runtime/debug/stack.go:26 +0x5e
+github.com/TerraDharitri/drt-go-chain-core/core/pubkeyConverter.(*bech32PubkeyConverter).SilentEncode(0x0?, {0x0, 0x0, 0xc0000a6d68?}, {0xd17380, 0xc0001aafc0})
+	/home/divesh/go/pkg/mod/github.com/!terra!dharitri/drt-go-chain-core@v1.0.1/core/pubkeyConverter/bech32PubkeyConverter.go:109 +0x105
+github.com/TerraDharitri/drt-go-chain-es-indexer/process/elasticproc/transactions.(*dbTransactionBuilder).prepareTransaction(0xc0001ab240, 0xc0001b11e8, {0xc00011bda8, 0x2, 0x2}, {0xc00002aae0, 0x20, 0xc000304aa0?}, 0xc0000a6d40, {0xd1e428, ...}, ...)
+	/home/divesh/Desktop/shannu/zxc v/drt-go-chain-es-indexer/process/elasticproc/transactions/transactionDBBuilder.go:54 +0x1b5
+github.com/TerraDharitri/drt-go-chain-es-indexer/process/elasticproc/transactions.(*txsGrouper).prepareNormalTxForDB(0xc00012a570, {0xc00002aae0, 0x20, 0x20}, 0xc0000a6d40, {0xc0c6c9, 0x7}, {0xc00011bda8, 0x2, 0x2}, ...)
+	/home/divesh/Desktop/shannu/zxc v/drt-go-chain-es-indexer/process/elasticproc/transactions/transactionsGrouper.go:108 +0x1c5
+github.com/TerraDharitri/drt-go-chain-es-indexer/process/elasticproc/transactions.(*txsGrouper).groupNormalTxs(0xc00012a570, 0x0, 0xc0000a6d40, {0xd1e428, 0xc0000edc00}, 0xc0003e21e0, 0x0, 0x3, 0x5b8d80)
+	/home/divesh/Desktop/shannu/zxc v/drt-go-chain-es-indexer/process/elasticproc/transactions/transactionsGrouper.go:59 +0x219
+github.com/TerraDharitri/drt-go-chain-es-indexer/process/elasticproc/transactions.(*txsDatabaseProcessor).PrepareTransactionsForDatabase(0xc0001d2420, {0xc00019e3f0, 0x1, 0x1}, {0xd1e428, 0xc0000edc00}, 0xc000498850, 0x0, 0x3, 0x5b8d80)
+	/home/divesh/Desktop/shannu/zxc v/drt-go-chain-es-indexer/process/elasticproc/transactions/transactionsProcessor.go:100 +0x5c6
+github.com/TerraDharitri/drt-go-chain-es-indexer/process/elasticproc.(*elasticProcessor).SaveTransactions(0xc0000c0340, 0xc0001b1248)
+	/home/divesh/Desktop/shannu/zxc v/drt-go-chain-es-indexer/process/elasticproc/elasticProcessor.go:425 +0x189
+github.com/TerraDharitri/drt-go-chain-es-indexer/integrationtests.TestIndexAccountsBalance(0xc0002001a0)
+	/home/divesh/Desktop/shannu/zxc v/drt-go-chain-es-indexer/integrationtests/accountsBalanceWithLowerTimestamp_test.go:167 +0x16ef
+testing.tRunner(0xc0002001a0, 0xc560c0)
+	/usr/local/go/src/testing/testing.go:1690 +0xf4
+created by testing.(*T).Run in goroutine 1
+	/usr/local/go/src/testing/testing.go:1743 +0x390
+ 
+[0;33mWARN [0m[2026-03-09 20:10:53.721]   bech32PubkeyConverter.SilentEncode       [0;33mhex buff[0m = 6472743137756d63307576656c36326e6733306b3575707271637868337565333368713630386e6a656a61716c6a75717a716c78747a7571797134756d6a [0;33merror[0m = wrong size when encoding address, expected length 32, received 62 [0;33mstack trace[0m = goroutine 50 [running]:
+runtime/debug.Stack()
+	/usr/local/go/src/runtime/debug/stack.go:26 +0x5e
+github.com/TerraDharitri/drt-go-chain-core/core/pubkeyConverter.(*bech32PubkeyConverter).SilentEncode(0x0?, {0xc0001b6bc0, 0x3e, 0xc0000a6d68?}, {0xd17380, 0xc0001aafc0})
+	/home/divesh/go/pkg/mod/github.com/!terra!dharitri/drt-go-chain-core@v1.0.1/core/pubkeyConverter/bech32PubkeyConverter.go:109 +0x105
+github.com/TerraDharitri/drt-go-chain-es-indexer/process/elasticproc/transactions.(*dbTransactionBuilder).prepareTransaction(0xc0001ab240, 0xc0001b11e8, {0xc00011bda8, 0x2, 0x2}, {0xc00002aae0, 0x20, 0xc000304aa0?}, 0xc0000a6d40, {0xd1e428, ...}, ...)
+	/home/divesh/Desktop/shannu/zxc v/drt-go-chain-es-indexer/process/elasticproc/transactions/transactionDBBuilder.go:55 +0x203
+github.com/TerraDharitri/drt-go-chain-es-indexer/process/elasticproc/transactions.(*txsGrouper).prepareNormalTxForDB(0xc00012a570, {0xc00002aae0, 0x20, 0x20}, 0xc0000a6d40, {0xc0c6c9, 0x7}, {0xc00011bda8, 0x2, 0x2}, ...)
+	/home/divesh/Desktop/shannu/zxc v/drt-go-chain-es-indexer/process/elasticproc/transactions/transactionsGrouper.go:108 +0x1c5
+github.com/TerraDharitri/drt-go-chain-es-indexer/process/elasticproc/transactions.(*txsGrouper).groupNormalTxs(0xc00012a570, 0x0, 0xc0000a6d40, {0xd1e428, 0xc0000edc00}, 0xc0003e21e0, 0x0, 0x3, 0x5b8d80)
+	/home/divesh/Desktop/shannu/zxc v/drt-go-chain-es-indexer/process/elasticproc/transactions/transactionsGrouper.go:59 +0x219
+github.com/TerraDharitri/drt-go-chain-es-indexer/process/elasticproc/transactions.(*txsDatabaseProcessor).PrepareTransactionsForDatabase(0xc0001d2420, {0xc00019e3f0, 0x1, 0x1}, {0xd1e428, 0xc0000edc00}, 0xc000498850, 0x0, 0x3, 0x5b8d80)
+	/home/divesh/Desktop/shannu/zxc v/drt-go-chain-es-indexer/process/elasticproc/transactions/transactionsProcessor.go:100 +0x5c6
+github.com/TerraDharitri/drt-go-chain-es-indexer/process/elasticproc.(*elasticProcessor).SaveTransactions(0xc0000c0340, 0xc0001b1248)
+	/home/divesh/Desktop/shannu/zxc v/drt-go-chain-es-indexer/process/elasticproc/elasticProcessor.go:425 +0x189
+github.com/TerraDharitri/drt-go-chain-es-indexer/integrationtests.TestIndexAccountsBalance(0xc0002001a0)
+	/home/divesh/Desktop/shannu/zxc v/drt-go-chain-es-indexer/integrationtests/accountsBalanceWithLowerTimestamp_test.go:167 +0x16ef
+testing.tRunner(0xc0002001a0, 0xc560c0)
+	/usr/local/go/src/testing/testing.go:1690 +0xf4
+created by testing.(*T).Run in goroutine 1
+	/usr/local/go/src/testing/testing.go:1743 +0x390
+ 
+[0;33mWARN [0m[2026-03-09 20:10:53.721]   bech32PubkeyConverter.SilentEncode       [0;33mhex buff[0m =  [0;33merror[0m = wrong size when encoding address, expected length 32, received 0 [0;33mstack trace[0m = goroutine 50 [running]:
+runtime/debug.Stack()
+	/usr/local/go/src/runtime/debug/stack.go:26 +0x5e
+github.com/TerraDharitri/drt-go-chain-core/core/pubkeyConverter.(*bech32PubkeyConverter).SilentEncode(0x8?, {0x0, 0x0, 0x4?}, {0xd17380, 0xc0001aaf00})
+	/home/divesh/go/pkg/mod/github.com/!terra!dharitri/drt-go-chain-core@v1.0.1/core/pubkeyConverter/bech32PubkeyConverter.go:109 +0x105
+github.com/TerraDharitri/drt-go-chain-es-indexer/process/elasticproc/logsevents.(*logsAndEventsProcessor).prepareLog(0xc0001ab280, 0xc0000bbcc0, {0xc00011bd78, 0x4}, 0xc0003e2240, 0x1770, 0x2, 0x5b8d80)
+	/home/divesh/Desktop/shannu/zxc v/drt-go-chain-es-indexer/process/elasticproc/logsevents/logsAndEventsProcessor.go:226 +0x173
+github.com/TerraDharitri/drt-go-chain-es-indexer/process/elasticproc/logsevents.(*logsAndEventsProcessor).prepareLogsForDB(0xc0001ab280, 0xc0000bbcc0, {0xc00019e3e8, 0x1, 0xc0000bbcc0?}, 0x1770, 0x2, 0x5b8d80)
+	/home/divesh/Desktop/shannu/zxc v/drt-go-chain-es-indexer/process/elasticproc/logsevents/logsAndEventsProcessor.go:208 +0x109
+github.com/TerraDharitri/drt-go-chain-es-indexer/process/elasticproc/logsevents.(*logsAndEventsProcessor).ExtractDataFromLogs(0xc0001ab280, {0xc00019e3e8, 0x1, 0x1}, 0x1?, 0x1770, 0x2, 0x3, 0x5b8d80)
+	/home/divesh/Desktop/shannu/zxc v/drt-go-chain-es-indexer/process/elasticproc/logsevents/logsAndEventsProcessor.go:120 +0x234
+github.com/TerraDharitri/drt-go-chain-es-indexer/process/elasticproc.(*elasticProcessor).SaveTransactions(0xc0000c0340, 0xc0001b1248)
+	/home/divesh/Desktop/shannu/zxc v/drt-go-chain-es-indexer/process/elasticproc/elasticProcessor.go:426 +0x211
+github.com/TerraDharitri/drt-go-chain-es-indexer/integrationtests.TestIndexAccountsBalance(0xc0002001a0)
+	/home/divesh/Desktop/shannu/zxc v/drt-go-chain-es-indexer/integrationtests/accountsBalanceWithLowerTimestamp_test.go:167 +0x16ef
+testing.tRunner(0xc0002001a0, 0xc560c0)
+	/usr/local/go/src/testing/testing.go:1690 +0xf4
+created by testing.(*T).Run in goroutine 1
+	/usr/local/go/src/testing/testing.go:1743 +0x390
+ 
+[0;36mDEBUG[0m[2026-03-09 20:10:53.976]   ei.elasticProcessor indexer version is empty 
+[0;33mWARN [0m[2026-03-09 20:10:53.976]   bech32PubkeyConverter.SilentEncode       [0;33mhex buff[0m =  [0;33merror[0m = wrong size when encoding address, expected length 32, received 0 [0;33mstack trace[0m = goroutine 50 [running]:
+runtime/debug.Stack()
+	/usr/local/go/src/runtime/debug/stack.go:26 +0x5e
+github.com/TerraDharitri/drt-go-chain-core/core/pubkeyConverter.(*bech32PubkeyConverter).SilentEncode(0x8?, {0x0, 0x0, 0x4?}, {0xd17380, 0xc0001aaf00})
+	/home/divesh/go/pkg/mod/github.com/!terra!dharitri/drt-go-chain-core@v1.0.1/core/pubkeyConverter/bech32PubkeyConverter.go:109 +0x105
+github.com/TerraDharitri/drt-go-chain-es-indexer/process/elasticproc/logsevents.(*logsAndEventsProcessor).prepareLog(0xc00031a2c0, 0xc00048a460, {0xc00011bd78, 0x4}, 0xc0003e2240, 0x1771, 0x2, 0x5b9168)
+	/home/divesh/Desktop/shannu/zxc v/drt-go-chain-es-indexer/process/elasticproc/logsevents/logsAndEventsProcessor.go:226 +0x173
+github.com/TerraDharitri/drt-go-chain-es-indexer/process/elasticproc/logsevents.(*logsAndEventsProcessor).prepareLogsForDB(0xc00031a2c0, 0xc00048a460, {0xc00019e3e8, 0x1, 0xc00048a460?}, 0x1771, 0x2, 0x5b9168)
+	/home/divesh/Desktop/shannu/zxc v/drt-go-chain-es-indexer/process/elasticproc/logsevents/logsAndEventsProcessor.go:208 +0x109
+github.com/TerraDharitri/drt-go-chain-es-indexer/process/elasticproc/logsevents.(*logsAndEventsProcessor).ExtractDataFromLogs(0xc00031a2c0, {0xc00019e3e8, 0x1, 0x1}, 0x1?, 0x1771, 0x2, 0x3, 0x5b9168)
+	/home/divesh/Desktop/shannu/zxc v/drt-go-chain-es-indexer/process/elasticproc/logsevents/logsAndEventsProcessor.go:120 +0x234
+github.com/TerraDharitri/drt-go-chain-es-indexer/process/elasticproc.(*elasticProcessor).SaveTransactions(0xc0002a4270, 0xc0002a02a0)
+	/home/divesh/Desktop/shannu/zxc v/drt-go-chain-es-indexer/process/elasticproc/elasticProcessor.go:426 +0x211
+github.com/TerraDharitri/drt-go-chain-es-indexer/integrationtests.TestIndexAccountsBalance(0xc0002001a0)
+	/home/divesh/Desktop/shannu/zxc v/drt-go-chain-es-indexer/integrationtests/accountsBalanceWithLowerTimestamp_test.go:202 +0x1c1e
+testing.tRunner(0xc0002001a0, 0xc560c0)
+	/usr/local/go/src/testing/testing.go:1690 +0xf4
+created by testing.(*T).Run in goroutine 1
+	/usr/local/go/src/testing/testing.go:1743 +0x390
+ 
+[0;33mWARN [0m[2026-03-09 20:10:53.976]   cannot find hash in the txs map or scrs map [0;33mhash[0m = 6831 
+--- PASS: TestIndexAccountsBalance (0.53s)
+=== RUN   TestAccountsDCDTDeleteOnRollback
+[0;36mDEBUG[0m[2026-03-09 20:10:54.142]   ei.elasticProcessor indexer version is empty 
+[0;33mWARN [0m[2026-03-09 20:10:54.143]   bech32PubkeyConverter.SilentEncode       [0;33mhex buff[0m =  [0;33merror[0m = wrong size when encoding address, expected length 32, received 0 [0;33mstack trace[0m = goroutine 51 [running]:
+runtime/debug.Stack()
+	/usr/local/go/src/runtime/debug/stack.go:26 +0x5e
+github.com/TerraDharitri/drt-go-chain-core/core/pubkeyConverter.(*bech32PubkeyConverter).SilentEncode(0x8?, {0x0, 0x0, 0x4?}, {0xd17380, 0xc0001aaf00})
+	/home/divesh/go/pkg/mod/github.com/!terra!dharitri/drt-go-chain-core@v1.0.1/core/pubkeyConverter/bech32PubkeyConverter.go:109 +0x105
+github.com/TerraDharitri/drt-go-chain-es-indexer/process/elasticproc/logsevents.(*logsAndEventsProcessor).prepareLog(0xc0000a6280, 0xc0001a0820, {0xc000612538, 0x4}, 0xc0001f9c20, 0x13b0, 0x2, 0x4ce780)
+	/home/divesh/Desktop/shannu/zxc v/drt-go-chain-es-indexer/process/elasticproc/logsevents/logsAndEventsProcessor.go:226 +0x173
+github.com/TerraDharitri/drt-go-chain-es-indexer/process/elasticproc/logsevents.(*logsAndEventsProcessor).prepareLogsForDB(0xc0000a6280, 0xc0001a0820, {0xc00060a128, 0x1, 0xc0001a0820?}, 0x13b0, 0x2, 0x4ce780)
+	/home/divesh/Desktop/shannu/zxc v/drt-go-chain-es-indexer/process/elasticproc/logsevents/logsAndEventsProcessor.go:208 +0x109
+github.com/TerraDharitri/drt-go-chain-es-indexer/process/elasticproc/logsevents.(*logsAndEventsProcessor).ExtractDataFromLogs(0xc0000a6280, {0xc00060a128, 0x1, 0x1}, 0x0?, 0x13b0, 0x2, 0x3, 0x4ce780)
+	/home/divesh/Desktop/shannu/zxc v/drt-go-chain-es-indexer/process/elasticproc/logsevents/logsAndEventsProcessor.go:120 +0x234
+github.com/TerraDharitri/drt-go-chain-es-indexer/process/elasticproc.(*elasticProcessor).SaveTransactions(0xc0000c09c0, 0xc0000121f8)
+	/home/divesh/Desktop/shannu/zxc v/drt-go-chain-es-indexer/process/elasticproc/elasticProcessor.go:426 +0x211
+github.com/TerraDharitri/drt-go-chain-es-indexer/integrationtests.TestAccountsDCDTDeleteOnRollback(0xc0005644e0)
+	/home/divesh/Desktop/shannu/zxc v/drt-go-chain-es-indexer/integrationtests/accountsDCDTRollback_test.go:84 +0xa32
+testing.tRunner(0xc0005644e0, 0xc56068)
+	/usr/local/go/src/testing/testing.go:1690 +0xf4
+created by testing.(*T).Run in goroutine 1
+	/usr/local/go/src/testing/testing.go:1743 +0x390
+ 
+[0;33mWARN [0m[2026-03-09 20:10:54.143]   cannot find hash in the txs map or scrs map [0;33mhash[0m = 6831 
+[0;36mDEBUG[0m[2026-03-09 20:10:54.143]   accountsProcessor.splitAlteredAccounts - nil additional data 
+[0;33mWARN [0m[2026-03-09 20:10:54.143]   accountsProcessor.PrepareRegularAccountsMap: cannot cast account's balance to big int [0;33mvalue[0m =  
+--- PASS: TestAccountsDCDTDeleteOnRollback (0.23s)
+=== RUN   TestIndexAccountDCDTWithTokenType
+[0;36mDEBUG[0m[2026-03-09 20:10:54.379]   ei.elasticProcessor indexer version is empty 
+[0;33mWARN [0m[2026-03-09 20:10:54.379]   cannot find hash in the txs map or scrs map [0;33mhash[0m = 6831 
+[0;36mDEBUG[0m[2026-03-09 20:10:54.387]   elasticProcessor.addTokenType            [0;36mindex[0m = accountsdcdt [0;36mduration[0m = 7.056293ms 
+[0;36mDEBUG[0m[2026-03-09 20:10:54.390]   elasticProcessor.addTokenType            [0;36mindex[0m = tokens [0;36mduration[0m = 3.341816ms 
+[0;36mDEBUG[0m[2026-03-09 20:10:54.557]   ei.elasticProcessor indexer version is empty 
+[0;33mWARN [0m[2026-03-09 20:10:54.557]   cannot find hash in the txs map or scrs map [0;33mhash[0m = 6831 
+[0;36mDEBUG[0m[2026-03-09 20:10:54.557]   accountsProcessor.splitAlteredAccounts - nil additional data 
+--- PASS: TestIndexAccountDCDTWithTokenType (0.35s)
+=== RUN   TestIndexAccountDCDTWithTokenTypeShardFirstAndMetachainAfter
+[0;36mDEBUG[0m[2026-03-09 20:10:54.709]   ei.elasticProcessor indexer version is empty 
+[0;33mWARN [0m[2026-03-09 20:10:54.709]   cannot find hash in the txs map or scrs map [0;33mhash[0m = 6831 
+[0;36mDEBUG[0m[2026-03-09 20:10:54.711]   accountsProcessor.splitAlteredAccounts - nil additional data 
+[0;36mDEBUG[0m[2026-03-09 20:10:55.871]   ei.elasticProcessor indexer version is empty 
+[0;33mWARN [0m[2026-03-09 20:10:55.871]   cannot find hash in the txs map or scrs map [0;33mhash[0m = 6831 
+[0;36mDEBUG[0m[2026-03-09 20:10:55.899]   elasticProcessor.addTokenType            [0;36mindex[0m = accountsdcdt [0;36mduration[0m = 27.353162ms 
+[0;36mDEBUG[0m[2026-03-09 20:10:55.914]   elasticProcessor.addTokenType            [0;36mindex[0m = tokens [0;36mduration[0m = 14.849483ms 
+--- PASS: TestIndexAccountDCDTWithTokenTypeShardFirstAndMetachainAfter (1.36s)
+=== RUN   TestTransactionWithClaimRewardsGasRefund
+[0;36mDEBUG[0m[2026-03-09 20:10:56.121]   ei.elasticProcessor indexer version is empty 
+--- PASS: TestTransactionWithClaimRewardsGasRefund (0.23s)
+=== RUN   TestCreateNFTWithTags
+[0;36mDEBUG[0m[2026-03-09 20:10:56.320]   ei.elasticProcessor indexer version is empty 
+[0;33mWARN [0m[2026-03-09 20:10:56.320]   cannot find hash in the txs map or scrs map [0;33mhash[0m = 6831 
+[0;36mDEBUG[0m[2026-03-09 20:10:56.320]   accountsProcessor.splitAlteredAccounts - nil additional data 
+[0;33mWARN [0m[2026-03-09 20:10:56.340]   cannot find hash in the txs map or scrs map [0;33mhash[0m = 6831 
+[0;36mDEBUG[0m[2026-03-09 20:10:56.340]   accountsProcessor.splitAlteredAccounts - nil additional data 
+[0;36mDEBUG[0m[2026-03-09 20:10:56.483]   ei.elasticProcessor indexer version is empty 
+[0;33mWARN [0m[2026-03-09 20:10:56.483]   cannot find hash in the txs map or scrs map [0;33mhash[0m = 6831 
+[0;36mDEBUG[0m[2026-03-09 20:10:56.483]   accountsProcessor.splitAlteredAccounts - nil additional data 
+--- PASS: TestCreateNFTWithTags (0.34s)
+=== RUN   TestDCDTTransferTooMuchGasProvided
+[0;36mDEBUG[0m[2026-03-09 20:10:56.659]   ei.elasticProcessor indexer version is empty 
+--- PASS: TestDCDTTransferTooMuchGasProvided (0.18s)
+=== RUN   TestDCDTTransferCrossShardWithRefundOnSourceShard
+[0;36mDEBUG[0m[2026-03-09 20:10:56.836]   ei.elasticProcessor indexer version is empty 
+--- PASS: TestDCDTTransferCrossShardWithRefundOnSourceShard (0.19s)
+=== RUN   TestDCDTTransferCrossShardIndexFirstOnDestinationAndAfterSource
+[0;36mDEBUG[0m[2026-03-09 20:10:57.039]   ei.elasticProcessor indexer version is empty 
+--- PASS: TestDCDTTransferCrossShardIndexFirstOnDestinationAndAfterSource (0.20s)
+=== RUN   TestDelegateUnDelegateAndWithdraw
+[0;36mDEBUG[0m[2026-03-09 20:10:57.186]   ei.elasticProcessor indexer version is empty 
+[0;33mWARN [0m[2026-03-09 20:10:57.187]   cannot find hash in the txs map or scrs map [0;33mhash[0m = 6831 
+[0;33mWARN [0m[2026-03-09 20:10:57.199]   cannot find hash in the txs map or scrs map [0;33mhash[0m = 6832 
+[0;33mWARN [0m[2026-03-09 20:10:57.214]   cannot find hash in the txs map or scrs map [0;33mhash[0m = 6833 
+[0;33mWARN [0m[2026-03-09 20:10:59.273]   cannot find hash in the txs map or scrs map [0;33mhash[0m = 6834 
+--- PASS: TestDelegateUnDelegateAndWithdraw (2.22s)
+=== RUN   TestIssueTokenAndChangeToDynamic
+[0;36mDEBUG[0m[2026-03-09 20:10:59.436]   ei.elasticProcessor indexer version is empty 
+[0;33mWARN [0m[2026-03-09 20:10:59.436]   cannot find hash in the txs map or scrs map [0;33mhash[0m = 6831 
+[0;33mWARN [0m[2026-03-09 20:10:59.436]   cannot find hash in the txs map or scrs map [0;33mhash[0m = 6831 
+[0;36mDEBUG[0m[2026-03-09 20:10:59.439]   elasticProcessor.addTokenType            [0;36mindex[0m = accountsdcdt [0;36mduration[0m = 3.11893ms 
+[0;36mDEBUG[0m[2026-03-09 20:10:59.441]   elasticProcessor.addTokenType            [0;36mindex[0m = tokens [0;36mduration[0m = 2.302779ms 
+[0;33mWARN [0m[2026-03-09 20:10:59.453]   cannot find hash in the txs map or scrs map [0;33mhash[0m = 6831 
+[0;36mDEBUG[0m[2026-03-09 20:10:59.462]   elasticProcessor.addTokenType            [0;36mindex[0m = accountsdcdt [0;36mduration[0m = 9.030173ms 
+[0;36mDEBUG[0m[2026-03-09 20:10:59.465]   elasticProcessor.addTokenType            [0;36mindex[0m = tokens [0;36mduration[0m = 2.26ms 
+--- PASS: TestIssueTokenAndChangeToDynamic (0.18s)
+=== RUN   TestIssueTokenAndSetRole
+[0;36mDEBUG[0m[2026-03-09 20:10:59.600]   ei.elasticProcessor indexer version is empty 
+[0;33mWARN [0m[2026-03-09 20:10:59.600]   cannot find hash in the txs map or scrs map [0;33mhash[0m = 6831 
+[0;33mWARN [0m[2026-03-09 20:10:59.600]   cannot find hash in the txs map or scrs map [0;33mhash[0m = 6831 
+[0;36mDEBUG[0m[2026-03-09 20:10:59.603]   elasticProcessor.addTokenType            [0;36mindex[0m = accountsdcdt [0;36mduration[0m = 2.846512ms 
+[0;36mDEBUG[0m[2026-03-09 20:10:59.606]   elasticProcessor.addTokenType            [0;36mindex[0m = tokens [0;36mduration[0m = 2.925186ms 
+[0;33mWARN [0m[2026-03-09 20:10:59.618]   cannot find hash in the txs map or scrs map [0;33mhash[0m = 6831 
+[0;33mWARN [0m[2026-03-09 20:10:59.631]   cannot find hash in the txs map or scrs map [0;33mhash[0m = 6831 
+[0;33mWARN [0m[2026-03-09 20:10:59.631]   cannot find hash in the txs map or scrs map [0;33mhash[0m = 6831 
+[0;33mWARN [0m[2026-03-09 20:10:59.643]   cannot find hash in the txs map or scrs map [0;33mhash[0m = 6831 
+--- PASS: TestIssueTokenAndSetRole (0.17s)
+=== RUN   TestIssueSetRolesEventAndAfterTokenIssue
+[0;36mDEBUG[0m[2026-03-09 20:10:59.798]   ei.elasticProcessor indexer version is empty 
+[0;33mWARN [0m[2026-03-09 20:10:59.798]   cannot find hash in the txs map or scrs map [0;33mhash[0m = 6831 
+[0;33mWARN [0m[2026-03-09 20:10:59.805]   cannot find hash in the txs map or scrs map [0;33mhash[0m = 6831 
+[0;36mDEBUG[0m[2026-03-09 20:10:59.808]   elasticProcessor.addTokenType            [0;36mindex[0m = accountsdcdt [0;36mduration[0m = 2.355114ms 
+[0;36mDEBUG[0m[2026-03-09 20:10:59.810]   elasticProcessor.addTokenType            [0;36mindex[0m = tokens [0;36mduration[0m = 2.631599ms 
+--- PASS: TestIssueSetRolesEventAndAfterTokenIssue (0.17s)
+=== RUN   TestIssueTokenAndTransferOwnership
+[0;36mDEBUG[0m[2026-03-09 20:10:59.952]   ei.elasticProcessor indexer version is empty 
+[0;33mWARN [0m[2026-03-09 20:10:59.952]   cannot find hash in the txs map or scrs map [0;33mhash[0m = 6831 
+[0;36mDEBUG[0m[2026-03-09 20:10:59.955]   elasticProcessor.addTokenType            [0;36mindex[0m = accountsdcdt [0;36mduration[0m = 2.868733ms 
+[0;36mDEBUG[0m[2026-03-09 20:10:59.957]   elasticProcessor.addTokenType            [0;36mindex[0m = tokens [0;36mduration[0m = 2.804685ms 
+[0;33mWARN [0m[2026-03-09 20:10:59.971]   cannot find hash in the txs map or scrs map [0;33mhash[0m = 6831 
+[0;36mDEBUG[0m[2026-03-09 20:10:59.974]   elasticProcessor.addTokenType            [0;36mindex[0m = accountsdcdt [0;36mduration[0m = 2.94943ms 
+[0;36mDEBUG[0m[2026-03-09 20:10:59.977]   elasticProcessor.addTokenType            [0;36mindex[0m = tokens [0;36mduration[0m = 2.55518ms 
+[0;33mWARN [0m[2026-03-09 20:10:59.988]   cannot find hash in the txs map or scrs map [0;33mhash[0m = 6831 
+[0;33mWARN [0m[2026-03-09 20:11:00.025]   cannot find hash in the txs map or scrs map [0;33mhash[0m = 6831 
+--- PASS: TestIssueTokenAndTransferOwnership (0.22s)
+=== RUN   TestIndexLogSourceShardAndAfterDestinationAndAgainSource
+[0;36mDEBUG[0m[2026-03-09 20:11:00.191]   ei.elasticProcessor indexer version is empty 
+[0;33mWARN [0m[2026-03-09 20:11:00.191]   bech32PubkeyConverter.SilentEncode       [0;33mhex buff[0m =  [0;33merror[0m = wrong size when encoding address, expected length 32, received 0 [0;33mstack trace[0m = goroutine 41 [running]:
+runtime/debug.Stack()
+	/usr/local/go/src/runtime/debug/stack.go:26 +0x5e
+github.com/TerraDharitri/drt-go-chain-core/core/pubkeyConverter.(*bech32PubkeyConverter).SilentEncode(0x0?, {0x0, 0x0, 0xc0002d30e8?}, {0xd17380, 0xc0001aafc0})
+	/home/divesh/go/pkg/mod/github.com/!terra!dharitri/drt-go-chain-core@v1.0.1/core/pubkeyConverter/bech32PubkeyConverter.go:109 +0x105
+github.com/TerraDharitri/drt-go-chain-es-indexer/process/elasticproc/transactions.(*dbTransactionBuilder).prepareTransaction(0xc0000a68c0, 0xc0000136f8, {0xc0004853a0, 0x9, 0x9}, {0xc000458340, 0x20, 0xc00038c0a0?}, 0xc0002d30c0, {0xd1e428, ...}, ...)
+	/home/divesh/Desktop/shannu/zxc v/drt-go-chain-es-indexer/process/elasticproc/transactions/transactionDBBuilder.go:54 +0x1b5
+github.com/TerraDharitri/drt-go-chain-es-indexer/process/elasticproc/transactions.(*txsGrouper).prepareNormalTxForDB(0xc00012b1a0, {0xc000458340, 0x20, 0x20}, 0xc0002d30c0, {0xc0c6c2, 0x7}, {0xc0004853a0, 0x9, 0x9}, ...)
+	/home/divesh/Desktop/shannu/zxc v/drt-go-chain-es-indexer/process/elasticproc/transactions/transactionsGrouper.go:108 +0x1c5
+github.com/TerraDharitri/drt-go-chain-es-indexer/process/elasticproc/transactions.(*txsGrouper).groupNormalTxs(0xc00012b1a0, 0x0, 0xc0002d30c0, {0xd1e428, 0xc000504380}, 0xc0003f3ec0, 0x0, 0x3, 0x4ce780)
+	/home/divesh/Desktop/shannu/zxc v/drt-go-chain-es-indexer/process/elasticproc/transactions/transactionsGrouper.go:59 +0x219
+github.com/TerraDharitri/drt-go-chain-es-indexer/process/elasticproc/transactions.(*txsDatabaseProcessor).PrepareTransactionsForDatabase(0xc000460b00, {0xc00019e318, 0x1, 0x1}, {0xd1e428, 0xc000504380}, 0xc000453ab0, 0x0, 0x3, 0x4ce780)
+	/home/divesh/Desktop/shannu/zxc v/drt-go-chain-es-indexer/process/elasticproc/transactions/transactionsProcessor.go:100 +0x5c6
+github.com/TerraDharitri/drt-go-chain-es-indexer/process/elasticproc.(*elasticProcessor).SaveTransactions(0xc0002a4820, 0xc000013728)
+	/home/divesh/Desktop/shannu/zxc v/drt-go-chain-es-indexer/process/elasticproc/elasticProcessor.go:425 +0x189
+github.com/TerraDharitri/drt-go-chain-es-indexer/integrationtests.TestIndexLogSourceShardAndAfterDestinationAndAgainSource(0xc0002016c0)
+	/home/divesh/Desktop/shannu/zxc v/drt-go-chain-es-indexer/integrationtests/logsCrossShard_test.go:73 +0x8f5
+testing.tRunner(0xc0002016c0, 0xc560c8)
+	/usr/local/go/src/testing/testing.go:1690 +0xf4
+created by testing.(*T).Run in goroutine 1
+	/usr/local/go/src/testing/testing.go:1743 +0x390
+ 
+[0;33mWARN [0m[2026-03-09 20:11:00.191]   bech32PubkeyConverter.SilentEncode       [0;33mhex buff[0m =  [0;33merror[0m = wrong size when encoding address, expected length 32, received 0 [0;33mstack trace[0m = goroutine 41 [running]:
+runtime/debug.Stack()
+	/usr/local/go/src/runtime/debug/stack.go:26 +0x5e
+github.com/TerraDharitri/drt-go-chain-core/core/pubkeyConverter.(*bech32PubkeyConverter).SilentEncode(0x0?, {0x0, 0x0, 0xc0002d30e8?}, {0xd17380, 0xc0001aafc0})
+	/home/divesh/go/pkg/mod/github.com/!terra!dharitri/drt-go-chain-core@v1.0.1/core/pubkeyConverter/bech32PubkeyConverter.go:109 +0x105
+github.com/TerraDharitri/drt-go-chain-es-indexer/process/elasticproc/transactions.(*dbTransactionBuilder).prepareTransaction(0xc0000a68c0, 0xc0000136f8, {0xc0004853a0, 0x9, 0x9}, {0xc000458340, 0x20, 0xc00038c0a0?}, 0xc0002d30c0, {0xd1e428, ...}, ...)
+	/home/divesh/Desktop/shannu/zxc v/drt-go-chain-es-indexer/process/elasticproc/transactions/transactionDBBuilder.go:55 +0x203
+github.com/TerraDharitri/drt-go-chain-es-indexer/process/elasticproc/transactions.(*txsGrouper).prepareNormalTxForDB(0xc00012b1a0, {0xc000458340, 0x20, 0x20}, 0xc0002d30c0, {0xc0c6c2, 0x7}, {0xc0004853a0, 0x9, 0x9}, ...)
+	/home/divesh/Desktop/shannu/zxc v/drt-go-chain-es-indexer/process/elasticproc/transactions/transactionsGrouper.go:108 +0x1c5
+github.com/TerraDharitri/drt-go-chain-es-indexer/process/elasticproc/transactions.(*txsGrouper).groupNormalTxs(0xc00012b1a0, 0x0, 0xc0002d30c0, {0xd1e428, 0xc000504380}, 0xc0003f3ec0, 0x0, 0x3, 0x4ce780)
+	/home/divesh/Desktop/shannu/zxc v/drt-go-chain-es-indexer/process/elasticproc/transactions/transactionsGrouper.go:59 +0x219
+github.com/TerraDharitri/drt-go-chain-es-indexer/process/elasticproc/transactions.(*txsDatabaseProcessor).PrepareTransactionsForDatabase(0xc000460b00, {0xc00019e318, 0x1, 0x1}, {0xd1e428, 0xc000504380}, 0xc000453ab0, 0x0, 0x3, 0x4ce780)
+	/home/divesh/Desktop/shannu/zxc v/drt-go-chain-es-indexer/process/elasticproc/transactions/transactionsProcessor.go:100 +0x5c6
+github.com/TerraDharitri/drt-go-chain-es-indexer/process/elasticproc.(*elasticProcessor).SaveTransactions(0xc0002a4820, 0xc000013728)
+	/home/divesh/Desktop/shannu/zxc v/drt-go-chain-es-indexer/process/elasticproc/elasticProcessor.go:425 +0x189
+github.com/TerraDharitri/drt-go-chain-es-indexer/integrationtests.TestIndexLogSourceShardAndAfterDestinationAndAgainSource(0xc0002016c0)
+	/home/divesh/Desktop/shannu/zxc v/drt-go-chain-es-indexer/integrationtests/logsCrossShard_test.go:73 +0x8f5
+testing.tRunner(0xc0002016c0, 0xc560c8)
+	/usr/local/go/src/testing/testing.go:1690 +0xf4
+created by testing.(*T).Run in goroutine 1
+	/usr/local/go/src/testing/testing.go:1743 +0x390
+ 
+[0;33mWARN [0m[2026-03-09 20:11:00.201]   bech32PubkeyConverter.SilentEncode       [0;33mhex buff[0m =  [0;33merror[0m = wrong size when encoding address, expected length 32, received 0 [0;33mstack trace[0m = goroutine 41 [running]:
+runtime/debug.Stack()
+	/usr/local/go/src/runtime/debug/stack.go:26 +0x5e
+github.com/TerraDharitri/drt-go-chain-core/core/pubkeyConverter.(*bech32PubkeyConverter).SilentEncode(0x0?, {0x0, 0x0, 0xc0002d30e8?}, {0xd17380, 0xc0001aafc0})
+	/home/divesh/go/pkg/mod/github.com/!terra!dharitri/drt-go-chain-core@v1.0.1/core/pubkeyConverter/bech32PubkeyConverter.go:109 +0x105
+github.com/TerraDharitri/drt-go-chain-es-indexer/process/elasticproc/transactions.(*dbTransactionBuilder).prepareTransaction(0xc0000a68c0, 0xc0000124b0, {0xc0004853a0, 0x9, 0x9}, {0xc00002a320, 0x20, 0xc00038c050?}, 0xc0002d30c0, {0xd1e428, ...}, ...)
+	/home/divesh/Desktop/shannu/zxc v/drt-go-chain-es-indexer/process/elasticproc/transactions/transactionDBBuilder.go:54 +0x1b5
+github.com/TerraDharitri/drt-go-chain-es-indexer/process/elasticproc/transactions.(*txsGrouper).prepareNormalTxForDB(0xc00012b1a0, {0xc00002a320, 0x20, 0x20}, 0xc0002d30c0, {0xc0c6c9, 0x7}, {0xc0004853a0, 0x9, 0x9}, ...)
+	/home/divesh/Desktop/shannu/zxc v/drt-go-chain-es-indexer/process/elasticproc/transactions/transactionsGrouper.go:108 +0x1c5
+github.com/TerraDharitri/drt-go-chain-es-indexer/process/elasticproc/transactions.(*txsGrouper).groupNormalTxs(0xc00012b1a0, 0x0, 0xc0002d30c0, {0xd1e428, 0xc000504700}, 0xc0002d4000, 0x0, 0x3, 0x5c29c0)
+	/home/divesh/Desktop/shannu/zxc v/drt-go-chain-es-indexer/process/elasticproc/transactions/transactionsGrouper.go:59 +0x219
+github.com/TerraDharitri/drt-go-chain-es-indexer/process/elasticproc/transactions.(*txsDatabaseProcessor).PrepareTransactionsForDatabase(0xc000460b00, {0xc00019e318, 0x1, 0x1}, {0xd1e428, 0xc000504700}, 0xc0004520e0, 0x0, 0x3, 0x5c29c0)
+	/home/divesh/Desktop/shannu/zxc v/drt-go-chain-es-indexer/process/elasticproc/transactions/transactionsProcessor.go:100 +0x5c6
+github.com/TerraDharitri/drt-go-chain-es-indexer/process/elasticproc.(*elasticProcessor).SaveTransactions(0xc0002a4820, 0xc0000124f8)
+	/home/divesh/Desktop/shannu/zxc v/drt-go-chain-es-indexer/process/elasticproc/elasticProcessor.go:425 +0x189
+github.com/TerraDharitri/drt-go-chain-es-indexer/integrationtests.TestIndexLogSourceShardAndAfterDestinationAndAgainSource(0xc0002016c0)
+	/home/divesh/Desktop/shannu/zxc v/drt-go-chain-es-indexer/integrationtests/logsCrossShard_test.go:130 +0x1362
+testing.tRunner(0xc0002016c0, 0xc560c8)
+	/usr/local/go/src/testing/testing.go:1690 +0xf4
+created by testing.(*T).Run in goroutine 1
+	/usr/local/go/src/testing/testing.go:1743 +0x390
+ 
+[0;33mWARN [0m[2026-03-09 20:11:00.201]   bech32PubkeyConverter.SilentEncode       [0;33mhex buff[0m =  [0;33merror[0m = wrong size when encoding address, expected length 32, received 0 [0;33mstack trace[0m = goroutine 41 [running]:
+runtime/debug.Stack()
+	/usr/local/go/src/runtime/debug/stack.go:26 +0x5e
+github.com/TerraDharitri/drt-go-chain-core/core/pubkeyConverter.(*bech32PubkeyConverter).SilentEncode(0x0?, {0x0, 0x0, 0xc0002d30e8?}, {0xd17380, 0xc0001aafc0})
+	/home/divesh/go/pkg/mod/github.com/!terra!dharitri/drt-go-chain-core@v1.0.1/core/pubkeyConverter/bech32PubkeyConverter.go:109 +0x105
+github.com/TerraDharitri/drt-go-chain-es-indexer/process/elasticproc/transactions.(*dbTransactionBuilder).prepareTransaction(0xc0000a68c0, 0xc0000124b0, {0xc0004853a0, 0x9, 0x9}, {0xc00002a320, 0x20, 0xc00038c050?}, 0xc0002d30c0, {0xd1e428, ...}, ...)
+	/home/divesh/Desktop/shannu/zxc v/drt-go-chain-es-indexer/process/elasticproc/transactions/transactionDBBuilder.go:55 +0x203
+github.com/TerraDharitri/drt-go-chain-es-indexer/process/elasticproc/transactions.(*txsGrouper).prepareNormalTxForDB(0xc00012b1a0, {0xc00002a320, 0x20, 0x20}, 0xc0002d30c0, {0xc0c6c9, 0x7}, {0xc0004853a0, 0x9, 0x9}, ...)
+	/home/divesh/Desktop/shannu/zxc v/drt-go-chain-es-indexer/process/elasticproc/transactions/transactionsGrouper.go:108 +0x1c5
+github.com/TerraDharitri/drt-go-chain-es-indexer/process/elasticproc/transactions.(*txsGrouper).groupNormalTxs(0xc00012b1a0, 0x0, 0xc0002d30c0, {0xd1e428, 0xc000504700}, 0xc0002d4000, 0x0, 0x3, 0x5c29c0)
+	/home/divesh/Desktop/shannu/zxc v/drt-go-chain-es-indexer/process/elasticproc/transactions/transactionsGrouper.go:59 +0x219
+github.com/TerraDharitri/drt-go-chain-es-indexer/process/elasticproc/transactions.(*txsDatabaseProcessor).PrepareTransactionsForDatabase(0xc000460b00, {0xc00019e318, 0x1, 0x1}, {0xd1e428, 0xc000504700}, 0xc0004520e0, 0x0, 0x3, 0x5c29c0)
+	/home/divesh/Desktop/shannu/zxc v/drt-go-chain-es-indexer/process/elasticproc/transactions/transactionsProcessor.go:100 +0x5c6
+github.com/TerraDharitri/drt-go-chain-es-indexer/process/elasticproc.(*elasticProcessor).SaveTransactions(0xc0002a4820, 0xc0000124f8)
+	/home/divesh/Desktop/shannu/zxc v/drt-go-chain-es-indexer/process/elasticproc/elasticProcessor.go:425 +0x189
+github.com/TerraDharitri/drt-go-chain-es-indexer/integrationtests.TestIndexLogSourceShardAndAfterDestinationAndAgainSource(0xc0002016c0)
+	/home/divesh/Desktop/shannu/zxc v/drt-go-chain-es-indexer/integrationtests/logsCrossShard_test.go:130 +0x1362
+testing.tRunner(0xc0002016c0, 0xc560c8)
+	/usr/local/go/src/testing/testing.go:1690 +0xf4
+created by testing.(*T).Run in goroutine 1
+	/usr/local/go/src/testing/testing.go:1743 +0x390
+ 
+[0;33mWARN [0m[2026-03-09 20:11:00.209]   bech32PubkeyConverter.SilentEncode       [0;33mhex buff[0m =  [0;33merror[0m = wrong size when encoding address, expected length 32, received 0 [0;33mstack trace[0m = goroutine 41 [running]:
+runtime/debug.Stack()
+	/usr/local/go/src/runtime/debug/stack.go:26 +0x5e
+github.com/TerraDharitri/drt-go-chain-core/core/pubkeyConverter.(*bech32PubkeyConverter).SilentEncode(0x0?, {0x0, 0x0, 0xc0002d30e8?}, {0xd17380, 0xc0001aafc0})
+	/home/divesh/go/pkg/mod/github.com/!terra!dharitri/drt-go-chain-core@v1.0.1/core/pubkeyConverter/bech32PubkeyConverter.go:109 +0x105
+github.com/TerraDharitri/drt-go-chain-es-indexer/process/elasticproc/transactions.(*dbTransactionBuilder).prepareTransaction(0xc0000a68c0, 0xc0002fe180, {0xc0004853a0, 0x9, 0x9}, {0xc0004540e0, 0x20, 0xc00002e140?}, 0xc0002d30c0, {0xd1e428, ...}, ...)
+	/home/divesh/Desktop/shannu/zxc v/drt-go-chain-es-indexer/process/elasticproc/transactions/transactionDBBuilder.go:54 +0x1b5
+github.com/TerraDharitri/drt-go-chain-es-indexer/process/elasticproc/transactions.(*txsGrouper).prepareNormalTxForDB(0xc00012b1a0, {0xc0004540e0, 0x20, 0x20}, 0xc0002d30c0, {0xc0c6c2, 0x7}, {0xc0004853a0, 0x9, 0x9}, ...)
+	/home/divesh/Desktop/shannu/zxc v/drt-go-chain-es-indexer/process/elasticproc/transactions/transactionsGrouper.go:108 +0x1c5
+github.com/TerraDharitri/drt-go-chain-es-indexer/process/elasticproc/transactions.(*txsGrouper).groupNormalTxs(0xc00012b1a0, 0x0, 0xc0002d30c0, {0xd1e428, 0xc000104380}, 0xc0003e2750, 0x0, 0x3, 0x4c4b40)
+	/home/divesh/Desktop/shannu/zxc v/drt-go-chain-es-indexer/process/elasticproc/transactions/transactionsGrouper.go:59 +0x219
+github.com/TerraDharitri/drt-go-chain-es-indexer/process/elasticproc/transactions.(*txsDatabaseProcessor).PrepareTransactionsForDatabase(0xc000460b00, {0xc00019e318, 0x1, 0x1}, {0xd1e428, 0xc000104380}, 0xc0001c8850, 0x0, 0x3, 0x4c4b40)
+	/home/divesh/Desktop/shannu/zxc v/drt-go-chain-es-indexer/process/elasticproc/transactions/transactionsProcessor.go:100 +0x5c6
+github.com/TerraDharitri/drt-go-chain-es-indexer/process/elasticproc.(*elasticProcessor).SaveTransactions(0xc0002a4820, 0xc0002fe1b0)
+	/home/divesh/Desktop/shannu/zxc v/drt-go-chain-es-indexer/process/elasticproc/elasticProcessor.go:425 +0x189
+github.com/TerraDharitri/drt-go-chain-es-indexer/integrationtests.TestIndexLogSourceShardAndAfterDestinationAndAgainSource(0xc0002016c0)
+	/home/divesh/Desktop/shannu/zxc v/drt-go-chain-es-indexer/integrationtests/logsCrossShard_test.go:183 +0x1cb7
+testing.tRunner(0xc0002016c0, 0xc560c8)
+	/usr/local/go/src/testing/testing.go:1690 +0xf4
+created by testing.(*T).Run in goroutine 1
+	/usr/local/go/src/testing/testing.go:1743 +0x390
+ 
+[0;33mWARN [0m[2026-03-09 20:11:00.209]   bech32PubkeyConverter.SilentEncode       [0;33mhex buff[0m =  [0;33merror[0m = wrong size when encoding address, expected length 32, received 0 [0;33mstack trace[0m = goroutine 41 [running]:
+runtime/debug.Stack()
+	/usr/local/go/src/runtime/debug/stack.go:26 +0x5e
+github.com/TerraDharitri/drt-go-chain-core/core/pubkeyConverter.(*bech32PubkeyConverter).SilentEncode(0x0?, {0x0, 0x0, 0xc0002d30e8?}, {0xd17380, 0xc0001aafc0})
+	/home/divesh/go/pkg/mod/github.com/!terra!dharitri/drt-go-chain-core@v1.0.1/core/pubkeyConverter/bech32PubkeyConverter.go:109 +0x105
+github.com/TerraDharitri/drt-go-chain-es-indexer/process/elasticproc/transactions.(*dbTransactionBuilder).prepareTransaction(0xc0000a68c0, 0xc0002fe180, {0xc0004853a0, 0x9, 0x9}, {0xc0004540e0, 0x20, 0xc00002e140?}, 0xc0002d30c0, {0xd1e428, ...}, ...)
+	/home/divesh/Desktop/shannu/zxc v/drt-go-chain-es-indexer/process/elasticproc/transactions/transactionDBBuilder.go:55 +0x203
+github.com/TerraDharitri/drt-go-chain-es-indexer/process/elasticproc/transactions.(*txsGrouper).prepareNormalTxForDB(0xc00012b1a0, {0xc0004540e0, 0x20, 0x20}, 0xc0002d30c0, {0xc0c6c2, 0x7}, {0xc0004853a0, 0x9, 0x9}, ...)
+	/home/divesh/Desktop/shannu/zxc v/drt-go-chain-es-indexer/process/elasticproc/transactions/transactionsGrouper.go:108 +0x1c5
+github.com/TerraDharitri/drt-go-chain-es-indexer/process/elasticproc/transactions.(*txsGrouper).groupNormalTxs(0xc00012b1a0, 0x0, 0xc0002d30c0, {0xd1e428, 0xc000104380}, 0xc0003e2750, 0x0, 0x3, 0x4c4b40)
+	/home/divesh/Desktop/shannu/zxc v/drt-go-chain-es-indexer/process/elasticproc/transactions/transactionsGrouper.go:59 +0x219
+github.com/TerraDharitri/drt-go-chain-es-indexer/process/elasticproc/transactions.(*txsDatabaseProcessor).PrepareTransactionsForDatabase(0xc000460b00, {0xc00019e318, 0x1, 0x1}, {0xd1e428, 0xc000104380}, 0xc0001c8850, 0x0, 0x3, 0x4c4b40)
+	/home/divesh/Desktop/shannu/zxc v/drt-go-chain-es-indexer/process/elasticproc/transactions/transactionsProcessor.go:100 +0x5c6
+github.com/TerraDharitri/drt-go-chain-es-indexer/process/elasticproc.(*elasticProcessor).SaveTransactions(0xc0002a4820, 0xc0002fe1b0)
+	/home/divesh/Desktop/shannu/zxc v/drt-go-chain-es-indexer/process/elasticproc/elasticProcessor.go:425 +0x189
+github.com/TerraDharitri/drt-go-chain-es-indexer/integrationtests.TestIndexLogSourceShardAndAfterDestinationAndAgainSource(0xc0002016c0)
+	/home/divesh/Desktop/shannu/zxc v/drt-go-chain-es-indexer/integrationtests/logsCrossShard_test.go:183 +0x1cb7
+testing.tRunner(0xc0002016c0, 0xc560c8)
+	/usr/local/go/src/testing/testing.go:1690 +0xf4
+created by testing.(*T).Run in goroutine 1
+	/usr/local/go/src/testing/testing.go:1743 +0x390
+ 
+--- PASS: TestIndexLogSourceShardAndAfterDestinationAndAgainSource (0.26s)
+=== RUN   TestMappingsOfDCDTsIndex
+[0;36mDEBUG[0m[2026-03-09 20:11:00.415]   ei.elasticProcessor indexer version is empty 
+--- PASS: TestMappingsOfDCDTsIndex (0.13s)
+=== RUN   TestIndexMiniBlocksOnSourceAndDestination
+[0;36mDEBUG[0m[2026-03-09 20:11:00.541]   ei.elasticProcessor indexer version is empty 
+--- PASS: TestIndexMiniBlocksOnSourceAndDestination (0.14s)
+=== RUN   TestIndexMiniBlockFirstOnDestinationAndAfterSource
+[0;36mDEBUG[0m[2026-03-09 20:11:00.688]   ei.elasticProcessor indexer version is empty 
+--- PASS: TestIndexMiniBlockFirstOnDestinationAndAfterSource (0.14s)
+=== RUN   TestMultiTransferCrossShardAndScCallErrorSignaledBySC
+[0;36mDEBUG[0m[2026-03-09 20:11:00.839]   ei.elasticProcessor indexer version is empty 
+--- PASS: TestMultiTransferCrossShardAndScCallErrorSignaledBySC (0.21s)
+=== RUN   TestIssueNFTCreateAndBurn
+[0;36mDEBUG[0m[2026-03-09 20:11:01.053]   ei.elasticProcessor indexer version is empty 
+[0;33mWARN [0m[2026-03-09 20:11:01.053]   cannot find hash in the txs map or scrs map [0;33mhash[0m = 6831 
+[0;36mDEBUG[0m[2026-03-09 20:11:01.057]   elasticProcessor.addTokenType            [0;36mindex[0m = accountsdcdt [0;36mduration[0m = 2.991046ms 
+[0;36mDEBUG[0m[2026-03-09 20:11:01.059]   elasticProcessor.addTokenType            [0;36mindex[0m = tokens [0;36mduration[0m = 2.539662ms 
+[0;36mDEBUG[0m[2026-03-09 20:11:01.208]   ei.elasticProcessor indexer version is empty 
+[0;33mWARN [0m[2026-03-09 20:11:01.209]   cannot find hash in the txs map or scrs map [0;33mhash[0m = 6831 
+[0;33mWARN [0m[2026-03-09 20:11:01.217]   cannot find hash in the txs map or scrs map [0;33mhash[0m = 6831 
+--- PASS: TestIssueNFTCreateAndBurn (0.31s)
+=== RUN   TestIssueNFTCreateAndBurnNonFungibleV2
+[0;36mDEBUG[0m[2026-03-09 20:11:01.364]   ei.elasticProcessor indexer version is empty 
+[0;33mWARN [0m[2026-03-09 20:11:01.364]   cannot find hash in the txs map or scrs map [0;33mhash[0m = 6831 
+[0;36mDEBUG[0m[2026-03-09 20:11:01.367]   elasticProcessor.addTokenType            [0;36mindex[0m = accountsdcdt [0;36mduration[0m = 3.369498ms 
+[0;36mDEBUG[0m[2026-03-09 20:11:01.370]   elasticProcessor.addTokenType            [0;36mindex[0m = tokens [0;36mduration[0m = 2.327273ms 
+[0;36mDEBUG[0m[2026-03-09 20:11:01.518]   ei.elasticProcessor indexer version is empty 
+[0;33mWARN [0m[2026-03-09 20:11:01.518]   cannot find hash in the txs map or scrs map [0;33mhash[0m = 6831 
+[0;33mWARN [0m[2026-03-09 20:11:01.525]   cannot find hash in the txs map or scrs map [0;33mhash[0m = 6831 
+--- PASS: TestIssueNFTCreateAndBurnNonFungibleV2 (0.31s)
+=== RUN   TestNFTTransferCrossShardWithSCCall
+[0;36mDEBUG[0m[2026-03-09 20:11:01.646]   ei.elasticProcessor indexer version is empty 
+--- PASS: TestNFTTransferCrossShardWithSCCall (0.14s)
+=== RUN   TestNFTTransferCrossShard
+[0;36mDEBUG[0m[2026-03-09 20:11:01.771]   ei.elasticProcessor indexer version is empty 
+--- PASS: TestNFTTransferCrossShard (0.12s)
+=== RUN   TestNFTTransferCrossShardImportDBScenarioFirstIndexDestinationAfterSource
+[0;36mDEBUG[0m[2026-03-09 20:11:01.908]   ei.elasticProcessor indexer version is empty 
+--- PASS: TestNFTTransferCrossShardImportDBScenarioFirstIndexDestinationAfterSource (0.14s)
+=== RUN   TestNFTTransferCrossShardImportDBScenarioFirstIndexDestinationAfterSourceSuccess
+[0;36mDEBUG[0m[2026-03-09 20:11:02.057]   ei.elasticProcessor indexer version is empty 
+--- PASS: TestNFTTransferCrossShardImportDBScenarioFirstIndexDestinationAfterSourceSuccess (0.17s)
+=== RUN   TestNFTTransferCrossShardWithScCall
+[0;36mDEBUG[0m[2026-03-09 20:11:02.255]   ei.elasticProcessor indexer version is empty 
+--- PASS: TestNFTTransferCrossShardWithScCall (0.17s)
+=== RUN   TestRelayedTransactionGasUsedCrossShard
+[0;36mDEBUG[0m[2026-03-09 20:11:02.395]   ei.elasticProcessor indexer version is empty 
+--- PASS: TestRelayedTransactionGasUsedCrossShard (0.15s)
+=== RUN   TestRelayedTransactionIntraShard
+[0;36mDEBUG[0m[2026-03-09 20:11:02.527]   ei.elasticProcessor indexer version is empty 
+--- PASS: TestRelayedTransactionIntraShard (0.12s)
+=== RUN   TestRelayedV3TransactionWithMultipleRefunds
+[0;36mDEBUG[0m[2026-03-09 20:11:02.637]   ei.elasticProcessor indexer version is empty 
+[0;33mWARN [0m[2026-03-09 20:11:02.664]   bech32PubkeyConverter.SilentEncode       [0;33mhex buff[0m =  [0;33merror[0m = wrong size when encoding address, expected length 32, received 0 [0;33mstack trace[0m = goroutine 130 [running]:
+runtime/debug.Stack()
+	/usr/local/go/src/runtime/debug/stack.go:26 +0x5e
+github.com/TerraDharitri/drt-go-chain-core/core/pubkeyConverter.(*bech32PubkeyConverter).SilentEncode(0x0?, {0x0, 0x0, 0xc0006253a0?}, {0xd17380, 0xc0001aafc0})
+	/home/divesh/go/pkg/mod/github.com/!terra!dharitri/drt-go-chain-core@v1.0.1/core/pubkeyConverter/bech32PubkeyConverter.go:109 +0x105
+github.com/TerraDharitri/drt-go-chain-es-indexer/process/elasticproc/transactions.(*smartContractResultsProcessor).prepareSmartContractResult(0xc000180d80, {0xc0c127, 0x7}, {0x0?, 0x0?, 0x0?}, 0xc0003aab40, {0xd1e428, 0xc000104a80}, 0x0, ...)
+	/home/divesh/Desktop/shannu/zxc v/drt-go-chain-es-indexer/process/elasticproc/transactions/smartContractResultsProcessor.go:141 +0x3b4
+github.com/TerraDharitri/drt-go-chain-es-indexer/process/elasticproc/transactions.(*smartContractResultsProcessor).processSCRs(0xc000180d80, {0xc00015e188, 0x1, 0xd1e428?}, {0xd1e428, 0xc000104a80}, 0xc00012a930, 0x3, 0x4ce780)
+	/home/divesh/Desktop/shannu/zxc v/drt-go-chain-es-indexer/process/elasticproc/transactions/smartContractResultsProcessor.go:68 +0x438
+github.com/TerraDharitri/drt-go-chain-es-indexer/process/elasticproc/transactions.(*txsDatabaseProcessor).PrepareTransactionsForDatabase(0xc0005306a0, {0xc00015e188, 0x1, 0x1}, {0xd1e428, 0xc000104a80}, 0xc000127dc0, 0x0, 0x3, 0x4ce780)
+	/home/divesh/Desktop/shannu/zxc v/drt-go-chain-es-indexer/process/elasticproc/transactions/transactionsProcessor.go:127 +0x80b
+github.com/TerraDharitri/drt-go-chain-es-indexer/process/elasticproc.(*elasticProcessor).SaveTransactions(0xc0000c0b60, 0xc0003aab58)
+	/home/divesh/Desktop/shannu/zxc v/drt-go-chain-es-indexer/process/elasticproc/elasticProcessor.go:425 +0x189
+github.com/TerraDharitri/drt-go-chain-es-indexer/integrationtests.TestRelayedV3TransactionWithMultipleRefunds(0xc000201380)
+	/home/divesh/Desktop/shannu/zxc v/drt-go-chain-es-indexer/integrationtests/relayedV3_test.go:100 +0xc7f
+testing.tRunner(0xc000201380, 0xc56168)
+	/usr/local/go/src/testing/testing.go:1690 +0xf4
+created by testing.(*T).Run in goroutine 1
+	/usr/local/go/src/testing/testing.go:1743 +0x390
+ 
+[0;33mWARN [0m[2026-03-09 20:11:02.664]   bech32PubkeyConverter.SilentEncode       [0;33mhex buff[0m =  [0;33merror[0m = wrong size when encoding address, expected length 32, received 0 [0;33mstack trace[0m = goroutine 130 [running]:
+runtime/debug.Stack()
+	/usr/local/go/src/runtime/debug/stack.go:26 +0x5e
+github.com/TerraDharitri/drt-go-chain-core/core/pubkeyConverter.(*bech32PubkeyConverter).SilentEncode(0x0?, {0x0, 0x0, 0xc0006253a0?}, {0xd17380, 0xc0001aafc0})
+	/home/divesh/go/pkg/mod/github.com/!terra!dharitri/drt-go-chain-core@v1.0.1/core/pubkeyConverter/bech32PubkeyConverter.go:109 +0x105
+github.com/TerraDharitri/drt-go-chain-es-indexer/process/elasticproc/transactions.(*smartContractResultsProcessor).prepareSmartContractResult(0xc000180d80, {0xc0c127, 0x7}, {0x0?, 0x0?, 0x0?}, 0xc0003aab40, {0xd1e428, 0xc000104a80}, 0x0, ...)
+	/home/divesh/Desktop/shannu/zxc v/drt-go-chain-es-indexer/process/elasticproc/transactions/smartContractResultsProcessor.go:142 +0x403
+github.com/TerraDharitri/drt-go-chain-es-indexer/process/elasticproc/transactions.(*smartContractResultsProcessor).processSCRs(0xc000180d80, {0xc00015e188, 0x1, 0xd1e428?}, {0xd1e428, 0xc000104a80}, 0xc00012a930, 0x3, 0x4ce780)
+	/home/divesh/Desktop/shannu/zxc v/drt-go-chain-es-indexer/process/elasticproc/transactions/smartContractResultsProcessor.go:68 +0x438
+github.com/TerraDharitri/drt-go-chain-es-indexer/process/elasticproc/transactions.(*txsDatabaseProcessor).PrepareTransactionsForDatabase(0xc0005306a0, {0xc00015e188, 0x1, 0x1}, {0xd1e428, 0xc000104a80}, 0xc000127dc0, 0x0, 0x3, 0x4ce780)
+	/home/divesh/Desktop/shannu/zxc v/drt-go-chain-es-indexer/process/elasticproc/transactions/transactionsProcessor.go:127 +0x80b
+github.com/TerraDharitri/drt-go-chain-es-indexer/process/elasticproc.(*elasticProcessor).SaveTransactions(0xc0000c0b60, 0xc0003aab58)
+	/home/divesh/Desktop/shannu/zxc v/drt-go-chain-es-indexer/process/elasticproc/elasticProcessor.go:425 +0x189
+github.com/TerraDharitri/drt-go-chain-es-indexer/integrationtests.TestRelayedV3TransactionWithMultipleRefunds(0xc000201380)
+	/home/divesh/Desktop/shannu/zxc v/drt-go-chain-es-indexer/integrationtests/relayedV3_test.go:100 +0xc7f
+testing.tRunner(0xc000201380, 0xc56168)
+	/usr/local/go/src/testing/testing.go:1690 +0xf4
+created by testing.(*T).Run in goroutine 1
+	/usr/local/go/src/testing/testing.go:1743 +0x390
+ 
+[0;33mWARN [0m[2026-03-09 20:11:02.733]   bech32PubkeyConverter.SilentEncode       [0;33mhex buff[0m =  [0;33merror[0m = wrong size when encoding address, expected length 32, received 0 [0;33mstack trace[0m = goroutine 130 [running]:
+runtime/debug.Stack()
+	/usr/local/go/src/runtime/debug/stack.go:26 +0x5e
+github.com/TerraDharitri/drt-go-chain-core/core/pubkeyConverter.(*bech32PubkeyConverter).SilentEncode(0x0?, {0x0, 0x0, 0xc0006253a0?}, {0xd17380, 0xc0001aafc0})
+	/home/divesh/go/pkg/mod/github.com/!terra!dharitri/drt-go-chain-core@v1.0.1/core/pubkeyConverter/bech32PubkeyConverter.go:109 +0x105
+github.com/TerraDharitri/drt-go-chain-es-indexer/process/elasticproc/transactions.(*smartContractResultsProcessor).prepareSmartContractResult(0xc000180d80, {0xc0c127, 0x7}, {0x0?, 0x0?, 0x0?}, 0xc0003aabe8, {0xd1e428, 0xc000104a80}, 0x0, ...)
+	/home/divesh/Desktop/shannu/zxc v/drt-go-chain-es-indexer/process/elasticproc/transactions/smartContractResultsProcessor.go:141 +0x3b4
+github.com/TerraDharitri/drt-go-chain-es-indexer/process/elasticproc/transactions.(*smartContractResultsProcessor).processSCRs(0xc000180d80, {0xc00015e188, 0x1, 0xd1e428?}, {0xd1e428, 0xc000104a80}, 0xc00012b380, 0x3, 0x4ce780)
+	/home/divesh/Desktop/shannu/zxc v/drt-go-chain-es-indexer/process/elasticproc/transactions/smartContractResultsProcessor.go:68 +0x438
+github.com/TerraDharitri/drt-go-chain-es-indexer/process/elasticproc/transactions.(*txsDatabaseProcessor).PrepareTransactionsForDatabase(0xc0005306a0, {0xc00015e188, 0x1, 0x1}, {0xd1e428, 0xc000104a80}, 0xc000127f10, 0x0, 0x3, 0x4ce780)
+	/home/divesh/Desktop/shannu/zxc v/drt-go-chain-es-indexer/process/elasticproc/transactions/transactionsProcessor.go:127 +0x80b
+github.com/TerraDharitri/drt-go-chain-es-indexer/process/elasticproc.(*elasticProcessor).SaveTransactions(0xc0000c0b60, 0xc0003aac00)
+	/home/divesh/Desktop/shannu/zxc v/drt-go-chain-es-indexer/process/elasticproc/elasticProcessor.go:425 +0x189
+github.com/TerraDharitri/drt-go-chain-es-indexer/integrationtests.TestRelayedV3TransactionWithMultipleRefunds(0xc000201380)
+	/home/divesh/Desktop/shannu/zxc v/drt-go-chain-es-indexer/integrationtests/relayedV3_test.go:127 +0x10be
+testing.tRunner(0xc000201380, 0xc56168)
+	/usr/local/go/src/testing/testing.go:1690 +0xf4
+created by testing.(*T).Run in goroutine 1
+	/usr/local/go/src/testing/testing.go:1743 +0x390
+ 
+[0;33mWARN [0m[2026-03-09 20:11:02.733]   bech32PubkeyConverter.SilentEncode       [0;33mhex buff[0m =  [0;33merror[0m = wrong size when encoding address, expected length 32, received 0 [0;33mstack trace[0m = goroutine 130 [running]:
+runtime/debug.Stack()
+	/usr/local/go/src/runtime/debug/stack.go:26 +0x5e
+github.com/TerraDharitri/drt-go-chain-core/core/pubkeyConverter.(*bech32PubkeyConverter).SilentEncode(0x0?, {0x0, 0x0, 0xc0006253a0?}, {0xd17380, 0xc0001aafc0})
+	/home/divesh/go/pkg/mod/github.com/!terra!dharitri/drt-go-chain-core@v1.0.1/core/pubkeyConverter/bech32PubkeyConverter.go:109 +0x105
+github.com/TerraDharitri/drt-go-chain-es-indexer/process/elasticproc/transactions.(*smartContractResultsProcessor).prepareSmartContractResult(0xc000180d80, {0xc0c127, 0x7}, {0x0?, 0x0?, 0x0?}, 0xc0003aabe8, {0xd1e428, 0xc000104a80}, 0x0, ...)
+	/home/divesh/Desktop/shannu/zxc v/drt-go-chain-es-indexer/process/elasticproc/transactions/smartContractResultsProcessor.go:142 +0x403
+github.com/TerraDharitri/drt-go-chain-es-indexer/process/elasticproc/transactions.(*smartContractResultsProcessor).processSCRs(0xc000180d80, {0xc00015e188, 0x1, 0xd1e428?}, {0xd1e428, 0xc000104a80}, 0xc00012b380, 0x3, 0x4ce780)
+	/home/divesh/Desktop/shannu/zxc v/drt-go-chain-es-indexer/process/elasticproc/transactions/smartContractResultsProcessor.go:68 +0x438
+github.com/TerraDharitri/drt-go-chain-es-indexer/process/elasticproc/transactions.(*txsDatabaseProcessor).PrepareTransactionsForDatabase(0xc0005306a0, {0xc00015e188, 0x1, 0x1}, {0xd1e428, 0xc000104a80}, 0xc000127f10, 0x0, 0x3, 0x4ce780)
+	/home/divesh/Desktop/shannu/zxc v/drt-go-chain-es-indexer/process/elasticproc/transactions/transactionsProcessor.go:127 +0x80b
+github.com/TerraDharitri/drt-go-chain-es-indexer/process/elasticproc.(*elasticProcessor).SaveTransactions(0xc0000c0b60, 0xc0003aac00)
+	/home/divesh/Desktop/shannu/zxc v/drt-go-chain-es-indexer/process/elasticproc/elasticProcessor.go:425 +0x189
+github.com/TerraDharitri/drt-go-chain-es-indexer/integrationtests.TestRelayedV3TransactionWithMultipleRefunds(0xc000201380)
+	/home/divesh/Desktop/shannu/zxc v/drt-go-chain-es-indexer/integrationtests/relayedV3_test.go:127 +0x10be
+testing.tRunner(0xc000201380, 0xc56168)
+	/usr/local/go/src/testing/testing.go:1690 +0xf4
+created by testing.(*T).Run in goroutine 1
+	/usr/local/go/src/testing/testing.go:1743 +0x390
+ 
+--- PASS: TestRelayedV3TransactionWithMultipleRefunds (0.21s)
+=== RUN   TestTransactionWithSCCallFail
+[0;36mDEBUG[0m[2026-03-09 20:11:02.889]   ei.elasticProcessor indexer version is empty 
+--- PASS: TestTransactionWithSCCallFail (0.16s)
+=== RUN   TestTransactionWithScCallSuccess
+[0;36mDEBUG[0m[2026-03-09 20:11:03.039]   ei.elasticProcessor indexer version is empty 
+--- PASS: TestTransactionWithScCallSuccess (0.15s)
+=== RUN   TestScCallIntraShardWithIssueDCDT
+[0;36mDEBUG[0m[2026-03-09 20:11:03.171]   ei.elasticProcessor indexer version is empty 
+--- PASS: TestScCallIntraShardWithIssueDCDT (0.15s)
+=== RUN   TestTransactionWithSCDeploy
+[0;36mDEBUG[0m[2026-03-09 20:11:03.323]   ei.elasticProcessor indexer version is empty 
+[0;33mWARN [0m[2026-03-09 20:11:03.323]   cannot find hash in the txs map or scrs map [0;33mhash[0m = 6831 
+[0;33mWARN [0m[2026-03-09 20:11:03.340]   cannot find hash in the txs map or scrs map [0;33mhash[0m = 6832 
+[0;33mWARN [0m[2026-03-09 20:11:03.352]   cannot find hash in the txs map or scrs map [0;33mhash[0m = 6833 
+[0;33mWARN [0m[2026-03-09 20:11:03.362]   cannot find hash in the txs map or scrs map [0;33mhash[0m = 6834 
+--- PASS: TestTransactionWithSCDeploy (0.17s)
+=== RUN   TestScDeployWithSignalErrorAndCompleteTxEvent
+[0;36mDEBUG[0m[2026-03-09 20:11:03.486]   ei.elasticProcessor indexer version is empty 
+--- PASS: TestScDeployWithSignalErrorAndCompleteTxEvent (0.12s)
+=== RUN   TestElasticIndexerSaveTransactions
+[0;36mDEBUG[0m[2026-03-09 20:11:03.594]   ei.elasticProcessor indexer version is empty 
+--- PASS: TestElasticIndexerSaveTransactions (0.11s)
+=== RUN   TestNFTUpdateMetadata
+[0;36mDEBUG[0m[2026-03-09 20:11:03.701]   ei.elasticProcessor indexer version is empty 
+[0;33mWARN [0m[2026-03-09 20:11:03.702]   nftsProcessor.convertMetaData            [0;33mcannot encode creator address[0m = error [0;33mwrong size when encoding address, expected length 32, received 0[0m = address 
+[0;33mWARN [0m[2026-03-09 20:11:03.702]   bech32PubkeyConverter.SilentEncode       [0;33mhex buff[0m =  [0;33merror[0m = wrong size when encoding address, expected length 32, received 0 [0;33mstack trace[0m = goroutine 116 [running]:
+runtime/debug.Stack()
+	/usr/local/go/src/runtime/debug/stack.go:26 +0x5e
+github.com/TerraDharitri/drt-go-chain-core/core/pubkeyConverter.(*bech32PubkeyConverter).SilentEncode(0x8?, {0x0, 0x0, 0x4?}, {0xd17380, 0xc0001aaf00})
+	/home/divesh/go/pkg/mod/github.com/!terra!dharitri/drt-go-chain-core@v1.0.1/core/pubkeyConverter/bech32PubkeyConverter.go:109 +0x105
+github.com/TerraDharitri/drt-go-chain-es-indexer/process/elasticproc/logsevents.(*logsAndEventsProcessor).prepareLog(0xc000390c80, 0xc0000b6820, {0xc00019690c, 0x4}, 0xc00012bc50, 0x13b0, 0x1, 0x4ce780)
+	/home/divesh/Desktop/shannu/zxc v/drt-go-chain-es-indexer/process/elasticproc/logsevents/logsAndEventsProcessor.go:226 +0x173
+github.com/TerraDharitri/drt-go-chain-es-indexer/process/elasticproc/logsevents.(*logsAndEventsProcessor).prepareLogsForDB(0xc000390c80, 0xc0000b6820, {0xc0002800c0, 0x1, 0xc0000b6820?}, 0x13b0, 0x1, 0x4ce780)
+	/home/divesh/Desktop/shannu/zxc v/drt-go-chain-es-indexer/process/elasticproc/logsevents/logsAndEventsProcessor.go:208 +0x109
+github.com/TerraDharitri/drt-go-chain-es-indexer/process/elasticproc/logsevents.(*logsAndEventsProcessor).ExtractDataFromLogs(0xc000390c80, {0xc0002800c0, 0x1, 0x1}, 0x0?, 0x13b0, 0x1, 0x3, 0x4ce780)
+	/home/divesh/Desktop/shannu/zxc v/drt-go-chain-es-indexer/process/elasticproc/logsevents/logsAndEventsProcessor.go:120 +0x234
+github.com/TerraDharitri/drt-go-chain-es-indexer/process/elasticproc.(*elasticProcessor).SaveTransactions(0xc00038e1a0, 0xc0002a6390)
+	/home/divesh/Desktop/shannu/zxc v/drt-go-chain-es-indexer/process/elasticproc/elasticProcessor.go:426 +0x211
+github.com/TerraDharitri/drt-go-chain-es-indexer/integrationtests.TestNFTUpdateMetadata(0xc0002001a0)
+	/home/divesh/Desktop/shannu/zxc v/drt-go-chain-es-indexer/integrationtests/updateNFT_test.go:65 +0x8d1
+testing.tRunner(0xc0002001a0, 0xc56150)
+	/usr/local/go/src/testing/testing.go:1690 +0xf4
+created by testing.(*T).Run in goroutine 1
+	/usr/local/go/src/testing/testing.go:1743 +0x390
+ 
+[0;33mWARN [0m[2026-03-09 20:11:03.702]   cannot find hash in the txs map or scrs map [0;33mhash[0m = 6831 
+[0;33mWARN [0m[2026-03-09 20:11:03.727]   bech32PubkeyConverter.SilentEncode       [0;33mhex buff[0m =  [0;33merror[0m = wrong size when encoding address, expected length 32, received 0 [0;33mstack trace[0m = goroutine 116 [running]:
+runtime/debug.Stack()
+	/usr/local/go/src/runtime/debug/stack.go:26 +0x5e
+github.com/TerraDharitri/drt-go-chain-core/core/pubkeyConverter.(*bech32PubkeyConverter).SilentEncode(0x8?, {0x0, 0x0, 0x4?}, {0xd17380, 0xc0001aaf00})
+	/home/divesh/go/pkg/mod/github.com/!terra!dharitri/drt-go-chain-core@v1.0.1/core/pubkeyConverter/bech32PubkeyConverter.go:109 +0x105
+github.com/TerraDharitri/drt-go-chain-es-indexer/process/elasticproc/logsevents.(*logsAndEventsProcessor).prepareLog(0xc000390c80, 0xc0001a05a0, {0xc00060e36c, 0x4}, 0xc0003e2630, 0x13b0, 0x1, 0x4ce780)
+	/home/divesh/Desktop/shannu/zxc v/drt-go-chain-es-indexer/process/elasticproc/logsevents/logsAndEventsProcessor.go:226 +0x173
+github.com/TerraDharitri/drt-go-chain-es-indexer/process/elasticproc/logsevents.(*logsAndEventsProcessor).prepareLogsForDB(0xc000390c80, 0xc0001a05a0, {0xc00019e228, 0x1, 0xc0001a05a0?}, 0x13b0, 0x1, 0x4ce780)
+	/home/divesh/Desktop/shannu/zxc v/drt-go-chain-es-indexer/process/elasticproc/logsevents/logsAndEventsProcessor.go:208 +0x109
+github.com/TerraDharitri/drt-go-chain-es-indexer/process/elasticproc/logsevents.(*logsAndEventsProcessor).ExtractDataFromLogs(0xc000390c80, {0xc00019e228, 0x1, 0x1}, 0x0?, 0x13b0, 0x1, 0x3, 0x4ce780)
+	/home/divesh/Desktop/shannu/zxc v/drt-go-chain-es-indexer/process/elasticproc/logsevents/logsAndEventsProcessor.go:120 +0x234
+github.com/TerraDharitri/drt-go-chain-es-indexer/process/elasticproc.(*elasticProcessor).SaveTransactions(0xc00038e1a0, 0xc0001b1428)
+	/home/divesh/Desktop/shannu/zxc v/drt-go-chain-es-indexer/process/elasticproc/elasticProcessor.go:426 +0x211
+github.com/TerraDharitri/drt-go-chain-es-indexer/integrationtests.TestNFTUpdateMetadata(0xc0002001a0)
+	/home/divesh/Desktop/shannu/zxc v/drt-go-chain-es-indexer/integrationtests/updateNFT_test.go:92 +0xf94
+testing.tRunner(0xc0002001a0, 0xc56150)
+	/usr/local/go/src/testing/testing.go:1690 +0xf4
+created by testing.(*T).Run in goroutine 1
+	/usr/local/go/src/testing/testing.go:1743 +0x390
+ 
+[0;33mWARN [0m[2026-03-09 20:11:03.727]   cannot find hash in the txs map or scrs map [0;33mhash[0m = 6831 
+[0;33mWARN [0m[2026-03-09 20:11:03.744]   bech32PubkeyConverter.SilentEncode       [0;33mhex buff[0m =  [0;33merror[0m = wrong size when encoding address, expected length 32, received 0 [0;33mstack trace[0m = goroutine 116 [running]:
+runtime/debug.Stack()
+	/usr/local/go/src/runtime/debug/stack.go:26 +0x5e
+github.com/TerraDharitri/drt-go-chain-core/core/pubkeyConverter.(*bech32PubkeyConverter).SilentEncode(0x8?, {0x0, 0x0, 0x4?}, {0xd17380, 0xc0001aaf00})
+	/home/divesh/go/pkg/mod/github.com/!terra!dharitri/drt-go-chain-core@v1.0.1/core/pubkeyConverter/bech32PubkeyConverter.go:109 +0x105
+github.com/TerraDharitri/drt-go-chain-es-indexer/process/elasticproc/logsevents.(*logsAndEventsProcessor).prepareLog(0xc000390c80, 0xc0000ba460, {0xc000484e84, 0x4}, 0xc0001181b0, 0x13b0, 0x1, 0x4ce780)
+	/home/divesh/Desktop/shannu/zxc v/drt-go-chain-es-indexer/process/elasticproc/logsevents/logsAndEventsProcessor.go:226 +0x173
+github.com/TerraDharitri/drt-go-chain-es-indexer/process/elasticproc/logsevents.(*logsAndEventsProcessor).prepareLogsForDB(0xc000390c80, 0xc0000ba460, {0xc00060a008, 0x1, 0xc0000ba460?}, 0x13b0, 0x1, 0x4ce780)
+	/home/divesh/Desktop/shannu/zxc v/drt-go-chain-es-indexer/process/elasticproc/logsevents/logsAndEventsProcessor.go:208 +0x109
+github.com/TerraDharitri/drt-go-chain-es-indexer/process/elasticproc/logsevents.(*logsAndEventsProcessor).ExtractDataFromLogs(0xc000390c80, {0xc00060a008, 0x1, 0x1}, 0x0?, 0x13b0, 0x1, 0x3, 0x4ce780)
+	/home/divesh/Desktop/shannu/zxc v/drt-go-chain-es-indexer/process/elasticproc/logsevents/logsAndEventsProcessor.go:120 +0x234
+github.com/TerraDharitri/drt-go-chain-es-indexer/process/elasticproc.(*elasticProcessor).SaveTransactions(0xc00038e1a0, 0xc0002a6048)
+	/home/divesh/Desktop/shannu/zxc v/drt-go-chain-es-indexer/process/elasticproc/elasticProcessor.go:426 +0x211
+github.com/TerraDharitri/drt-go-chain-es-indexer/integrationtests.TestNFTUpdateMetadata(0xc0002001a0)
+	/home/divesh/Desktop/shannu/zxc v/drt-go-chain-es-indexer/integrationtests/updateNFT_test.go:113 +0x151f
+testing.tRunner(0xc0002001a0, 0xc56150)
+	/usr/local/go/src/testing/testing.go:1690 +0xf4
+created by testing.(*T).Run in goroutine 1
+	/usr/local/go/src/testing/testing.go:1743 +0x390
+ 
+[0;33mWARN [0m[2026-03-09 20:11:03.744]   cannot find hash in the txs map or scrs map [0;33mhash[0m = 6831 
+[0;33mWARN [0m[2026-03-09 20:11:03.758]   bech32PubkeyConverter.SilentEncode       [0;33mhex buff[0m =  [0;33merror[0m = wrong size when encoding address, expected length 32, received 0 [0;33mstack trace[0m = goroutine 116 [running]:
+runtime/debug.Stack()
+	/usr/local/go/src/runtime/debug/stack.go:26 +0x5e
+github.com/TerraDharitri/drt-go-chain-core/core/pubkeyConverter.(*bech32PubkeyConverter).SilentEncode(0x8?, {0x0, 0x0, 0x4?}, {0xd17380, 0xc0001aaf00})
+	/home/divesh/go/pkg/mod/github.com/!terra!dharitri/drt-go-chain-core@v1.0.1/core/pubkeyConverter/bech32PubkeyConverter.go:109 +0x105
+github.com/TerraDharitri/drt-go-chain-es-indexer/process/elasticproc/logsevents.(*logsAndEventsProcessor).prepareLog(0xc000390c80, 0xc0000ba0a0, {0xc000484e4c, 0x4}, 0xc000118120, 0x13b0, 0x1, 0x4ce780)
+	/home/divesh/Desktop/shannu/zxc v/drt-go-chain-es-indexer/process/elasticproc/logsevents/logsAndEventsProcessor.go:226 +0x173
+github.com/TerraDharitri/drt-go-chain-es-indexer/process/elasticproc/logsevents.(*logsAndEventsProcessor).prepareLogsForDB(0xc000390c80, 0xc0000ba0a0, {0xc00060a000, 0x1, 0xc0000ba0a0?}, 0x13b0, 0x1, 0x4ce780)
+	/home/divesh/Desktop/shannu/zxc v/drt-go-chain-es-indexer/process/elasticproc/logsevents/logsAndEventsProcessor.go:208 +0x109
+github.com/TerraDharitri/drt-go-chain-es-indexer/process/elasticproc/logsevents.(*logsAndEventsProcessor).ExtractDataFromLogs(0xc000390c80, {0xc00060a000, 0x1, 0x1}, 0x0?, 0x13b0, 0x1, 0x3, 0x4ce780)
+	/home/divesh/Desktop/shannu/zxc v/drt-go-chain-es-indexer/process/elasticproc/logsevents/logsAndEventsProcessor.go:120 +0x234
+github.com/TerraDharitri/drt-go-chain-es-indexer/process/elasticproc.(*elasticProcessor).SaveTransactions(0xc00038e1a0, 0xc0002a6048)
+	/home/divesh/Desktop/shannu/zxc v/drt-go-chain-es-indexer/process/elasticproc/elasticProcessor.go:426 +0x211
+github.com/TerraDharitri/drt-go-chain-es-indexer/integrationtests.TestNFTUpdateMetadata(0xc0002001a0)
+	/home/divesh/Desktop/shannu/zxc v/drt-go-chain-es-indexer/integrationtests/updateNFT_test.go:140 +0x1be9
+testing.tRunner(0xc0002001a0, 0xc56150)
+	/usr/local/go/src/testing/testing.go:1690 +0xf4
+created by testing.(*T).Run in goroutine 1
+	/usr/local/go/src/testing/testing.go:1743 +0x390
+ 
+[0;33mWARN [0m[2026-03-09 20:11:03.758]   cannot find hash in the txs map or scrs map [0;33mhash[0m = 6831 
+[0;33mWARN [0m[2026-03-09 20:11:03.771]   bech32PubkeyConverter.SilentEncode       [0;33mhex buff[0m =  [0;33merror[0m = wrong size when encoding address, expected length 32, received 0 [0;33mstack trace[0m = goroutine 116 [running]:
+runtime/debug.Stack()
+	/usr/local/go/src/runtime/debug/stack.go:26 +0x5e
+github.com/TerraDharitri/drt-go-chain-core/core/pubkeyConverter.(*bech32PubkeyConverter).SilentEncode(0x8?, {0x0, 0x0, 0x4?}, {0xd17380, 0xc0001aaf00})
+	/home/divesh/go/pkg/mod/github.com/!terra!dharitri/drt-go-chain-core@v1.0.1/core/pubkeyConverter/bech32PubkeyConverter.go:109 +0x105
+github.com/TerraDharitri/drt-go-chain-es-indexer/process/elasticproc/logsevents.(*logsAndEventsProcessor).prepareLog(0xc000390c80, 0xc0001a0460, {0xc0001966ac, 0x4}, 0xc0003e20c0, 0x13b0, 0x1, 0x4ce780)
+	/home/divesh/Desktop/shannu/zxc v/drt-go-chain-es-indexer/process/elasticproc/logsevents/logsAndEventsProcessor.go:226 +0x173
+github.com/TerraDharitri/drt-go-chain-es-indexer/process/elasticproc/logsevents.(*logsAndEventsProcessor).prepareLogsForDB(0xc000390c80, 0xc0001a0460, {0xc00019e040, 0x1, 0xc0001a0460?}, 0x13b0, 0x1, 0x4ce780)
+	/home/divesh/Desktop/shannu/zxc v/drt-go-chain-es-indexer/process/elasticproc/logsevents/logsAndEventsProcessor.go:208 +0x109
+github.com/TerraDharitri/drt-go-chain-es-indexer/process/elasticproc/logsevents.(*logsAndEventsProcessor).ExtractDataFromLogs(0xc000390c80, {0xc00019e040, 0x1, 0x1}, 0x0?, 0x13b0, 0x1, 0x3, 0x4ce780)
+	/home/divesh/Desktop/shannu/zxc v/drt-go-chain-es-indexer/process/elasticproc/logsevents/logsAndEventsProcessor.go:120 +0x234
+github.com/TerraDharitri/drt-go-chain-es-indexer/process/elasticproc.(*elasticProcessor).SaveTransactions(0xc00038e1a0, 0xc0001b13b0)
+	/home/divesh/Desktop/shannu/zxc v/drt-go-chain-es-indexer/process/elasticproc/elasticProcessor.go:426 +0x211
+github.com/TerraDharitri/drt-go-chain-es-indexer/integrationtests.TestNFTUpdateMetadata(0xc0002001a0)
+	/home/divesh/Desktop/shannu/zxc v/drt-go-chain-es-indexer/integrationtests/updateNFT_test.go:168 +0x2297
+testing.tRunner(0xc0002001a0, 0xc56150)
+	/usr/local/go/src/testing/testing.go:1690 +0xf4
+created by testing.(*T).Run in goroutine 1
+	/usr/local/go/src/testing/testing.go:1743 +0x390
+ 
+[0;33mWARN [0m[2026-03-09 20:11:03.771]   cannot find hash in the txs map or scrs map [0;33mhash[0m = 6831 
+[0;33mWARN [0m[2026-03-09 20:11:03.781]   bech32PubkeyConverter.SilentEncode       [0;33mhex buff[0m =  [0;33merror[0m = wrong size when encoding address, expected length 32, received 0 [0;33mstack trace[0m = goroutine 116 [running]:
+runtime/debug.Stack()
+	/usr/local/go/src/runtime/debug/stack.go:26 +0x5e
+github.com/TerraDharitri/drt-go-chain-core/core/pubkeyConverter.(*bech32PubkeyConverter).SilentEncode(0x8?, {0x0, 0x0, 0x4?}, {0xd17380, 0xc0001aaf00})
+	/home/divesh/go/pkg/mod/github.com/!terra!dharitri/drt-go-chain-core@v1.0.1/core/pubkeyConverter/bech32PubkeyConverter.go:109 +0x105
+github.com/TerraDharitri/drt-go-chain-es-indexer/process/elasticproc/logsevents.(*logsAndEventsProcessor).prepareLog(0xc000390c80, 0xc0000ba0a0, {0xc000484f1c, 0x4}, 0xc000118150, 0x13b0, 0x1, 0x4ce780)
+	/home/divesh/Desktop/shannu/zxc v/drt-go-chain-es-indexer/process/elasticproc/logsevents/logsAndEventsProcessor.go:226 +0x173
+github.com/TerraDharitri/drt-go-chain-es-indexer/process/elasticproc/logsevents.(*logsAndEventsProcessor).prepareLogsForDB(0xc000390c80, 0xc0000ba0a0, {0xc00060a000, 0x1, 0xc0000ba0a0?}, 0x13b0, 0x1, 0x4ce780)
+	/home/divesh/Desktop/shannu/zxc v/drt-go-chain-es-indexer/process/elasticproc/logsevents/logsAndEventsProcessor.go:208 +0x109
+github.com/TerraDharitri/drt-go-chain-es-indexer/process/elasticproc/logsevents.(*logsAndEventsProcessor).ExtractDataFromLogs(0xc000390c80, {0xc00060a000, 0x1, 0x1}, 0x0?, 0x13b0, 0x1, 0x3, 0x4ce780)
+	/home/divesh/Desktop/shannu/zxc v/drt-go-chain-es-indexer/process/elasticproc/logsevents/logsAndEventsProcessor.go:120 +0x234
+github.com/TerraDharitri/drt-go-chain-es-indexer/process/elasticproc.(*elasticProcessor).SaveTransactions(0xc00038e1a0, 0xc0002a6048)
+	/home/divesh/Desktop/shannu/zxc v/drt-go-chain-es-indexer/process/elasticproc/elasticProcessor.go:426 +0x211
+github.com/TerraDharitri/drt-go-chain-es-indexer/integrationtests.TestNFTUpdateMetadata(0xc0002001a0)
+	/home/divesh/Desktop/shannu/zxc v/drt-go-chain-es-indexer/integrationtests/updateNFT_test.go:195 +0x2924
+testing.tRunner(0xc0002001a0, 0xc56150)
+	/usr/local/go/src/testing/testing.go:1690 +0xf4
+created by testing.(*T).Run in goroutine 1
+	/usr/local/go/src/testing/testing.go:1743 +0x390
+ 
+[0;33mWARN [0m[2026-03-09 20:11:03.781]   cannot find hash in the txs map or scrs map [0;33mhash[0m = 6831 
+[0;33mWARN [0m[2026-03-09 20:11:03.819]   bech32PubkeyConverter.SilentEncode       [0;33mhex buff[0m =  [0;33merror[0m = wrong size when encoding address, expected length 32, received 0 [0;33mstack trace[0m = goroutine 116 [running]:
+runtime/debug.Stack()
+	/usr/local/go/src/runtime/debug/stack.go:26 +0x5e
+github.com/TerraDharitri/drt-go-chain-core/core/pubkeyConverter.(*bech32PubkeyConverter).SilentEncode(0x8?, {0x0, 0x0, 0x4?}, {0xd17380, 0xc0001aaf00})
+	/home/divesh/go/pkg/mod/github.com/!terra!dharitri/drt-go-chain-core@v1.0.1/core/pubkeyConverter/bech32PubkeyConverter.go:109 +0x105
+github.com/TerraDharitri/drt-go-chain-es-indexer/process/elasticproc/logsevents.(*logsAndEventsProcessor).prepareLog(0xc000390c80, 0xc0001a0460, {0xc00019652c, 0x4}, 0xc00012a0c0, 0x13b0, 0x1, 0x4ce780)
+	/home/divesh/Desktop/shannu/zxc v/drt-go-chain-es-indexer/process/elasticproc/logsevents/logsAndEventsProcessor.go:226 +0x173
+github.com/TerraDharitri/drt-go-chain-es-indexer/process/elasticproc/logsevents.(*logsAndEventsProcessor).prepareLogsForDB(0xc000390c80, 0xc0001a0460, {0xc000280008, 0x1, 0xc0001a0460?}, 0x13b0, 0x1, 0x4ce780)
+	/home/divesh/Desktop/shannu/zxc v/drt-go-chain-es-indexer/process/elasticproc/logsevents/logsAndEventsProcessor.go:208 +0x109
+github.com/TerraDharitri/drt-go-chain-es-indexer/process/elasticproc/logsevents.(*logsAndEventsProcessor).ExtractDataFromLogs(0xc000390c80, {0xc000280008, 0x1, 0x1}, 0x0?, 0x13b0, 0x1, 0x3, 0x4ce780)
+	/home/divesh/Desktop/shannu/zxc v/drt-go-chain-es-indexer/process/elasticproc/logsevents/logsAndEventsProcessor.go:120 +0x234
+github.com/TerraDharitri/drt-go-chain-es-indexer/process/elasticproc.(*elasticProcessor).SaveTransactions(0xc00038e1a0, 0xc0000130f8)
+	/home/divesh/Desktop/shannu/zxc v/drt-go-chain-es-indexer/process/elasticproc/elasticProcessor.go:426 +0x211
+github.com/TerraDharitri/drt-go-chain-es-indexer/integrationtests.TestNFTUpdateMetadata(0xc0002001a0)
+	/home/divesh/Desktop/shannu/zxc v/drt-go-chain-es-indexer/integrationtests/updateNFT_test.go:221 +0x2fc4
+testing.tRunner(0xc0002001a0, 0xc56150)
+	/usr/local/go/src/testing/testing.go:1690 +0xf4
+created by testing.(*T).Run in goroutine 1
+	/usr/local/go/src/testing/testing.go:1743 +0x390
+ 
+[0;33mWARN [0m[2026-03-09 20:11:03.819]   cannot find hash in the txs map or scrs map [0;33mhash[0m = 6831 
+[0;33mWARN [0m[2026-03-09 20:11:03.829]   bech32PubkeyConverter.SilentEncode       [0;33mhex buff[0m =  [0;33merror[0m = wrong size when encoding address, expected length 32, received 0 [0;33mstack trace[0m = goroutine 116 [running]:
+runtime/debug.Stack()
+	/usr/local/go/src/runtime/debug/stack.go:26 +0x5e
+github.com/TerraDharitri/drt-go-chain-core/core/pubkeyConverter.(*bech32PubkeyConverter).SilentEncode(0x8?, {0x0, 0x0, 0x4?}, {0xd17380, 0xc0001aaf00})
+	/home/divesh/go/pkg/mod/github.com/!terra!dharitri/drt-go-chain-core@v1.0.1/core/pubkeyConverter/bech32PubkeyConverter.go:109 +0x105
+github.com/TerraDharitri/drt-go-chain-es-indexer/process/elasticproc/logsevents.(*logsAndEventsProcessor).prepareLog(0xc000390c80, 0xc0001a0460, {0xc00019651c, 0x4}, 0xc00012a0f0, 0x13b0, 0x1, 0x4ce780)
+	/home/divesh/Desktop/shannu/zxc v/drt-go-chain-es-indexer/process/elasticproc/logsevents/logsAndEventsProcessor.go:226 +0x173
+github.com/TerraDharitri/drt-go-chain-es-indexer/process/elasticproc/logsevents.(*logsAndEventsProcessor).prepareLogsForDB(0xc000390c80, 0xc0001a0460, {0xc000280008, 0x1, 0xc0001a0460?}, 0x13b0, 0x1, 0x4ce780)
+	/home/divesh/Desktop/shannu/zxc v/drt-go-chain-es-indexer/process/elasticproc/logsevents/logsAndEventsProcessor.go:208 +0x109
+github.com/TerraDharitri/drt-go-chain-es-indexer/process/elasticproc/logsevents.(*logsAndEventsProcessor).ExtractDataFromLogs(0xc000390c80, {0xc000280008, 0x1, 0x1}, 0x0?, 0x13b0, 0x1, 0x3, 0x4ce780)
+	/home/divesh/Desktop/shannu/zxc v/drt-go-chain-es-indexer/process/elasticproc/logsevents/logsAndEventsProcessor.go:120 +0x234
+github.com/TerraDharitri/drt-go-chain-es-indexer/process/elasticproc.(*elasticProcessor).SaveTransactions(0xc00038e1a0, 0xc000012408)
+	/home/divesh/Desktop/shannu/zxc v/drt-go-chain-es-indexer/process/elasticproc/elasticProcessor.go:426 +0x211
+github.com/TerraDharitri/drt-go-chain-es-indexer/integrationtests.TestNFTUpdateMetadata(0xc0002001a0)
+	/home/divesh/Desktop/shannu/zxc v/drt-go-chain-es-indexer/integrationtests/updateNFT_test.go:247 +0x379f
+testing.tRunner(0xc0002001a0, 0xc56150)
+	/usr/local/go/src/testing/testing.go:1690 +0xf4
+created by testing.(*T).Run in goroutine 1
+	/usr/local/go/src/testing/testing.go:1743 +0x390
+ 
+[0;33mWARN [0m[2026-03-09 20:11:03.829]   cannot find hash in the txs map or scrs map [0;33mhash[0m = 6831 
+[0;33mWARN [0m[2026-03-09 20:11:03.835]   bech32PubkeyConverter.SilentEncode       [0;33mhex buff[0m =  [0;33merror[0m = wrong size when encoding address, expected length 32, received 0 [0;33mstack trace[0m = goroutine 116 [running]:
+runtime/debug.Stack()
+	/usr/local/go/src/runtime/debug/stack.go:26 +0x5e
+github.com/TerraDharitri/drt-go-chain-core/core/pubkeyConverter.(*bech32PubkeyConverter).SilentEncode(0x8?, {0x0, 0x0, 0x4?}, {0xd17380, 0xc0001aaf00})
+	/home/divesh/go/pkg/mod/github.com/!terra!dharitri/drt-go-chain-core@v1.0.1/core/pubkeyConverter/bech32PubkeyConverter.go:109 +0x105
+github.com/TerraDharitri/drt-go-chain-es-indexer/process/elasticproc/logsevents.(*logsAndEventsProcessor).prepareLog(0xc000390c80, 0xc0001a1400, {0xc000196f8c, 0x4}, 0xc00012aa20, 0x13b0, 0x1, 0x4ce780)
+	/home/divesh/Desktop/shannu/zxc v/drt-go-chain-es-indexer/process/elasticproc/logsevents/logsAndEventsProcessor.go:226 +0x173
+github.com/TerraDharitri/drt-go-chain-es-indexer/process/elasticproc/logsevents.(*logsAndEventsProcessor).prepareLogsForDB(0xc000390c80, 0xc0001a1400, {0xc000280088, 0x1, 0xc0001a1400?}, 0x13b0, 0x1, 0x4ce780)
+	/home/divesh/Desktop/shannu/zxc v/drt-go-chain-es-indexer/process/elasticproc/logsevents/logsAndEventsProcessor.go:208 +0x109
+github.com/TerraDharitri/drt-go-chain-es-indexer/process/elasticproc/logsevents.(*logsAndEventsProcessor).ExtractDataFromLogs(0xc000390c80, {0xc000280088, 0x1, 0x1}, 0x0?, 0x13b0, 0x1, 0x3, 0x4ce780)
+	/home/divesh/Desktop/shannu/zxc v/drt-go-chain-es-indexer/process/elasticproc/logsevents/logsAndEventsProcessor.go:120 +0x234
+github.com/TerraDharitri/drt-go-chain-es-indexer/process/elasticproc.(*elasticProcessor).SaveTransactions(0xc00038e1a0, 0xc0000132f0)
+	/home/divesh/Desktop/shannu/zxc v/drt-go-chain-es-indexer/process/elasticproc/elasticProcessor.go:426 +0x211
+github.com/TerraDharitri/drt-go-chain-es-indexer/integrationtests.TestNFTUpdateMetadata(0xc0002001a0)
+	/home/divesh/Desktop/shannu/zxc v/drt-go-chain-es-indexer/integrationtests/updateNFT_test.go:274 +0x3dec
+testing.tRunner(0xc0002001a0, 0xc56150)
+	/usr/local/go/src/testing/testing.go:1690 +0xf4
+created by testing.(*T).Run in goroutine 1
+	/usr/local/go/src/testing/testing.go:1743 +0x390
+ 
+[0;33mWARN [0m[2026-03-09 20:11:03.835]   cannot find hash in the txs map or scrs map [0;33mhash[0m = 6831 
+[0;33mWARN [0m[2026-03-09 20:11:03.843]   bech32PubkeyConverter.SilentEncode       [0;33mhex buff[0m =  [0;33merror[0m = wrong size when encoding address, expected length 32, received 0 [0;33mstack trace[0m = goroutine 116 [running]:
+runtime/debug.Stack()
+	/usr/local/go/src/runtime/debug/stack.go:26 +0x5e
+github.com/TerraDharitri/drt-go-chain-core/core/pubkeyConverter.(*bech32PubkeyConverter).SilentEncode(0x8?, {0x0, 0x0, 0x4?}, {0xd17380, 0xc0001aaf00})
+	/home/divesh/go/pkg/mod/github.com/!terra!dharitri/drt-go-chain-core@v1.0.1/core/pubkeyConverter/bech32PubkeyConverter.go:109 +0x105
+github.com/TerraDharitri/drt-go-chain-es-indexer/process/elasticproc/logsevents.(*logsAndEventsProcessor).prepareLog(0xc000390c80, 0xc0001a17c0, {0xc000197b9c, 0x4}, 0xc00012b140, 0x13b0, 0x1, 0x4ce780)
+	/home/divesh/Desktop/shannu/zxc v/drt-go-chain-es-indexer/process/elasticproc/logsevents/logsAndEventsProcessor.go:226 +0x173
+github.com/TerraDharitri/drt-go-chain-es-indexer/process/elasticproc/logsevents.(*logsAndEventsProcessor).prepareLogsForDB(0xc000390c80, 0xc0001a17c0, {0xc000280170, 0x1, 0xc0001a17c0?}, 0x13b0, 0x1, 0x4ce780)
+	/home/divesh/Desktop/shannu/zxc v/drt-go-chain-es-indexer/process/elasticproc/logsevents/logsAndEventsProcessor.go:208 +0x109
+github.com/TerraDharitri/drt-go-chain-es-indexer/process/elasticproc/logsevents.(*logsAndEventsProcessor).ExtractDataFromLogs(0xc000390c80, {0xc000280170, 0x1, 0x1}, 0x0?, 0x13b0, 0x1, 0x3, 0x4ce780)
+	/home/divesh/Desktop/shannu/zxc v/drt-go-chain-es-indexer/process/elasticproc/logsevents/logsAndEventsProcessor.go:120 +0x234
+github.com/TerraDharitri/drt-go-chain-es-indexer/process/elasticproc.(*elasticProcessor).SaveTransactions(0xc00038e1a0, 0xc000013410)
+	/home/divesh/Desktop/shannu/zxc v/drt-go-chain-es-indexer/process/elasticproc/elasticProcessor.go:426 +0x211
+github.com/TerraDharitri/drt-go-chain-es-indexer/integrationtests.TestNFTUpdateMetadata(0xc0002001a0)
+	/home/divesh/Desktop/shannu/zxc v/drt-go-chain-es-indexer/integrationtests/updateNFT_test.go:300 +0x44f0
+testing.tRunner(0xc0002001a0, 0xc56150)
+	/usr/local/go/src/testing/testing.go:1690 +0xf4
+created by testing.(*T).Run in goroutine 1
+	/usr/local/go/src/testing/testing.go:1743 +0x390
+ 
+[0;33mWARN [0m[2026-03-09 20:11:03.843]   cannot find hash in the txs map or scrs map [0;33mhash[0m = 6831 
+--- PASS: TestNFTUpdateMetadata (0.25s)
+=== RUN   TestCreateNFTAndMetaDataRecreate
+[0;36mDEBUG[0m[2026-03-09 20:11:03.983]   ei.elasticProcessor indexer version is empty 
+[0;33mWARN [0m[2026-03-09 20:11:03.983]   nftsProcessor.convertMetaData            [0;33mcannot encode creator address[0m = error [0;33mwrong size when encoding address, expected length 32, received 0[0m = address 
+[0;33mWARN [0m[2026-03-09 20:11:03.983]   bech32PubkeyConverter.SilentEncode       [0;33mhex buff[0m =  [0;33merror[0m = wrong size when encoding address, expected length 32, received 0 [0;33mstack trace[0m = goroutine 48 [running]:
+runtime/debug.Stack()
+	/usr/local/go/src/runtime/debug/stack.go:26 +0x5e
+github.com/TerraDharitri/drt-go-chain-core/core/pubkeyConverter.(*bech32PubkeyConverter).SilentEncode(0x8?, {0x0, 0x0, 0x4?}, {0xd17380, 0xc0001aaf00})
+	/home/divesh/go/pkg/mod/github.com/!terra!dharitri/drt-go-chain-core@v1.0.1/core/pubkeyConverter/bech32PubkeyConverter.go:109 +0x105
+github.com/TerraDharitri/drt-go-chain-es-indexer/process/elasticproc/logsevents.(*logsAndEventsProcessor).prepareLog(0xc0000a6840, 0xc0000ba0a0, {0xc00011a044, 0x4}, 0xc000118180, 0x13b0, 0x1, 0x4ce780)
+	/home/divesh/Desktop/shannu/zxc v/drt-go-chain-es-indexer/process/elasticproc/logsevents/logsAndEventsProcessor.go:226 +0x173
+github.com/TerraDharitri/drt-go-chain-es-indexer/process/elasticproc/logsevents.(*logsAndEventsProcessor).prepareLogsForDB(0xc0000a6840, 0xc0000ba0a0, {0xc00060a008, 0x1, 0xc0000ba0a0?}, 0x13b0, 0x1, 0x4ce780)
+	/home/divesh/Desktop/shannu/zxc v/drt-go-chain-es-indexer/process/elasticproc/logsevents/logsAndEventsProcessor.go:208 +0x109
+github.com/TerraDharitri/drt-go-chain-es-indexer/process/elasticproc/logsevents.(*logsAndEventsProcessor).ExtractDataFromLogs(0xc0000a6840, {0xc00060a008, 0x1, 0x1}, 0x0?, 0x13b0, 0x1, 0x3, 0x4ce780)
+	/home/divesh/Desktop/shannu/zxc v/drt-go-chain-es-indexer/process/elasticproc/logsevents/logsAndEventsProcessor.go:120 +0x234
+github.com/TerraDharitri/drt-go-chain-es-indexer/process/elasticproc.(*elasticProcessor).SaveTransactions(0xc00013b380, 0xc0001b04b0)
+	/home/divesh/Desktop/shannu/zxc v/drt-go-chain-es-indexer/process/elasticproc/elasticProcessor.go:426 +0x211
+github.com/TerraDharitri/drt-go-chain-es-indexer/integrationtests.TestCreateNFTAndMetaDataRecreate(0xc000201380)
+	/home/divesh/Desktop/shannu/zxc v/drt-go-chain-es-indexer/integrationtests/updateNFT_test.go:352 +0x8d1
+testing.tRunner(0xc000201380, 0xc56078)
+	/usr/local/go/src/testing/testing.go:1690 +0xf4
+created by testing.(*T).Run in goroutine 1
+	/usr/local/go/src/testing/testing.go:1743 +0x390
+ 
+[0;33mWARN [0m[2026-03-09 20:11:03.983]   cannot find hash in the txs map or scrs map [0;33mhash[0m = 6831 
+[0;33mWARN [0m[2026-03-09 20:11:03.990]   nftsProcessor.convertMetaData            [0;33mcannot encode creator address[0m = error [0;33mwrong size when encoding address, expected length 32, received 0[0m = address 
+[0;33mWARN [0m[2026-03-09 20:11:03.990]   bech32PubkeyConverter.SilentEncode       [0;33mhex buff[0m =  [0;33merror[0m = wrong size when encoding address, expected length 32, received 0 [0;33mstack trace[0m = goroutine 48 [running]:
+runtime/debug.Stack()
+	/usr/local/go/src/runtime/debug/stack.go:26 +0x5e
+github.com/TerraDharitri/drt-go-chain-core/core/pubkeyConverter.(*bech32PubkeyConverter).SilentEncode(0x8?, {0x0, 0x0, 0x4?}, {0xd17380, 0xc0001aaf00})
+	/home/divesh/go/pkg/mod/github.com/!terra!dharitri/drt-go-chain-core@v1.0.1/core/pubkeyConverter/bech32PubkeyConverter.go:109 +0x105
+github.com/TerraDharitri/drt-go-chain-es-indexer/process/elasticproc/logsevents.(*logsAndEventsProcessor).prepareLog(0xc0000a6840, 0xc0001a05a0, {0xc0001967c8, 0x4}, 0xc00061c540, 0x13b0, 0x1, 0x4ce780)
+	/home/divesh/Desktop/shannu/zxc v/drt-go-chain-es-indexer/process/elasticproc/logsevents/logsAndEventsProcessor.go:226 +0x173
+github.com/TerraDharitri/drt-go-chain-es-indexer/process/elasticproc/logsevents.(*logsAndEventsProcessor).prepareLogsForDB(0xc0000a6840, 0xc0001a05a0, {0xc00015e030, 0x1, 0xc0001a05a0?}, 0x13b0, 0x1, 0x4ce780)
+	/home/divesh/Desktop/shannu/zxc v/drt-go-chain-es-indexer/process/elasticproc/logsevents/logsAndEventsProcessor.go:208 +0x109
+github.com/TerraDharitri/drt-go-chain-es-indexer/process/elasticproc/logsevents.(*logsAndEventsProcessor).ExtractDataFromLogs(0xc0000a6840, {0xc00015e030, 0x1, 0x1}, 0x0?, 0x13b0, 0x1, 0x3, 0x4ce780)
+	/home/divesh/Desktop/shannu/zxc v/drt-go-chain-es-indexer/process/elasticproc/logsevents/logsAndEventsProcessor.go:120 +0x234
+github.com/TerraDharitri/drt-go-chain-es-indexer/process/elasticproc.(*elasticProcessor).SaveTransactions(0xc00013b380, 0xc0000120d8)
+	/home/divesh/Desktop/shannu/zxc v/drt-go-chain-es-indexer/process/elasticproc/elasticProcessor.go:426 +0x211
+github.com/TerraDharitri/drt-go-chain-es-indexer/integrationtests.TestCreateNFTAndMetaDataRecreate(0xc000201380)
+	/home/divesh/Desktop/shannu/zxc v/drt-go-chain-es-indexer/integrationtests/updateNFT_test.go:388 +0x10f5
+testing.tRunner(0xc000201380, 0xc56078)
+	/usr/local/go/src/testing/testing.go:1690 +0xf4
+created by testing.(*T).Run in goroutine 1
+	/usr/local/go/src/testing/testing.go:1743 +0x390
+ 
+[0;33mWARN [0m[2026-03-09 20:11:03.990]   cannot find hash in the txs map or scrs map [0;33mhash[0m = 6831 
+[0;33mWARN [0m[2026-03-09 20:11:03.998]   nftsProcessor.convertMetaData            [0;33mcannot encode creator address[0m = error [0;33mwrong size when encoding address, expected length 32, received 0[0m = address 
+[0;33mWARN [0m[2026-03-09 20:11:03.998]   bech32PubkeyConverter.SilentEncode       [0;33mhex buff[0m =  [0;33merror[0m = wrong size when encoding address, expected length 32, received 0 [0;33mstack trace[0m = goroutine 48 [running]:
+runtime/debug.Stack()
+	/usr/local/go/src/runtime/debug/stack.go:26 +0x5e
+github.com/TerraDharitri/drt-go-chain-core/core/pubkeyConverter.(*bech32PubkeyConverter).SilentEncode(0x8?, {0x0, 0x0, 0x4?}, {0xd17380, 0xc0001aaf00})
+	/home/divesh/go/pkg/mod/github.com/!terra!dharitri/drt-go-chain-core@v1.0.1/core/pubkeyConverter/bech32PubkeyConverter.go:109 +0x105
+github.com/TerraDharitri/drt-go-chain-es-indexer/process/elasticproc/logsevents.(*logsAndEventsProcessor).prepareLog(0xc0000a6840, 0xc0000ba3c0, {0xc00011ba74, 0x4}, 0xc0001189c0, 0x13b0, 0x1, 0x4ce780)
+	/home/divesh/Desktop/shannu/zxc v/drt-go-chain-es-indexer/process/elasticproc/logsevents/logsAndEventsProcessor.go:226 +0x173
+github.com/TerraDharitri/drt-go-chain-es-indexer/process/elasticproc/logsevents.(*logsAndEventsProcessor).prepareLogsForDB(0xc0000a6840, 0xc0000ba3c0, {0xc00060a150, 0x1, 0xc0000ba3c0?}, 0x13b0, 0x1, 0x4ce780)
+	/home/divesh/Desktop/shannu/zxc v/drt-go-chain-es-indexer/process/elasticproc/logsevents/logsAndEventsProcessor.go:208 +0x109
+github.com/TerraDharitri/drt-go-chain-es-indexer/process/elasticproc/logsevents.(*logsAndEventsProcessor).ExtractDataFromLogs(0xc0000a6840, {0xc00060a150, 0x1, 0x1}, 0x0?, 0x13b0, 0x1, 0x3, 0x4ce780)
+	/home/divesh/Desktop/shannu/zxc v/drt-go-chain-es-indexer/process/elasticproc/logsevents/logsAndEventsProcessor.go:120 +0x234
+github.com/TerraDharitri/drt-go-chain-es-indexer/process/elasticproc.(*elasticProcessor).SaveTransactions(0xc00013b380, 0xc0001b0660)
+	/home/divesh/Desktop/shannu/zxc v/drt-go-chain-es-indexer/process/elasticproc/elasticProcessor.go:426 +0x211
+github.com/TerraDharitri/drt-go-chain-es-indexer/integrationtests.TestCreateNFTAndMetaDataRecreate(0xc000201380)
+	/home/divesh/Desktop/shannu/zxc v/drt-go-chain-es-indexer/integrationtests/updateNFT_test.go:423 +0x1902
+testing.tRunner(0xc000201380, 0xc56078)
+	/usr/local/go/src/testing/testing.go:1690 +0xf4
+created by testing.(*T).Run in goroutine 1
+	/usr/local/go/src/testing/testing.go:1743 +0x390
+ 
+[0;33mWARN [0m[2026-03-09 20:11:03.998]   cannot find hash in the txs map or scrs map [0;33mhash[0m = 6831 
+--- PASS: TestCreateNFTAndMetaDataRecreate (0.17s)
+=== RUN   TestMultipleDCDTMetadataRecreate
+[0;36mDEBUG[0m[2026-03-09 20:11:04.128]   ei.elasticProcessor indexer version is empty 
+[0;33mWARN [0m[2026-03-09 20:11:04.128]   nftsProcessor.convertMetaData            [0;33mcannot encode creator address[0m = error [0;33mwrong size when encoding address, expected length 32, received 0[0m = address 
+[0;33mWARN [0m[2026-03-09 20:11:04.128]   nftsProcessor.convertMetaData            [0;33mcannot encode creator address[0m = error [0;33mwrong size when encoding address, expected length 32, received 0[0m = address 
+[0;33mWARN [0m[2026-03-09 20:11:04.128]   bech32PubkeyConverter.SilentEncode       [0;33mhex buff[0m =  [0;33merror[0m = wrong size when encoding address, expected length 32, received 0 [0;33mstack trace[0m = goroutine 49 [running]:
+runtime/debug.Stack()
+	/usr/local/go/src/runtime/debug/stack.go:26 +0x5e
+github.com/TerraDharitri/drt-go-chain-core/core/pubkeyConverter.(*bech32PubkeyConverter).SilentEncode(0x8?, {0x0, 0x0, 0x4?}, {0xd17380, 0xc0001aaf00})
+	/home/divesh/go/pkg/mod/github.com/!terra!dharitri/drt-go-chain-core@v1.0.1/core/pubkeyConverter/bech32PubkeyConverter.go:109 +0x105
+github.com/TerraDharitri/drt-go-chain-es-indexer/process/elasticproc/logsevents.(*logsAndEventsProcessor).prepareLog(0xc0000a65c0, 0xc0001a1400, {0xc0001964f4, 0x4}, 0xc00028ced0, 0x13b0, 0x1, 0x4ce780)
+	/home/divesh/Desktop/shannu/zxc v/drt-go-chain-es-indexer/process/elasticproc/logsevents/logsAndEventsProcessor.go:226 +0x173
+github.com/TerraDharitri/drt-go-chain-es-indexer/process/elasticproc/logsevents.(*logsAndEventsProcessor).prepareLogsForDB(0xc0000a65c0, 0xc0001a1400, {0xc00003a600, 0x2, 0xc0001a1400?}, 0x13b0, 0x1, 0x4ce780)
+	/home/divesh/Desktop/shannu/zxc v/drt-go-chain-es-indexer/process/elasticproc/logsevents/logsAndEventsProcessor.go:208 +0x109
+github.com/TerraDharitri/drt-go-chain-es-indexer/process/elasticproc/logsevents.(*logsAndEventsProcessor).ExtractDataFromLogs(0xc0000a65c0, {0xc00003a600, 0x2, 0x2}, 0x0?, 0x13b0, 0x1, 0x3, 0x4ce780)
+	/home/divesh/Desktop/shannu/zxc v/drt-go-chain-es-indexer/process/elasticproc/logsevents/logsAndEventsProcessor.go:120 +0x234
+github.com/TerraDharitri/drt-go-chain-es-indexer/process/elasticproc.(*elasticProcessor).SaveTransactions(0xc0000c08f0, 0xc000012240)
+	/home/divesh/Desktop/shannu/zxc v/drt-go-chain-es-indexer/process/elasticproc/elasticProcessor.go:426 +0x211
+github.com/TerraDharitri/drt-go-chain-es-indexer/integrationtests.TestMultipleDCDTMetadataRecreate(0xc000201520)
+	/home/divesh/Desktop/shannu/zxc v/drt-go-chain-es-indexer/integrationtests/updateNFT_test.go:488 +0xd54
+testing.tRunner(0xc000201520, 0xc56120)
+	/usr/local/go/src/testing/testing.go:1690 +0xf4
+created by testing.(*T).Run in goroutine 1
+	/usr/local/go/src/testing/testing.go:1743 +0x390
+ 
+[0;33mWARN [0m[2026-03-09 20:11:04.128]   cannot find hash in the txs map or scrs map [0;33mhash[0m = 6831 
+[0;33mWARN [0m[2026-03-09 20:11:04.128]   bech32PubkeyConverter.SilentEncode       [0;33mhex buff[0m =  [0;33merror[0m = wrong size when encoding address, expected length 32, received 0 [0;33mstack trace[0m = goroutine 49 [running]:
+runtime/debug.Stack()
+	/usr/local/go/src/runtime/debug/stack.go:26 +0x5e
+github.com/TerraDharitri/drt-go-chain-core/core/pubkeyConverter.(*bech32PubkeyConverter).SilentEncode(0x8?, {0x0, 0x0, 0x4?}, {0xd17380, 0xc0001aaf00})
+	/home/divesh/go/pkg/mod/github.com/!terra!dharitri/drt-go-chain-core@v1.0.1/core/pubkeyConverter/bech32PubkeyConverter.go:109 +0x105
+github.com/TerraDharitri/drt-go-chain-es-indexer/process/elasticproc/logsevents.(*logsAndEventsProcessor).prepareLog(0xc0000a65c0, 0xc0001a1400, {0xc00019652c, 0x4}, 0xc00028cf00, 0x13b0, 0x1, 0x4ce780)
+	/home/divesh/Desktop/shannu/zxc v/drt-go-chain-es-indexer/process/elasticproc/logsevents/logsAndEventsProcessor.go:226 +0x173
+github.com/TerraDharitri/drt-go-chain-es-indexer/process/elasticproc/logsevents.(*logsAndEventsProcessor).prepareLogsForDB(0xc0000a65c0, 0xc0001a1400, {0xc00003a600, 0x2, 0xc0001a1400?}, 0x13b0, 0x1, 0x4ce780)
+	/home/divesh/Desktop/shannu/zxc v/drt-go-chain-es-indexer/process/elasticproc/logsevents/logsAndEventsProcessor.go:208 +0x109
+github.com/TerraDharitri/drt-go-chain-es-indexer/process/elasticproc/logsevents.(*logsAndEventsProcessor).ExtractDataFromLogs(0xc0000a65c0, {0xc00003a600, 0x2, 0x2}, 0x0?, 0x13b0, 0x1, 0x3, 0x4ce780)
+	/home/divesh/Desktop/shannu/zxc v/drt-go-chain-es-indexer/process/elasticproc/logsevents/logsAndEventsProcessor.go:120 +0x234
+github.com/TerraDharitri/drt-go-chain-es-indexer/process/elasticproc.(*elasticProcessor).SaveTransactions(0xc0000c08f0, 0xc000012240)
+	/home/divesh/Desktop/shannu/zxc v/drt-go-chain-es-indexer/process/elasticproc/elasticProcessor.go:426 +0x211
+github.com/TerraDharitri/drt-go-chain-es-indexer/integrationtests.TestMultipleDCDTMetadataRecreate(0xc000201520)
+	/home/divesh/Desktop/shannu/zxc v/drt-go-chain-es-indexer/integrationtests/updateNFT_test.go:488 +0xd54
+testing.tRunner(0xc000201520, 0xc56120)
+	/usr/local/go/src/testing/testing.go:1690 +0xf4
+created by testing.(*T).Run in goroutine 1
+	/usr/local/go/src/testing/testing.go:1743 +0x390
+ 
+[0;33mWARN [0m[2026-03-09 20:11:04.128]   cannot find hash in the txs map or scrs map [0;33mhash[0m = 6832 
+[0;33mWARN [0m[2026-03-09 20:11:04.133]   nftsProcessor.convertMetaData            [0;33mcannot encode creator address[0m = error [0;33mwrong size when encoding address, expected length 32, received 0[0m = address 
+[0;33mWARN [0m[2026-03-09 20:11:04.133]   nftsProcessor.convertMetaData            [0;33mcannot encode creator address[0m = error [0;33mwrong size when encoding address, expected length 32, received 0[0m = address 
+[0;33mWARN [0m[2026-03-09 20:11:04.133]   bech32PubkeyConverter.SilentEncode       [0;33mhex buff[0m =  [0;33merror[0m = wrong size when encoding address, expected length 32, received 0 [0;33mstack trace[0m = goroutine 49 [running]:
+runtime/debug.Stack()
+	/usr/local/go/src/runtime/debug/stack.go:26 +0x5e
+github.com/TerraDharitri/drt-go-chain-core/core/pubkeyConverter.(*bech32PubkeyConverter).SilentEncode(0x8?, {0x0, 0x0, 0x4?}, {0xd17380, 0xc0001aaf00})
+	/home/divesh/go/pkg/mod/github.com/!terra!dharitri/drt-go-chain-core@v1.0.1/core/pubkeyConverter/bech32PubkeyConverter.go:109 +0x105
+github.com/TerraDharitri/drt-go-chain-es-indexer/process/elasticproc/logsevents.(*logsAndEventsProcessor).prepareLog(0xc0000a65c0, 0xc0001a1ea0, {0xc000196b88, 0x4}, 0xc00028d920, 0x13b0, 0x1, 0x4ce780)
+	/home/divesh/Desktop/shannu/zxc v/drt-go-chain-es-indexer/process/elasticproc/logsevents/logsAndEventsProcessor.go:226 +0x173
+github.com/TerraDharitri/drt-go-chain-es-indexer/process/elasticproc/logsevents.(*logsAndEventsProcessor).prepareLogsForDB(0xc0000a65c0, 0xc0001a1ea0, {0xc00003ae60, 0x2, 0xc0001a1ea0?}, 0x13b0, 0x1, 0x4ce780)
+	/home/divesh/Desktop/shannu/zxc v/drt-go-chain-es-indexer/process/elasticproc/logsevents/logsAndEventsProcessor.go:208 +0x109
+github.com/TerraDharitri/drt-go-chain-es-indexer/process/elasticproc/logsevents.(*logsAndEventsProcessor).ExtractDataFromLogs(0xc0000a65c0, {0xc00003ae60, 0x2, 0x2}, 0x0?, 0x13b0, 0x1, 0x3, 0x4ce780)
+	/home/divesh/Desktop/shannu/zxc v/drt-go-chain-es-indexer/process/elasticproc/logsevents/logsAndEventsProcessor.go:120 +0x234
+github.com/TerraDharitri/drt-go-chain-es-indexer/process/elasticproc.(*elasticProcessor).SaveTransactions(0xc0000c08f0, 0xc0000123d8)
+	/home/divesh/Desktop/shannu/zxc v/drt-go-chain-es-indexer/process/elasticproc/elasticProcessor.go:426 +0x211
+github.com/TerraDharitri/drt-go-chain-es-indexer/integrationtests.TestMultipleDCDTMetadataRecreate(0xc000201520)
+	/home/divesh/Desktop/shannu/zxc v/drt-go-chain-es-indexer/integrationtests/updateNFT_test.go:531 +0x18e4
+testing.tRunner(0xc000201520, 0xc56120)
+	/usr/local/go/src/testing/testing.go:1690 +0xf4
+created by testing.(*T).Run in goroutine 1
+	/usr/local/go/src/testing/testing.go:1743 +0x390
+ 
+[0;33mWARN [0m[2026-03-09 20:11:04.133]   cannot find hash in the txs map or scrs map [0;33mhash[0m = 6831 
+[0;33mWARN [0m[2026-03-09 20:11:04.133]   bech32PubkeyConverter.SilentEncode       [0;33mhex buff[0m =  [0;33merror[0m = wrong size when encoding address, expected length 32, received 0 [0;33mstack trace[0m = goroutine 49 [running]:
+runtime/debug.Stack()
+	/usr/local/go/src/runtime/debug/stack.go:26 +0x5e
+github.com/TerraDharitri/drt-go-chain-core/core/pubkeyConverter.(*bech32PubkeyConverter).SilentEncode(0x8?, {0x0, 0x0, 0x4?}, {0xd17380, 0xc0001aaf00})
+	/home/divesh/go/pkg/mod/github.com/!terra!dharitri/drt-go-chain-core@v1.0.1/core/pubkeyConverter/bech32PubkeyConverter.go:109 +0x105
+github.com/TerraDharitri/drt-go-chain-es-indexer/process/elasticproc/logsevents.(*logsAndEventsProcessor).prepareLog(0xc0000a65c0, 0xc0001a1ea0, {0xc000196bac, 0x4}, 0xc00028d950, 0x13b0, 0x1, 0x4ce780)
+	/home/divesh/Desktop/shannu/zxc v/drt-go-chain-es-indexer/process/elasticproc/logsevents/logsAndEventsProcessor.go:226 +0x173
+github.com/TerraDharitri/drt-go-chain-es-indexer/process/elasticproc/logsevents.(*logsAndEventsProcessor).prepareLogsForDB(0xc0000a65c0, 0xc0001a1ea0, {0xc00003ae60, 0x2, 0xc0001a1ea0?}, 0x13b0, 0x1, 0x4ce780)
+	/home/divesh/Desktop/shannu/zxc v/drt-go-chain-es-indexer/process/elasticproc/logsevents/logsAndEventsProcessor.go:208 +0x109
+github.com/TerraDharitri/drt-go-chain-es-indexer/process/elasticproc/logsevents.(*logsAndEventsProcessor).ExtractDataFromLogs(0xc0000a65c0, {0xc00003ae60, 0x2, 0x2}, 0x0?, 0x13b0, 0x1, 0x3, 0x4ce780)
+	/home/divesh/Desktop/shannu/zxc v/drt-go-chain-es-indexer/process/elasticproc/logsevents/logsAndEventsProcessor.go:120 +0x234
+github.com/TerraDharitri/drt-go-chain-es-indexer/process/elasticproc.(*elasticProcessor).SaveTransactions(0xc0000c08f0, 0xc0000123d8)
+	/home/divesh/Desktop/shannu/zxc v/drt-go-chain-es-indexer/process/elasticproc/elasticProcessor.go:426 +0x211
+github.com/TerraDharitri/drt-go-chain-es-indexer/integrationtests.TestMultipleDCDTMetadataRecreate(0xc000201520)
+	/home/divesh/Desktop/shannu/zxc v/drt-go-chain-es-indexer/integrationtests/updateNFT_test.go:531 +0x18e4
+testing.tRunner(0xc000201520, 0xc56120)
+	/usr/local/go/src/testing/testing.go:1690 +0xf4
+created by testing.(*T).Run in goroutine 1
+	/usr/local/go/src/testing/testing.go:1743 +0x390
+ 
+[0;33mWARN [0m[2026-03-09 20:11:04.133]   cannot find hash in the txs map or scrs map [0;33mhash[0m = 6832 
+--- PASS: TestMultipleDCDTMetadataRecreate (0.11s)
+=== RUN   TestCheckVersionIsIndexer
+--- PASS: TestCheckVersionIsIndexer (0.13s)
+PASS
+ok  	github.com/TerraDharitri/drt-go-chain-es-indexer/integrationtests	(cached)
+cd scripts && /bin/bash script.sh delete
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+cd scripts && /bin/bash script.sh stop
+elastic-container
