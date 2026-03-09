@@ -1,10 +1,10 @@
 github.com/BurntSushi/toml v1.4.0/go.mod h1:ukJfTF/6rtPPRCnwkur4qwRxa8vTRFBF0uk2lLoLwho=
-github.com/TerraDharitri/drt-go-chain-communication v1.0.0 h1:3U17ZT36CRwVt0wkNNq0aRz70A6enAek/H8nrRhBWw0=
-github.com/TerraDharitri/drt-go-chain-communication v1.0.0/go.mod h1:qU/N8/BtPjPjRkf8G9CyjzQjmbDbMEhB19KbcwcvOi4=
+github.com/TerraDharitri/drt-go-chain-communication v1.0.1 h1:2Yk1Cl+5IS8JJ0DFvOtVpMM1xe7Pq0RFbOPv+prQoKA=
+github.com/TerraDharitri/drt-go-chain-communication v1.0.1/go.mod h1:Oil6hGoBcxPVGJCpH/xeAYC67pn9wu67FRKCxCEUZ+U=
 github.com/TerraDharitri/drt-go-chain-core v1.0.1 h1:k0B3DZNYJwE/NmibEQBVi/TxDm5Ij1Poo2HOv6HcMMM=
 github.com/TerraDharitri/drt-go-chain-core v1.0.1/go.mod h1:dppf7NEpCEr/YrKYrRCnyVLsehIVnXSWMU4cikdL2/Q=
-github.com/TerraDharitri/drt-go-chain-crypto v1.0.0 h1:WxdvBkBt/kuUzofzFKYIZLok/otu51mD2iFCCnXadmQ=
-github.com/TerraDharitri/drt-go-chain-crypto v1.0.0/go.mod h1:viKoiLEX6j8l9X4ByoxA/v+9PKlH97qTQPkgaWUJxvQ=
+github.com/TerraDharitri/drt-go-chain-crypto v1.0.1 h1:kSfVue6EEF41W6MO2TJuaBe448Fpqsyq2/ILvTGaUpQ=
+github.com/TerraDharitri/drt-go-chain-crypto v1.0.1/go.mod h1:viKoiLEX6j8l9X4ByoxA/v+9PKlH97qTQPkgaWUJxvQ=
 github.com/TerraDharitri/drt-go-chain-logger v1.0.0 h1:JU7F0+DLrdV6mNXemd5RzyQcsy/QKCIrhSkvmoeHA9Y=
 github.com/TerraDharitri/drt-go-chain-logger v1.0.0/go.mod h1:5I5eJbzcpPswHIWc1oZXLzlvE3YWJ2S8nzmKZ8CeMm0=
 github.com/TerraDharitri/drt-go-chain-vm-common v1.0.0 h1:NdUhj5A3vdWRHiylNrG1bJINjNRt5ktbgYFYtbrb/8M=
