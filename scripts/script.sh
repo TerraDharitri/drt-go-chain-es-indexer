@@ -32,11 +32,11 @@ stop() {
 
 delete() {
    for str in ${INDICES_LIST[@]}; do
-      curl -XDELETE http://localhost:9200/$str-000001
+      curl -XDELETE http://127.0.0.1:9200/$str-000001
       echo
    done
 
-  curl -XDELETE http://localhost:9200/_template/*
+  curl -XDELETE http://127.0.0.1:9200/_template/*
   echo
 }
 
