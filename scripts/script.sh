@@ -16,13 +16,14 @@ start() {
   docker pull docker.elastic.co/elasticsearch/elasticsearch:${ES_VERSION}
 
   docker rm ${IMAGE_NAME} 2> /dev/null
-  docker run -d --name "${IMAGE_NAME}" -p 9200:9200  -p 9300:9300 \
+  docker run -d --name "${IMAGE_NAME}" -p 127.0.0.1:9200:9200  -p 127.0.0.1:9300:9300 \
    -e "discovery.type=single-node" -e "xpack.security.enabled=false" -e "ES_JAVA_OPTS=-Xms512m -Xmx512m" \
     docker.elastic.co/elasticsearch/elasticsearch:${ES_VERSION}
 
   # Wait elastic cluster to start
   echo "Waiting Elasticsearch cluster to start..."
   sleep 30s
+  docker ps -a
 }
 
 stop() {
@@ -52,7 +53,7 @@ start_open_search() {
   docker pull opensearchproject/opensearch:${OPEN_VERSION}
 
   docker rm ${IMAGE_OPEN_SEARCH} 2> /dev/null
-  docker run -d --name "${IMAGE_OPEN_SEARCH}" -p 9200:9200 -p 9600:9600 \
+  docker run -d --name "${IMAGE_OPEN_SEARCH}" -p 127.0.0.1:9200:9200 -p 127.0.0.1:9600:9600 \
    -e "discovery.type=single-node" -e "plugins.security.disabled=true" -e "ES_JAVA_OPTS=-Xms512m -Xmx512m" \
    opensearchproject/opensearch:${OPEN_VERSION}
 
