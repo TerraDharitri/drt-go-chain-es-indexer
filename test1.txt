@@ -4,10 +4,7 @@ cd scripts && /bin/bash script.sh start 7.16.1
 Digest: sha256:1000eae211ce9e3fcd1850928eea4ee45a0a5173154df954f7b4c7a093b849f8
 Status: Image is up to date for docker.elastic.co/elasticsearch/elasticsearch:7.16.1
 docker.elastic.co/elasticsearch/elasticsearch:7.16.1
-elastic-container
-426b29ba52024c0baf5c532467246cac6fc699de2508c43cb0b59e2c4ab9f690
 Waiting Elasticsearch cluster to start...
-Elasticsearch is ready
 go test -v ./integrationtests -tags integrationtests
 === RUN   TestAccountBalanceNFTTransfer
 [0;36mDEBUG[0m[2026-03-09 20:10:53.069]   ei.elasticProcessor indexer version is empty 
@@ -1036,28 +1033,28 @@ created by testing.(*T).Run in goroutine 1
 PASS
 ok  	github.com/TerraDharitri/drt-go-chain-es-indexer/integrationtests	(cached)
 cd scripts && /bin/bash script.sh delete
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+{"error":{"root_cause":[{"type":"index_not_found_exception","reason":"no such index [rating-000001]","resource.type":"index_or_alias","resource.id":"rating-000001","index_uuid":"_na_","index":"rating-000001"}],"type":"index_not_found_exception","reason":"no such index [rating-000001]","resource.type":"index_or_alias","resource.id":"rating-000001","index_uuid":"_na_","index":"rating-000001"},"status":404}
+{"error":{"root_cause":[{"type":"index_not_found_exception","reason":"no such index [transactions-000001]","resource.type":"index_or_alias","resource.id":"transactions-000001","index_uuid":"_na_","index":"transactions-000001"}],"type":"index_not_found_exception","reason":"no such index [transactions-000001]","resource.type":"index_or_alias","resource.id":"transactions-000001","index_uuid":"_na_","index":"transactions-000001"},"status":404}
+{"error":{"root_cause":[{"type":"index_not_found_exception","reason":"no such index [blocks-000001]","resource.type":"index_or_alias","resource.id":"blocks-000001","index_uuid":"_na_","index":"blocks-000001"}],"type":"index_not_found_exception","reason":"no such index [blocks-000001]","resource.type":"index_or_alias","resource.id":"blocks-000001","index_uuid":"_na_","index":"blocks-000001"},"status":404}
+{"error":{"root_cause":[{"type":"index_not_found_exception","reason":"no such index [validators-000001]","resource.type":"index_or_alias","resource.id":"validators-000001","index_uuid":"_na_","index":"validators-000001"}],"type":"index_not_found_exception","reason":"no such index [validators-000001]","resource.type":"index_or_alias","resource.id":"validators-000001","index_uuid":"_na_","index":"validators-000001"},"status":404}
+{"error":{"root_cause":[{"type":"index_not_found_exception","reason":"no such index [miniblocks-000001]","resource.type":"index_or_alias","resource.id":"miniblocks-000001","index_uuid":"_na_","index":"miniblocks-000001"}],"type":"index_not_found_exception","reason":"no such index [miniblocks-000001]","resource.type":"index_or_alias","resource.id":"miniblocks-000001","index_uuid":"_na_","index":"miniblocks-000001"},"status":404}
+{"error":{"root_cause":[{"type":"index_not_found_exception","reason":"no such index [rounds-000001]","resource.type":"index_or_alias","resource.id":"rounds-000001","index_uuid":"_na_","index":"rounds-000001"}],"type":"index_not_found_exception","reason":"no such index [rounds-000001]","resource.type":"index_or_alias","resource.id":"rounds-000001","index_uuid":"_na_","index":"rounds-000001"},"status":404}
+{"error":{"root_cause":[{"type":"index_not_found_exception","reason":"no such index [accounts-000001]","resource.type":"index_or_alias","resource.id":"accounts-000001","index_uuid":"_na_","index":"accounts-000001"}],"type":"index_not_found_exception","reason":"no such index [accounts-000001]","resource.type":"index_or_alias","resource.id":"accounts-000001","index_uuid":"_na_","index":"accounts-000001"},"status":404}
+{"error":{"root_cause":[{"type":"index_not_found_exception","reason":"no such index [accountshistory-000001]","resource.type":"index_or_alias","resource.id":"accountshistory-000001","index_uuid":"_na_","index":"accountshistory-000001"}],"type":"index_not_found_exception","reason":"no such index [accountshistory-000001]","resource.type":"index_or_alias","resource.id":"accountshistory-000001","index_uuid":"_na_","index":"accountshistory-000001"},"status":404}
+{"error":{"root_cause":[{"type":"index_not_found_exception","reason":"no such index [receipts-000001]","resource.type":"index_or_alias","resource.id":"receipts-000001","index_uuid":"_na_","index":"receipts-000001"}],"type":"index_not_found_exception","reason":"no such index [receipts-000001]","resource.type":"index_or_alias","resource.id":"receipts-000001","index_uuid":"_na_","index":"receipts-000001"},"status":404}
+{"error":{"root_cause":[{"type":"index_not_found_exception","reason":"no such index [scresults-000001]","resource.type":"index_or_alias","resource.id":"scresults-000001","index_uuid":"_na_","index":"scresults-000001"}],"type":"index_not_found_exception","reason":"no such index [scresults-000001]","resource.type":"index_or_alias","resource.id":"scresults-000001","index_uuid":"_na_","index":"scresults-000001"},"status":404}
+{"error":{"root_cause":[{"type":"index_not_found_exception","reason":"no such index [accountsdcdt-000001]","resource.type":"index_or_alias","resource.id":"accountsdcdt-000001","index_uuid":"_na_","index":"accountsdcdt-000001"}],"type":"index_not_found_exception","reason":"no such index [accountsdcdt-000001]","resource.type":"index_or_alias","resource.id":"accountsdcdt-000001","index_uuid":"_na_","index":"accountsdcdt-000001"},"status":404}
+{"error":{"root_cause":[{"type":"index_not_found_exception","reason":"no such index [accountsdcdthistory-000001]","resource.type":"index_or_alias","resource.id":"accountsdcdthistory-000001","index_uuid":"_na_","index":"accountsdcdthistory-000001"}],"type":"index_not_found_exception","reason":"no such index [accountsdcdthistory-000001]","resource.type":"index_or_alias","resource.id":"accountsdcdthistory-000001","index_uuid":"_na_","index":"accountsdcdthistory-000001"},"status":404}
+{"error":{"root_cause":[{"type":"index_not_found_exception","reason":"no such index [epochinfo-000001]","resource.type":"index_or_alias","resource.id":"epochinfo-000001","index_uuid":"_na_","index":"epochinfo-000001"}],"type":"index_not_found_exception","reason":"no such index [epochinfo-000001]","resource.type":"index_or_alias","resource.id":"epochinfo-000001","index_uuid":"_na_","index":"epochinfo-000001"},"status":404}
+{"error":{"root_cause":[{"type":"index_not_found_exception","reason":"no such index [scdeploys-000001]","resource.type":"index_or_alias","resource.id":"scdeploys-000001","index_uuid":"_na_","index":"scdeploys-000001"}],"type":"index_not_found_exception","reason":"no such index [scdeploys-000001]","resource.type":"index_or_alias","resource.id":"scdeploys-000001","index_uuid":"_na_","index":"scdeploys-000001"},"status":404}
+{"error":{"root_cause":[{"type":"index_not_found_exception","reason":"no such index [tokens-000001]","resource.type":"index_or_alias","resource.id":"tokens-000001","index_uuid":"_na_","index":"tokens-000001"}],"type":"index_not_found_exception","reason":"no such index [tokens-000001]","resource.type":"index_or_alias","resource.id":"tokens-000001","index_uuid":"_na_","index":"tokens-000001"},"status":404}
+{"error":{"root_cause":[{"type":"index_not_found_exception","reason":"no such index [tags-000001]","resource.type":"index_or_alias","resource.id":"tags-000001","index_uuid":"_na_","index":"tags-000001"}],"type":"index_not_found_exception","reason":"no such index [tags-000001]","resource.type":"index_or_alias","resource.id":"tags-000001","index_uuid":"_na_","index":"tags-000001"},"status":404}
+{"error":{"root_cause":[{"type":"index_not_found_exception","reason":"no such index [logs-000001]","resource.type":"index_or_alias","resource.id":"logs-000001","index_uuid":"_na_","index":"logs-000001"}],"type":"index_not_found_exception","reason":"no such index [logs-000001]","resource.type":"index_or_alias","resource.id":"logs-000001","index_uuid":"_na_","index":"logs-000001"},"status":404}
+{"error":{"root_cause":[{"type":"index_not_found_exception","reason":"no such index [delegators-000001]","resource.type":"index_or_alias","resource.id":"delegators-000001","index_uuid":"_na_","index":"delegators-000001"}],"type":"index_not_found_exception","reason":"no such index [delegators-000001]","resource.type":"index_or_alias","resource.id":"delegators-000001","index_uuid":"_na_","index":"delegators-000001"},"status":404}
+{"error":{"root_cause":[{"type":"index_not_found_exception","reason":"no such index [operations-000001]","resource.type":"index_or_alias","resource.id":"operations-000001","index_uuid":"_na_","index":"operations-000001"}],"type":"index_not_found_exception","reason":"no such index [operations-000001]","resource.type":"index_or_alias","resource.id":"operations-000001","index_uuid":"_na_","index":"operations-000001"},"status":404}
+{"error":{"root_cause":[{"type":"index_not_found_exception","reason":"no such index [dcdts-000001]","resource.type":"index_or_alias","resource.id":"dcdts-000001","index_uuid":"_na_","index":"dcdts-000001"}],"type":"index_not_found_exception","reason":"no such index [dcdts-000001]","resource.type":"index_or_alias","resource.id":"dcdts-000001","index_uuid":"_na_","index":"dcdts-000001"},"status":404}
+{"error":{"root_cause":[{"type":"index_not_found_exception","reason":"no such index [values-000001]","resource.type":"index_or_alias","resource.id":"values-000001","index_uuid":"_na_","index":"values-000001"}],"type":"index_not_found_exception","reason":"no such index [values-000001]","resource.type":"index_or_alias","resource.id":"values-000001","index_uuid":"_na_","index":"values-000001"},"status":404}
+{"error":{"root_cause":[{"type":"index_not_found_exception","reason":"no such index [events-000001]","resource.type":"index_or_alias","resource.id":"events-000001","index_uuid":"_na_","index":"events-000001"}],"type":"index_not_found_exception","reason":"no such index [events-000001]","resource.type":"index_or_alias","resource.id":"events-000001","index_uuid":"_na_","index":"events-000001"},"status":404}
+{"acknowledged":true}
 cd scripts && /bin/bash script.sh stop
 elastic-container
