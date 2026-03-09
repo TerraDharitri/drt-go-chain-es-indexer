@@ -8,8 +8,8 @@ on:
 
 jobs:
   test-0:
-    name: Elasticsearch v7.17.9
-    runs-on: ubuntu-latest
+    name: Elasticsearch v7.16.1
+    runs-on: ubuntu-20.04
     steps:
       - name: Set up Go 1.x
         uses: actions/setup-go@v5
@@ -23,8 +23,8 @@ jobs:
       - name: Get dependencies
         run: |
           go get -v -t -d ./...
-      - name: Run integration tests with Elasticsearch `v7.17.9`
-        run: make integration-tests ES_VERSION=7.17.9
+      - name: Run integration tests with Elasticsearch `v7.16.1`
+        run: make integration-tests ES_VERSION=7.16.1
   test-1:
     name: Elasticsearch v7.17.8
     runs-on: ubuntu-latest
