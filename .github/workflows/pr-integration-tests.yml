@@ -2,14 +2,14 @@ name: Integration tests
 
 on:
   push:
-    branches: [ main, feat/*, rc/* ]
+    branches: [ main, feat/*, rc/*, dev-divesh ]
   pull_request:
-    branches: [ main, feat/*, rc/* ]
+    branches: [ main, feat/*, rc/*, dev-divesh ]
 
 jobs:
   test-0:
     name: Elasticsearch v7.16.1
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     steps:
       - name: Set up Go 1.x
         uses: actions/setup-go@v5
@@ -23,6 +23,8 @@ jobs:
       - name: Get dependencies
         run: |
           go get -v -t -d ./...
+      - name: Configure system for Elasticsearch
+        run: sudo sysctl -w vm.max_map_count=262144
       - name: Run integration tests with Elasticsearch `v7.16.1`
         run: make integration-tests ES_VERSION=7.16.1
   test-1:
