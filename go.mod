@@ -4,9 +4,9 @@ go 1.23
 
 require (
 	github.com/TerraDharitri/drt-go-chain-communication v1.0.1
-	github.com/TerraDharitri/drt-go-chain-core v1.0.1
+	github.com/TerraDharitri/drt-go-chain-core v1.0.2
 	github.com/TerraDharitri/drt-go-chain-logger v1.0.0
-	github.com/TerraDharitri/drt-go-chain-vm-common v1.0.0
+	github.com/TerraDharitri/drt-go-chain-vm-common v1.0.1-0.20260325094529-97e3568d04b2
 	github.com/elastic/go-elasticsearch/v7 v7.12.0
 	github.com/gin-contrib/cors v1.4.0
 	github.com/gin-gonic/gin v1.10.0
